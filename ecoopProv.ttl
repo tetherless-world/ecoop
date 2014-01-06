@@ -1,0 +1,124 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ecoop: <http://escience.rpi.edu/ontology/eco-op/ecoopProv.ttl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2009/08/skos-reference/skos.rdf#> .
+@prefix dctype: <http://purl.org/dc/dcmitype/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+
+<http://escience.rpi.edu/ontology/eco-op/ecoopProv.ttl> a owl:Ontology ;
+	dct:title "Ontology for ECOOP Provenance Capturing" ;
+	dct:date "2013-10-31";
+	owl:versionInfo "1.0";
+	rdfs:comment "An ontology designed for capturing provenance information in the research project INTEROP ECO-OP: Employing Cyber Infrastructure Data Technologies to Facilitate IEA for Climate Impacts in NE & CA LME's (#3 & #7). The ontology uses the namespace prefix ecoop." ;
+    dct:identifier "http://escience.rpi.edu/ontology/eco-op/ecoopProv.ttl" ;
+	dct:creator "Xiaogang Ma <max7@rpi.edu>; Stace Beaulieu <sbeaulieu@whoi.edu>; Peter Fox <foxp@rpi.edu>" ;
+	dct:contributor "Patrick West <westp@rpi.edu>; Joe Futrelle <jfutrelle@whoi.edu>; Massimo Di Stefano <distem@rpi.edu>; Linyun Fu <ful2@rpi.edu>; Chengcong Du <duc2@rpi.edu>" ;
+	skos:historyNote "The ontology is a part of the result of the ECO-OP project (2010-2014) at Tetherless World Constellation, Rensselaer Polytechnic Institute and Woods Hole Oceanographic Institution. More details of that project is accessible at: http://tw.rpi.edu/web/project/ECOOP." . 
+
+ecoop:Document a owl:Class ;
+	rdfs:label "Document" ;
+	rdfs:comment "A bounded physical representation of body of information designed with the capacity (and usually intent) to communicate, and it has been made available to the public." ;
+	rdfs:subClassOf prov:Entity .
+	
+ecoop:IPythonNotebookRun a owl:Class ;
+	rdfs:label "IPython Notebook Run" ;
+	rdfs:comment "The running of an iPython Notebook" ;
+	rdfs:subClassOf prov:Activity .	
+
+ecoop:CellRun a owl:Class ;
+	rdfs:label "Cell Run" ;
+	rdfs:comment "The running of a cell in an iPython Notebook" ;
+	rdfs:subClassOf prov:Activity .		
+
+ecoop:IPythonNotebook a owl:Class ;
+	rdfs:label "IPython Notebook" ;
+	rdfs:comment "An iPython Notebook" ;
+	rdfs:subClassOf prov:Entity .
+
+ecoop:Cell a owl:Class ;
+	rdfs:label "Cell" ;
+	rdfs:comment "A cell in an iPython Notebook" ;
+	rdfs:subClassOf prov:Entity .
+
+ecoop:Dataset a owl:Class ;
+	rdfs:label "Dataset" ;
+	rdfs:comment "A collection of data, published or curated by a single agent, and available for access or download in one or more formats." ;
+	rdfs:subClassOf dcat:Dataset, prov:Entity . 	
+
+ecoop:Library a owl:Class ;
+	rdfs:label "Library" ;
+	rdfs:comment "A collection of software subprograms that provides functionality, to be incorporated into or used by a computer program." ;
+	rdfs:subClassOf prov:Entity .	
+
+prov:Entity a owl:Class ;
+    rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
+    rdfs:label "Entity" .	
+
+prov:Agent a owl:Class ;
+    rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
+    rdfs:label "Agent" .	
+	
+prov:Activity a owl:Class ;
+    rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
+    rdfs:label "Activity" .
+
+dcat:Dataset a owl:Class ;
+	rdfs:isDefinedBy <http://www.w3.org/ns/dcat#> ;
+    rdfs:label "Dataset" .
+
+dcat:Distribution a owl:Class ;
+	rdfs:isDefinedBy <http://www.w3.org/ns/dcat#> ;
+    rdfs:label "Distribution" .	
+
+dcat:distribution a rdf:Property ;
+	rdfs:isDefinedBy <http://www.w3.org/ns/dcat#> ;
+	rdfs:domain dcat:Dataset ;
+	rdfs:range dcat:Distribution ;
+    rdfs:label "Has Distribution" .	
+	
+dcat:accessURL a rdf:Property ;
+	rdfs:isDefinedBy <http://www.w3.org/ns/dcat#> ;
+    rdfs:label "Access URL" .	
+
+dcat:downloadURL a rdf:Property ;
+	rdfs:isDefinedBy <http://www.w3.org/ns/dcat#> ;
+    rdfs:label "Download URL" .
+	
+prov:wasGeneratedBy a owl:ObjectProperty ;
+    rdfs:domain prov:Entity ;
+    rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
+    rdfs:label "wasGeneratedBy" ;
+    rdfs:range prov:Activity ;
+    owl:inverseOf prov:generated  .	
+	
+prov:generated a owl:ObjectProperty ;
+    rdfs:domain prov:Activity ;
+    rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
+    rdfs:label "generated" ;
+    rdfs:range prov:Entity ;
+    owl:inverseOf prov:wasGeneratedBy .
+
+dct:hasPart a rdf:Property ; 	
+    rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
+    rdfs:label "Has Part" .
+
+dct:isPartOf a rdf:Property ; 	
+    rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
+    rdfs:label "Is Part Of" .
+
+dct:title a rdf:Property ; 	
+    rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
+    rdfs:label "Title" .
+	
+dct:description a rdf:Property ; 	
+    rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
+    rdfs:label "Description" .	
+
+foaf:name a rdf:Property ; 	
+    rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+    rdfs:label "Name" .
