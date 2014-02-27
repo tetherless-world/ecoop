@@ -11,91 +11,233 @@
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 
 <http://escience.rpi.edu/ontology/eco-op/ecoopProv.ttl> a owl:Ontology ;
-	dct:title "Ontology for ECOOP Provenance Capturing" ;
-	dct:date "2013-10-31";
-	owl:versionInfo "1.0";
-	rdfs:comment "An ontology designed for capturing provenance information in the research project INTEROP ECO-OP: Employing Cyber Infrastructure Data Technologies to Facilitate IEA for Climate Impacts in NE & CA LME's (#3 & #7). The ontology uses the namespace prefix ecoop." ;
+        dct:title "Ontology for ECOOP Provenance Capturing" ;
+        dct:date "2013-10-31";
+        owl:versionInfo "1.0";
+        rdfs:comment "An ontology designed for capturing provenance information in the research project INTEROP ECO-OP: Employing Cyber Infrastructure Data Technologies to Facilitate IEA for Climate Impacts in NE & CA LME's (#3 & #7). The ontology uses the namespace prefix ecoop." ;
     dct:identifier "http://escience.rpi.edu/ontology/eco-op/ecoopProv.ttl" ;
-	dct:creator "Xiaogang Ma <max7@rpi.edu>; Stace Beaulieu <sbeaulieu@whoi.edu>; Peter Fox <foxp@rpi.edu>" ;
-	dct:contributor "Patrick West <westp@rpi.edu>; Joe Futrelle <jfutrelle@whoi.edu>; Massimo Di Stefano <distem@rpi.edu>; Linyun Fu <ful2@rpi.edu>; Chengcong Du <duc2@rpi.edu>" ;
-	skos:historyNote "The ontology is a part of the result of the ECO-OP project (2010-2014) at Tetherless World Constellation, Rensselaer Polytechnic Institute and Woods Hole Oceanographic Institution. More details of that project is accessible at: http://tw.rpi.edu/web/project/ECOOP." . 
+        dct:creator "Xiaogang Ma <max7@rpi.edu>; Stace Beaulieu <sbeaulieu@whoi.edu>; Peter Fox <foxp@rpi.edu>" ;
+        dct:contributor "Patrick West <westp@rpi.edu>; Joe Futrelle <jfutrelle@whoi.edu>; Massimo Di Stefano <distem@rpi.edu>; Linyun Fu <ful2@rpi.edu>; Chengcong Du <duc2@rpi.edu>" ;
+        skos:historyNote "The ontology is a part of the result of the ECO-OP project (2010-2014) at Tetherless World Constellation, Rensselaer Polytechnic Institute and Woods Hole Oceanographic Institution. More details of that project is accessible at: http://tw.rpi.edu/web/project/ECOOP." . 
 
 ecoop:Document a owl:Class ;
-	rdfs:label "Document" ;
-	rdfs:comment "A bounded physical representation of body of information designed with the capacity (and usually intent) to communicate, and it has been made available to the public." ;
-	rdfs:subClassOf prov:Entity .
-	
+        rdfs:label "Document" ;
+        rdfs:comment "A bounded physical representation of body of information designed with the capacity (and usually intent) to communicate, and it has been made available to the public." ;
+        rdfs:subClassOf prov:Entity .
+
 ecoop:IPythonNotebookRun a owl:Class ;
-	rdfs:label "IPython Notebook Run" ;
-	rdfs:comment "The running of an iPython Notebook" ;
-	rdfs:subClassOf prov:Activity .	
+        rdfs:label "IPython Notebook Run" ;
+        rdfs:comment "The running of an iPython Notebook" ;
+        rdfs:subClassOf prov:Activity .        
 
 ecoop:CellRun a owl:Class ;
-	rdfs:label "Cell Run" ;
-	rdfs:comment "The running of a cell in an iPython Notebook" ;
-	rdfs:subClassOf prov:Activity .		
+        rdfs:label "Cell Run" ;
+        rdfs:comment "The running of a cell in an iPython Notebook" ;
+        rdfs:subClassOf prov:Activity .                
 
 ecoop:IPythonNotebook a owl:Class ;
-	rdfs:label "IPython Notebook" ;
-	rdfs:comment "An iPython Notebook" ;
-	rdfs:subClassOf prov:Entity .
+        rdfs:label "IPython Notebook" ;
+        rdfs:comment "The IPython Notebook is a web-based interactive computational environment for interactive authoring of documents which combine explanatory text, mathematics, computations and their rich media output." ;
+        rdfs:subClassOf prov:Entity .
 
 ecoop:Cell a owl:Class ;
-	rdfs:label "Cell" ;
-	rdfs:comment "A cell in an iPython Notebook" ;
-	rdfs:subClassOf prov:Entity .
+        rdfs:label "Cell" ;
+        rdfs:comment "A cell is a multi-line text input field, and its contents can be executed by using Shift-Enter, or by clicking either the “Play” button the toolbar, or Cell | Run in the menu bar. The execution behavior of a cell is determined the cell’s type." ;
+        rdfs:subClassOf prov:Entity .
+
+ecoop:CodeCell a owl:Class ; 
+rdfs:label "Code Cell" ; 
+rdfs:comment "A code cell allows you to edit and write new code, with full syntax highlighting and tab completion." ;
+rdfs:subClassOf ecoop:Cell .
+
+ecoop:MarkdownCell a owl:Class ; 
+rdfs:label "Markdown Cell" ; 
+rdfs:comment "A markdown cell is used to render rich text markup using the Markdown language." ;
+rdfs:subClassOf ecoop:Cell .
+
+ecoop:RawCell a owl:Class ; 
+rdfs:label "Raw Cell" ; 
+rdfs:comment "Raw cells provide a place in which you can write output directly." ;
+rdfs:subClassOf ecoop:Cell .
+
+ecoop:HeadingCell a owl:Class ; 
+rdfs:label "Heading Cell" ; 
+rdfs:comment "A heading cell is when contains html heading, when executed its content is replaced by a rich text rendering and can be used later for constructing anchor and tables of contents." ;
+rdfs:subClassOf ecoop:Cell .
+
+ecoop:IPythonKernel a owl:Class ;
+rdfs:label "IPython Kernel" ;
+rdfs:comment "IPython has abstracted and extended the notion of a traditional Read-Evaluate-Print Loop (REPL) environment by decoupling the evaluation into its own process. This process is defined as kernel: it receives execution instructions from clients and communicates the results back to them." ;
+rdfs:subClassOf prov:Entity .
+
+ecoop:Profile a owl:Class ;
+rdfs:label "Profile" ;
+rdfs:comment "A profile is a directory containing configuration and runtime files, such as logs, connection info for the parallel apps, and your IPython command history." ;
+rdfs:subClassOf prov:Entity .
+
+ecoop:Configuration a owl:Class ; 
+rdfs:label "Configuration" ; 
+rdfs:comment "The IPython configuration system let users to configure IPython to their liking. There are a number of abstractions that the IPython configuration system uses. Each of these abstractions is represented by a Python class." ;
+rdfs:subClassOf prov:Entity .
+
+ecoop:NotebookScript a owl:Class ; 
+rdfs:label "Notebook Script" ; 
+rdfs:comment "an IPython Notebook script (.py), is a version of the IPython Notebook file (.json) in which all rich output has been removed and the content of markdown cells have been inserted as comments." ;
+rdfs:subClassOf prov:Entity .
 
 ecoop:Dataset a owl:Class ;
-	rdfs:label "Dataset" ;
-	rdfs:comment "A collection of data, published or curated by a single agent, and available for access or download in one or more formats." ;
-	rdfs:subClassOf dcat:Dataset, prov:Entity . 	
+        rdfs:label "Dataset" ;
+        rdfs:comment "A collection of data, published or curated by a single agent, and available for access or download in one or more formats." ;
+        rdfs:subClassOf dcat:Dataset, prov:Entity .         
 
 ecoop:Library a owl:Class ;
-	rdfs:label "Library" ;
-	rdfs:comment "A collection of software subprograms that provides functionality, to be incorporated into or used by a computer program." ;
-	rdfs:subClassOf prov:Entity .	
+        rdfs:label "Library" ;
+        rdfs:comment "A collection of software subprograms that provides functionality, to be incorporated into or used by a computer program." ;
+        rdfs:subClassOf prov:Entity .        
+
+ecoop:Figure a owl:Class ;
+        rdfs:label "Figure" ;
+        rdfs:comment "A graphical/visual item in a publication that normally is referred to by a number and that has a caption." ;
+        rdfs:subClassOf prov:Entity .
+        
+ecoop:Table a owl:Class ;
+        rdfs:label "Table" ;
+        rdfs:comment "A list of facts or numbers arranged in a special order, usually in rows and columns." ;
+        rdfs:subClassOf prov:Entity .
+
+ecoop:Listing a owl:Class ;
+rdfs:label "Listing" ;
+rdfs:comment "A list, especially an official or published list of scripts, people or other things." ;
+rdfs:subClassOf prov:Entity .
+
+ecoop:Image a owl:Class ;
+        rdfs:label "Image" ;
+         rdfs:comment "A copy of something in the form of a visual  representation. Examples include images and photographs of physical  objects, paintings, prints, drawings, other images and graphics,  animations and moving pictures, film, diagrams, maps, musical notation,  etc." ;
+        rdfs:subClassOf prov:Entity .
+        
+ecoop:Array a owl:Class ;
+        rdfs:label "Array" ;
+        rdfs:comment "A group of numbers, signs or values arranged in rows and columns." ;
+        rdfs:subClassOf prov:Entity .   
+
+ecoop:Script a owl:Class ;
+        rdfs:label "Script" ;
+        rdfs:comment "A series of instructions for a computer." ;
+        rdfs:subClassOf prov:Entity .   
 
 prov:Entity a owl:Class ;
     rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
-    rdfs:label "Entity" .	
+    rdfs:label "Entity" .        
 
 prov:Agent a owl:Class ;
     rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
-    rdfs:label "Agent" .	
-	
+    rdfs:label "Agent" .        
+
 prov:Activity a owl:Class ;
     rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
     rdfs:label "Activity" .
 
 dcat:Dataset a owl:Class ;
-	rdfs:isDefinedBy <http://www.w3.org/ns/dcat#> ;
+        rdfs:isDefinedBy <http://www.w3.org/ns/dcat#> ;
     rdfs:label "Dataset" .
 
 dcat:Distribution a owl:Class ;
-	rdfs:isDefinedBy <http://www.w3.org/ns/dcat#> ;
-    rdfs:label "Distribution" .	
+        rdfs:isDefinedBy <http://www.w3.org/ns/dcat#> ;
+    rdfs:label "Distribution" .        
+
+ecoop:hasFrontEnd a owl:ObjectProperty ;
+rdfs:label "has FrontEnd" ;
+owl:inverseOf prov:isFrontEndOf . 
+
+ecoop:isFrontEndOf a owl:ObjectProperty ;
+rdfs:label "is FrontEnd Of" ;
+owl:inverseOf prov:hasFrontEnd . 
+
+ecoop:hasConfiguration a owl:ObjectProperty ;
+rdfs:label "has Configuration" ;
+owl:inverseOf prov:isConfigurationOf . 
+
+ecoop:isConfigurationOf a owl:ObjectProperty ;
+rdfs:label "is Configuration Of" ;
+owl:inverseOf prov:hasConfiguration . 
+
+ecoop:hasScript a owl:ObjectProperty ;
+rdfs:label "has Script" ;
+owl:inverseOf prov:isScriptOf . 
+
+ecoop:isScriptOf a owl:ObjectProperty ;
+rdfs:label "is Script Of" ;
+owl:inverseOf prov:hasScript . 
+
+ecoop:hasFigure a owl:ObjectProperty ;
+rdfs:label "has Figure" ;
+owl:inverseOf prov:isFigureOf . 
+ 
+ecoop:isFigureOf a owl:ObjectProperty ;
+rdfs:label "is Figure Of" ;
+owl:inverseOf prov:hasFigure .
+ 
+ecoop:hasTable a owl:ObjectProperty ;
+rdfs:label "has Table" ;
+owl:inverseOf prov:isTableOf . 
+ 
+ecoop:isTableOf a owl:ObjectProperty ;
+rdfs:label "is Table Of" ;
+owl:inverseOf prov:hasTable .
+ 
+ecoop:hasListing a owl:ObjectProperty ;
+rdfs:label "has Listing" ;
+owl:inverseOf prov:isListingOf . 
+ 
+ecoop:isListingOf a owl:ObjectProperty ;
+rdfs:label "is Listing Of" ;
+owl:inverseOf prov:hasListing .
+ 
+ecoop:hasImage a owl:ObjectProperty ;
+rdfs:label "has Image" ;
+owl:inverseOf prov:isImageOf . 
+ 
+ecoop:isImageOf a owl:ObjectProperty ;
+rdfs:label "is Image Of" ;
+owl:inverseOf prov:hasImage .
+ 
+ecoop:hasArray a owl:ObjectProperty ;
+rdfs:label "has Array" ;
+owl:inverseOf prov:isArrayOf . 
+ 
+ecoop:isArrayOf a owl:ObjectProperty ;
+rdfs:label "is Array Of" ;
+owl:inverseOf prov:hasArray .
+ 
+ecoop:hasScript a owl:ObjectProperty ;
+rdfs:label "has Script" ;
+owl:inverseOf prov:isScriptOf . 
+ 
+ecoop:isScriptOf a owl:ObjectProperty ;
+rdfs:label "is Script Of" ;
+owl:inverseOf prov:hasScript .
 
 dcat:distribution a rdf:Property ;
-	rdfs:isDefinedBy <http://www.w3.org/ns/dcat#> ;
-	rdfs:domain dcat:Dataset ;
-	rdfs:range dcat:Distribution ;
-    rdfs:label "Has Distribution" .	
-	
+        rdfs:isDefinedBy <http://www.w3.org/ns/dcat#> ;
+        rdfs:domain dcat:Dataset ;
+        rdfs:range dcat:Distribution ;
+    rdfs:label "Has Distribution" .        
+
 dcat:accessURL a rdf:Property ;
-	rdfs:isDefinedBy <http://www.w3.org/ns/dcat#> ;
-    rdfs:label "Access URL" .	
+        rdfs:isDefinedBy <http://www.w3.org/ns/dcat#> ;
+    rdfs:label "Access URL" .        
 
 dcat:downloadURL a rdf:Property ;
-	rdfs:isDefinedBy <http://www.w3.org/ns/dcat#> ;
+        rdfs:isDefinedBy <http://www.w3.org/ns/dcat#> ;
     rdfs:label "Download URL" .
-	
+
 prov:wasGeneratedBy a owl:ObjectProperty ;
     rdfs:domain prov:Entity ;
     rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
     rdfs:label "wasGeneratedBy" ;
     rdfs:range prov:Activity ;
-    owl:inverseOf prov:generated  .	
-	
+    owl:inverseOf prov:generated  .        
+
 prov:generated a owl:ObjectProperty ;
     rdfs:domain prov:Activity ;
     rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
@@ -103,22 +245,23 @@ prov:generated a owl:ObjectProperty ;
     rdfs:range prov:Entity ;
     owl:inverseOf prov:wasGeneratedBy .
 
-dct:hasPart a rdf:Property ; 	
+dct:hasPart a rdf:Property ;         
     rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
     rdfs:label "Has Part" .
 
-dct:isPartOf a rdf:Property ; 	
+dct:isPartOf a rdf:Property ;         
     rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
     rdfs:label "Is Part Of" .
 
-dct:title a rdf:Property ; 	
+dct:title a rdf:Property ;         
     rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
     rdfs:label "Title" .
-	
-dct:description a rdf:Property ; 	
-    rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
-    rdfs:label "Description" .	
 
-foaf:name a rdf:Property ; 	
+dct:description a rdf:Property ;         
+    rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
+    rdfs:label "Description" .        
+
+foaf:name a rdf:Property ;         
     rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
     rdfs:label "Name" .
+
