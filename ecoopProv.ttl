@@ -22,7 +22,7 @@
 
 ecoop:Document a owl:Class ;
     rdfs:label "Document" ;
-    rdfs:comment "A bounded physical representation of body of information designed with the capacity (and usually intent) to communicate, and it has been made available to the public." ;
+    rdfs:comment "A bounded physical representation of body of information designed with the capacity (and usually intent) to communicate." ;
     rdfs:subClassOf prov:Entity .
 
 ecoop:IPythonNotebookRun a owl:Class ;
@@ -30,19 +30,19 @@ ecoop:IPythonNotebookRun a owl:Class ;
     rdfs:comment "The running of an iPython Notebook" ;
     rdfs:subClassOf prov:Activity .
 
-ecoop:CellRun a owl:Class ;
-    rdfs:label "Cell Run" ;
-    rdfs:comment "The running of a cell in an iPython Notebook" ;
+ecoop:CodeCellRun a owl:Class ;
+    rdfs:label "Code Cell Run" ;
+    rdfs:comment "The running of a code cell in an iPython Notebook" ;
     rdfs:subClassOf prov:Activity .
 
 ecoop:IPythonNotebook a owl:Class ;
     rdfs:label "IPython Notebook" ;
-    rdfs:comment "The IPython Notebook is a web-based interactive computational environment for interactive authoring of documents which combine explanatory text, mathematics, computations and their rich media output." ;
+    rdfs:comment "The IPython Notebook is a web-based interactive computational environment for interactive authoring of IPython Notebook files which combine explanatory text, mathematics, computations and their rich media output." ;
     rdfs:subClassOf prov:Entity .
 
 ecoop:Cell a owl:Class ;
     rdfs:label "Cell" ;
-    rdfs:comment "A cell is a multi-line text input field, and its contents can be executed by using Shift-Enter, or by clicking either the “Play” button the toolbar, or Cell | Run in the menu bar. The execution behavior of a cell is determined the cell’s type." ;
+    rdfs:comment "A cell is a multi-line text input field in IPython Notebook, and its contents can be executed by using Shift-Enter, or by clicking either the “Play” button the toolbar, or Cell | Run in the menu bar. The execution behavior of a cell is determined the cell's type." ;
     rdfs:subClassOf prov:Entity .
 
 ecoop:CodeCell a owl:Class ; 
