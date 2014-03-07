@@ -419,7 +419,7 @@ ecoop:sourceInstrument a owl:ObjectProperty ;
     rdfs:comment "A dataset was collected by using one or more instruments." ;
     rdfs:domain ecoop:Dataset ;
     rdfs:range ecoop:Instrument ;
-    rdfs:subPropertyOf dcterms:hasPart .
+    rdfs:subPropertyOf dct:hasPart .
 
 ecoop:sourceLibrary a owl:ObjectProperty ;
     rdfs:label "Source Library" ;
