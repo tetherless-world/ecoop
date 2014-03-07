@@ -17,68 +17,68 @@
     rdfs:comment "An ontology designed for capturing provenance information in the research project INTEROP ECO-OP: Employing Cyber Infrastructure Data Technologies to Facilitate IEA for Climate Impacts in NE & CA LME's (#3 & #7). The ontology uses the namespace prefix ecoop." ;
     dct:identifier "http://escience.rpi.edu/ontology/eco-op/" ;
     dct:creator "Xiaogang Ma <http://tw.rpi.edu/web/person/xiaogang>" ;
-	dct:creator "Stace Beaulieu <http://www.whoi.edu/science/B/people/sbeaulieu/> ";
-	dct:creator "Peter Fox <http://tw.rpi.edu/web/person/PeterFox>" ;
+    dct:creator "Stace Beaulieu <http://www.whoi.edu/science/B/people/sbeaulieu/> ";
+    dct:creator "Peter Fox <http://tw.rpi.edu/web/person/PeterFox>" ;
     dct:contributor "Patrick West <http://tw.rpi.edu/web/person/PatrickWest>" ;
-	dct:contributor "Joe Futrelle <http://www.whoi.edu/hpb/Site.do?id=12833>" ;
-	dct:contributor "Massimo Di Stefano <http://tw.rpi.edu/web/person/MassimoDiStefano>" ;
-	dct:contributor "Linyun Fu <http://tw.rpi.edu/web/person/LinyunFu>" ;
-	dct:contributor "Chengcong Du" ;
-	dct:publisher "Rensselaer Polytechnic Institute <http://www.rpi.edu>" ;
-	dct:publisher "Woods Hole Oceanographic Institution <https://www.whoi.edu>" ;
-	rdfs:seeAlso "Concept map of the ontology <http://cmapspublic3.ihmc.us/rid=1MNVJ9BWY-10VSRJD-19LF/ECOOP_prov_capture_ontology_v_1_1.cmap>" ;
-    skos:historyNote "The ontology is a part of the result of the ECO-OP project (2010-2014) at Tetherless World Constellation, Rensselaer Polytechnic Institute and Woods Hole Oceanographic Institution. More details of that project is accessible at: http://tw.rpi.edu/web/project/ECOOP." . 
+    dct:contributor "Joe Futrelle <http://www.whoi.edu/hpb/Site.do?id=12833>" ;
+    dct:contributor "Massimo Di Stefano <http://tw.rpi.edu/web/person/MassimoDiStefano>" ;
+    dct:contributor "Linyun Fu <http://tw.rpi.edu/web/person/LinyunFu>" ;
+    dct:contributor "Chengcong Du" ;
+    dct:publisher "Rensselaer Polytechnic Institute <http://www.rpi.edu>" ;
+    dct:publisher "Woods Hole Oceanographic Institution <https://www.whoi.edu>" ;
+    rdfs:seeAlso "Concept map of the ontology <http://cmapspublic3.ihmc.us/rid=1MNVJ9BWY-10VSRJD-19LF/ECOOP_prov_capture_ontology_v_1_1.cmap>" ;
+    skos:historyNote "The ontology is a part of the result of the ECO-OP project (2010-2014) at Tetherless World Constellation, Rensselaer Polytechnic Institute and Woods Hole Oceanographic Institution. More details of that project is accessible at: http://tw.rpi.edu/web/project/ECOOP." .
 
 ecoop:IPythonKernel a owl:Class ;
     rdfs:label "IPython Kernel" ;
     rdfs:comment "IPython has abstracted and extended the notion of a traditional Read-Evaluate-Print Loop (REPL) environment by decoupling the evaluation into its own process. This process is defined as kernel: it receives execution instructions from clients and communicates the results back to them." ;
-	rdfs:subClassOf prov:Entity .
+    rdfs:subClassOf prov:Entity .
 
 ecoop:IPythonProfile a owl:Class ;
     rdfs:label "IPython Profile" ;
     rdfs:comment "A profile is a directory containing configuration and runtime files, such as logs, connection info for the parallel apps, and your IPython command history." ;
     rdfs:subClassOf prov:Entity .
 
-ecoop:Configuration a owl:Class ; 
-    rdfs:label "Configuration" ; 
+ecoop:Configuration a owl:Class ;
+    rdfs:label "Configuration" ;
     rdfs:comment "The IPython configuration system let users to configure IPython to their liking. There are a number of abstractions that the IPython configuration system uses. Each of these abstractions is represented by a Python class." ;
-	rdfs:subClassOf prov:Entity .
+    rdfs:subClassOf prov:Entity .
 
 ecoop:IPythonNotebook a owl:Class ;
     rdfs:label "IPython Notebook" ;
     rdfs:comment "The IPython Notebook is a web-based interactive computational environment for interactive authoring of IPython Notebook files which combine explanatory text, mathematics, computations and their rich media output." ;
     rdfs:subClassOf prov:Entity .
 
-ecoop:NotebookScript a owl:Class ; 
-    rdfs:label "Notebook Script" ; 
+ecoop:NotebookScript a owl:Class ;
+    rdfs:label "Notebook Script" ;
     rdfs:comment "an IPython Notebook script (.py), is a version of the IPython Notebook file (.json) in which all rich output has been removed and the content of markdown cells have been inserted as comments." ;
     rdfs:subClassOf prov:Entity .
-	
+
 ecoop:Cell a owl:Class ;
     rdfs:label "Cell" ;
-    rdfs:comment "A cell in iPythonNotebook is a multi-line text input field in IPython Notebook, and its contents can be executed by using Shift-Enter, or by clicking either the “Play” button the toolbar, or Cell | Run in the menu bar. The execution behavior of a cell is determined the cell's type." ;
+    rdfs:comment "A cell in iPythonNotebook is a multi-line text input field in IPython Notebook, and its contents can be executed by using Shift-Enter, or by clicking either the 'Play' button the toolbar, or Cell | Run in the menu bar. The execution behavior of a cell is determined the cell's type." ;
     rdfs:subClassOf prov:Entity .
 
-ecoop:CodeCell a owl:Class ; 
-    rdfs:label "Code Cell" ; 
+ecoop:CodeCell a owl:Class ;
+    rdfs:label "Code Cell" ;
     rdfs:comment "A code cell allows you to edit and write new code, with full syntax highlighting and tab completion." ;
     rdfs:subClassOf ecoop:Cell .
 
-ecoop:MarkdownCell a owl:Class ; 
-    rdfs:label "Markdown Cell" ; 
+ecoop:MarkdownCell a owl:Class ;
+    rdfs:label "Markdown Cell" ;
     rdfs:comment "A markdown cell is used to render rich text markup using the Markdown language." ;
     rdfs:subClassOf ecoop:Cell .
 
-ecoop:RawCell a owl:Class ; 
-    rdfs:label "Raw Cell" ; 
+ecoop:RawCell a owl:Class ;
+    rdfs:label "Raw Cell" ;
     rdfs:comment "Raw cells provide a place in which you can write output directly." ;
     rdfs:subClassOf ecoop:Cell .
 
-ecoop:HeadingCell a owl:Class ; 
-    rdfs:label "Heading Cell" ; 
+ecoop:HeadingCell a owl:Class ;
+    rdfs:label "Heading Cell" ;
     rdfs:comment "A heading cell is when contains html heading, when executed its content is replaced by a rich text rendering and can be used later for constructing anchor and tables of contents." ;
     rdfs:subClassOf ecoop:Cell .
-	
+
 ecoop:IPythonNotebookRun a owl:Class ;
     rdfs:label "IPython Notebook Run" ;
     rdfs:comment "The running of an iPython Notebook" ;
@@ -93,17 +93,17 @@ ecoop:Library a owl:Class ;
     rdfs:label "Library" ;
     rdfs:comment "A collection of software subprograms that provides functionality, to be incorporated into or used by a computer program." ;
     rdfs:subClassOf prov:Entity .
-	
+
 ecoop:Dataset a owl:Class ;
     rdfs:label "Dataset" ;
     rdfs:comment "A collection of data, published or curated by a single agent, and available for access or download in one or more formats." ;
     rdfs:subClassOf dcat:Dataset, prov:Entity .
-	
+
 ecoop:Image a owl:Class ;
     rdfs:label "Image" ;
     rdfs:comment "A copy of something in the form of a visual  representation. Examples include images and photographs of physical  objects, paintings, prints, drawings, other images and graphics,  animations and moving pictures, film, diagrams, maps, musical notation,  etc." ;
     rdfs:subClassOf prov:Entity .
-    
+
 ecoop:Array a owl:Class ;
     rdfs:label "Array" ;
     rdfs:comment "A group of numbers, signs or values arranged in rows and columns." ;
@@ -118,7 +118,7 @@ ecoop:Figure a owl:Class ;
     rdfs:label "Figure" ;
     rdfs:comment "A graphical/visual item in a publication that normally is referred to by a number and that has a caption." ;
     rdfs:subClassOf prov:Entity .
-    
+
 ecoop:Table a owl:Class ;
     rdfs:label "Table" ;
     rdfs:comment "A list of facts or numbers arranged in a special order, usually in rows and columns." ;
@@ -128,87 +128,87 @@ ecoop:Listing a owl:Class ;
     rdfs:label "Listing" ;
     rdfs:comment "A list, especially an official or published list of scripts, people or other things." ;
     rdfs:subClassOf prov:Entity .
-	
+
 ecoop:Document a owl:Class ;
     rdfs:label "Document" ;
     rdfs:comment "A bounded physical representation of body of information designed with the capacity (and usually intent) to communicate" ;
     rdfs:subClassOf prov:Entity .
 
 ecoop:SpatialExtents a owl:Class ;
-	rdfs:label "Spatial Extents" ;
-	rdfs:comment "A bounding box describing the northern, southern, western, and eastern limits of the data or results." ;
-	rdfs:subClassOf prov:Entity .	
+    rdfs:label "Spatial Extents" ;
+    rdfs:comment "A bounding box describing the northern, southern, western, and eastern limits of the data or results." ;
+    rdfs:subClassOf prov:Entity .
 
 ecoop:SpatialResolution a owl:Class ;
-	rdfs:label "Spatial Resolution" ;
-	rdfs:comment "The detail with which a map or image depicts the location and shape of geographic features. The finer the map scale, the higher the possible resolution. As scale decreases from fine to coarse, resolution diminishes and feature boundaries must be smoothed, simplified, or not shown at all; for example, small areas may have to be represented as points." ;
-	rdfs:subClassOf prov:Entity .	
-	
+    rdfs:label "Spatial Resolution" ;
+    rdfs:comment "The detail with which a map or image depicts the location and shape of geographic features. The finer the map scale, the higher the possible resolution. As scale decreases from fine to coarse, resolution diminishes and feature boundaries must be smoothed, simplified, or not shown at all; for example, small areas may have to be represented as points." ;
+    rdfs:subClassOf prov:Entity .
+
 ecoop:TemporalExtents a owl:Class ;
-	rdfs:label "Temporal Extents" ;
-	rdfs:comment "The time information, including the earliest and last observations, of a dataset." ;
-	rdfs:subClassOf prov:Entity .	
+    rdfs:label "Temporal Extents" ;
+    rdfs:comment "The time information, including the earliest and last observations, of a dataset." ;
+    rdfs:subClassOf prov:Entity .
 
 ecoop:TemporalResolution a owl:Class ;
-	rdfs:label "Temporal Resolution" ;
-	rdfs:comment "The precision or frequency of a measurement with respect to time. Often there is a tradeoff between temporal resolution of a measurement and its spatial resolution." ;
-	rdfs:subClassOf prov:Entity .
+    rdfs:label "Temporal Resolution" ;
+    rdfs:comment "The precision or frequency of a measurement with respect to time. Often there is a tradeoff between temporal resolution of a measurement and its spatial resolution." ;
+    rdfs:subClassOf prov:Entity .
 
 ecoop:TemporalUnit a owl:Class ;
-	rdfs:label "Temporal Unit" ;
-	rdfs:comment "A collection of temporal units used for measuring time." ;
-	owl:equivalentClass
+    rdfs:label "Temporal Unit" ;
+    rdfs:comment "A collection of temporal units used for measuring time." ;
+    owl:equivalentClass
               [ a owl:Class ;
                 owl:oneOf (ecoop:unitSecond ecoop:unitMinute ecoop:unitHour ecoop:unitDay ecoop:unitWeek ecoop:unitMonth ecoop:unitYear)
               ] ;
-	rdfs:subClassOf prov:Entity .	
+    rdfs:subClassOf prov:Entity .
 
 ecoop:UnitType a owl:Class ;
-	rdfs:label "Unit Type" ;
-	rdfs:comment "A type that allows only one value." .
-	
+    rdfs:label "Unit Type" ;
+    rdfs:comment "A type that allows only one value." .
+
 ecoop:unitSecond a ecoop:UnitType ;
-	rdfs:label "Unit Second" ;
-	rdfs:comment "Second is a basic temporal unit." .
-	
+    rdfs:label "Unit Second" ;
+    rdfs:comment "Second is a basic temporal unit." .
+
 ecoop:unitMinute a ecoop:UnitType ;
-	rdfs:label "Unit Minute" ;
-	rdfs:comment "A minute is 60 seconds." .
-	
+    rdfs:label "Unit Minute" ;
+    rdfs:comment "A minute is 60 seconds." .
+
 ecoop:unitHour a ecoop:UnitType ;
-	rdfs:label "Unit Hour" ;
-	rdfs:comment "An hour is 60 minutes." .
-	
+    rdfs:label "Unit Hour" ;
+    rdfs:comment "An hour is 60 minutes." .
+
 ecoop:unitDay a ecoop:UnitType ;
-	rdfs:label "Unit Day" ;
-	rdfs:comment "A day is 24 hours." .
-	
+    rdfs:label "Unit Day" ;
+    rdfs:comment "A day is 24 hours." .
+
 ecoop:unitWeek a ecoop:UnitType ;
-	rdfs:label "Unit Week" ;
-	rdfs:comment "A week is seven days." .
-	
+    rdfs:label "Unit Week" ;
+    rdfs:comment "A week is seven days." .
+
 ecoop:unitMonth a ecoop:UnitType ;
-	rdfs:label "Unit Month" ;
-	rdfs:comment "A month is 28 to 31 days." .
-	
+    rdfs:label "Unit Month" ;
+    rdfs:comment "A month is 28 to 31 days." .
+
 ecoop:unitYear a ecoop:UnitType ;
-	rdfs:label "Unit Year" ;
-	rdfs:comment "A year is 12 months." .
+    rdfs:label "Unit Year" ;
+    rdfs:comment "A year is 12 months." .
 
 ecoop:Model a owl:Class ;
-	rdfs:label "Model" ;
-	rdfs:comment "A simplified description or particular design, especially a mathematical one, of a system or process, to assist calculations and predictions." ;
-	rdfs:subClassOf prov:Entity .
+    rdfs:label "Model" ;
+    rdfs:comment "A simplified description or particular design, especially a mathematical one, of a system or process, to assist calculations and predictions." ;
+    rdfs:subClassOf prov:Entity .
 
 ecoop:Algorithm a owl:Class ;
-	rdfs:label "Algorithm" ;
-	rdfs:comment "A process or a set of rules to be followed in calculations or other problem-solving operations." ;
-	rdfs:subClassOf prov:Entity .	
-	
+    rdfs:label "Algorithm" ;
+    rdfs:comment "A process or a set of rules to be followed in calculations or other problem-solving operations." ;
+    rdfs:subClassOf prov:Entity .
+
 ecoop:Instrument a owl:Class ;
-	rdfs:label "Instrument" ;
-	rdfs:comment "A tool or device used for a particular task, especially for scientific work." ;
-	rdfs:subClassOf prov:Entity .
+    rdfs:label "Instrument" ;
+    rdfs:comment "A tool or device used for a particular task, especially for scientific work." ;
+    rdfs:subClassOf prov:Entity .
 
 prov:Entity a owl:Class ;
     rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
@@ -235,325 +235,325 @@ foaf:Agent a owl:Class ;
 
 foaf:Person a owl:Class ;
     rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
-	rdfs:subClassOf foaf:Agent .	
+    rdfs:subClassOf foaf:Agent .
 
 foaf:Organization a owl:Class ;
     rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
-	rdfs:subClassOf foaf:Agent .
+    rdfs:subClassOf foaf:Agent .
 
 foaf:Group a owl:Class ;
     rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
-	rdfs:subClassOf foaf:Agent .	
-	
+    rdfs:subClassOf foaf:Agent .
+
 dct:LicenseDocument a owl:Class ;
-	rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
+    rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
     rdfs:label "License Document" .
 
 dct:MediaTypeOrExtent a owl:Class ;
-	rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
+    rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
     rdfs:label "Media Type or Extent" .
 
 dct:LinguisticSystem a owl:Class ;
-	rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
+    rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
     rdfs:label "Linguistic System " .
 
 skos:Concept a owl:Class ;
-	rdfs:isDefinedBy <http://www.w3.org/2009/08/skos-reference/skos.rdf#> ;
-	rdfs:label "Concept" .
-	
+    rdfs:isDefinedBy <http://www.w3.org/2009/08/skos-reference/skos.rdf#> ;
+    rdfs:label "Concept" .
+
 ecoop:hasFrontEnd a owl:ObjectProperty ;
     rdfs:label "has FrontEnd" ;
-	rdfs:domain ecoop:IPythonKernel ;
+    rdfs:domain ecoop:IPythonKernel ;
     rdfs:range ecoop:IPythonNotebook ;
     owl:inverseOf ecoop:isFrontEndOf .
 
 ecoop:isFrontEndOf a owl:ObjectProperty ;
     rdfs:label "is FrontEnd Of" ;
-	rdfs:domain ecoop:IPythonNotebook ;
+    rdfs:domain ecoop:IPythonNotebook ;
     rdfs:range ecoop:IPythonKernel ;
     owl:inverseOf ecoop:hasFrontEnd .
 
 ecoop:hasProfile a owl:ObjectProperty ;
     rdfs:label "has FrontEnd" ;
-	rdfs:domain ecoop:IPythonKernel ;
+    rdfs:domain ecoop:IPythonKernel ;
     rdfs:range ecoop:IPythonProfile ;
     owl:inverseOf ecoop:isProfileOf .
-	
+
 ecoop:isProfileOf a owl:ObjectProperty ;
     rdfs:label "is FrontEnd Of" ;
-	rdfs:domain ecoop:IPythonProfile ;
+    rdfs:domain ecoop:IPythonProfile ;
     rdfs:range ecoop:IPythonKernel ;
     owl:inverseOf ecoop:hasProfile .
-	
+
 ecoop:hasConfiguration a owl:ObjectProperty ;
     rdfs:label "has Configuration" ;
-	rdfs:domain ecoop:IPythonProfile ;
+    rdfs:domain ecoop:IPythonProfile ;
     rdfs:range ecoop:Configuration ;
     owl:inverseOf ecoop:isConfigurationOf .
 
 ecoop:isConfigurationOf a owl:ObjectProperty ;
     rdfs:label "is Configuration Of" ;
-	rdfs:domain ecoop:Configuration ;
-    rdfs:range ecoop:IPythonProfile ;	
+    rdfs:domain ecoop:Configuration ;
+    rdfs:range ecoop:IPythonProfile ;
     owl:inverseOf ecoop:hasConfiguration .
 
 ecoop:hasScript a owl:ObjectProperty ;
     rdfs:label "has Script" ;
-	rdfs:domain ecoop:IPythonNotebook ;
-    rdfs:range ecoop:NotebookScript ;	
+    rdfs:domain ecoop:IPythonNotebook ;
+    rdfs:range ecoop:NotebookScript ;
     owl:inverseOf ecoop:isScriptOf .
 
 ecoop:isScriptOf a owl:ObjectProperty ;
     rdfs:label "is Script Of" ;
-	rdfs:domain ecoop:NotebookScript ;
-    rdfs:range ecoop:IPythonNotebook ;	
+    rdfs:domain ecoop:NotebookScript ;
+    rdfs:range ecoop:IPythonNotebook ;
     owl:inverseOf ecoop:hasScript .
 
 ecoop:hasFigure a owl:ObjectProperty ;
     rdfs:label "has Figure" ;
-	rdfs:domain ecoop:Document ;
-    rdfs:range ecoop:Figure ;		
+    rdfs:domain ecoop:Document ;
+    rdfs:range ecoop:Figure ;
     owl:inverseOf ecoop:isFigureOf .
 
 ecoop:isFigureOf a owl:ObjectProperty ;
     rdfs:label "is Figure Of" ;
-	rdfs:domain ecoop:Figure ;
-    rdfs:range ecoop:Document ;		
+    rdfs:domain ecoop:Figure ;
+    rdfs:range ecoop:Document ;
     owl:inverseOf ecoop:hasFigure .
 
 ecoop:hasTable a owl:ObjectProperty ;
     rdfs:label "has Table" ;
-	rdfs:domain ecoop:Document ;
-    rdfs:range ecoop:Table ;	
+    rdfs:domain ecoop:Document ;
+    rdfs:range ecoop:Table ;
     owl:inverseOf ecoop:isTableOf .
 
 ecoop:isTableOf a owl:ObjectProperty ;
     rdfs:label "is Table Of" ;
-	rdfs:domain ecoop:Table ;
-    rdfs:range ecoop:Document ;		
+    rdfs:domain ecoop:Table ;
+    rdfs:range ecoop:Document ;
     owl:inverseOf ecoop:hasTable .
- 
+
 ecoop:hasListing a owl:ObjectProperty ;
     rdfs:label "has Listing" ;
-	rdfs:domain ecoop:Document ;
-    rdfs:range ecoop:Listing ;	
+    rdfs:domain ecoop:Document ;
+    rdfs:range ecoop:Listing ;
     owl:inverseOf ecoop:isListingOf .
- 
+
 ecoop:isListingOf a owl:ObjectProperty ;
     rdfs:label "is Listing Of" ;
-	rdfs:domain ecoop:Listing ;
-    rdfs:range ecoop:Document ;		
+    rdfs:domain ecoop:Listing ;
+    rdfs:range ecoop:Document ;
     owl:inverseOf ecoop:hasListing .
- 
+
 ecoop:hasImage a owl:ObjectProperty ;
     rdfs:label "has Image" ;
-    rdfs:range ecoop:Image ;	
+    rdfs:range ecoop:Image ;
     owl:inverseOf ecoop:isImageOf .
- 
+
 ecoop:isImageOf a owl:ObjectProperty ;
     rdfs:label "is Image Of" ;
-	rdfs:domain ecoop:Image ;	
+    rdfs:domain ecoop:Image ;
     owl:inverseOf ecoop:hasImage .
- 
+
 ecoop:hasArray a owl:ObjectProperty ;
     rdfs:label "has Array" ;
-	rdfs:domain ecoop:Table ;
-    rdfs:range ecoop:Array ;		
+    rdfs:domain ecoop:Table ;
+    rdfs:range ecoop:Array ;
     owl:inverseOf ecoop:isArrayOf .
- 
+
 ecoop:isArrayOf a owl:ObjectProperty ;
     rdfs:label "is Array Of" ;
-	rdfs:domain ecoop:Array ;
-    rdfs:range ecoop:Table ;		
+    rdfs:domain ecoop:Array ;
+    rdfs:range ecoop:Table ;
     owl:inverseOf ecoop:hasArray .
- 
+
 ecoop:hasScript a owl:ObjectProperty ;
     rdfs:label "has Script" ;
-	rdfs:domain ecoop:Listing ;
-    rdfs:range ecoop:Script ;	
+    rdfs:domain ecoop:Listing ;
+    rdfs:range ecoop:Script ;
     owl:inverseOf ecoop:isScriptOf .
- 
+
 ecoop:isScriptOf a owl:ObjectProperty ;
     rdfs:label "is Script Of" ;
-	rdfs:domain ecoop:Script ;
-    rdfs:range ecoop:Listing ;	
+    rdfs:domain ecoop:Script ;
+    rdfs:range ecoop:Listing ;
     owl:inverseOf ecoop:hasScript .
 
-ecoop:accessURL	a owl:DatatypeProperty ;
-	rdfs:label "Access URL" ;
-	skos:editorialNote "The reason for defining a property ecoop:accessURL is that dcat:accessURL asserts it domain to be dcat:Dataset." ;
+ecoop:accessURL a owl:DatatypeProperty ;
+    rdfs:label "Access URL" ;
+    skos:editorialNote "The reason for defining a property ecoop:accessURL is that dcat:accessURL asserts it domain to be dcat:Dataset." ;
     rdfs:range xsd:anyURI .
 
 ecoop:byteSize a owl:DatatypeProperty ;
-	rdfs:label "Byte Size" ;
-	rdfs:comment "The size of a dataset in bytes." ;
-	rdfs:domain ecoop:Dataset;
-	rdfs:range xsd:string .
+    rdfs:label "Byte Size" ;
+    rdfs:comment "The size of a dataset in bytes." ;
+    rdfs:domain ecoop:Dataset;
+    rdfs:range xsd:string .
 
 ecoop:contactPoint a owl:ObjectProperty ;
-	rdfs:label "Contact Point" ;
-	rdfs:comment "The point of contact for a dataset." ;
-	rdfs:domain ecoop:Dataset ;
-	rdfs:range foaf:Agent .	
-	
+    rdfs:label "Contact Point" ;
+    rdfs:comment "The point of contact for a dataset." ;
+    rdfs:domain ecoop:Dataset ;
+    rdfs:range foaf:Agent .
+
 ecoop:byteSize a owl:DatatypeProperty ;
-	rdfs:label "Byte Size" ;
-	rdfs:comment "The size of a dataset in bytes." ;
-	rdfs:domain ecoop:Dataset;
-	rdfs:range xsd:string .	
+    rdfs:label "Byte Size" ;
+    rdfs:comment "The size of a dataset in bytes." ;
+    rdfs:domain ecoop:Dataset;
+    rdfs:range xsd:string .
 
 ecoop:sourceModel a owl:ObjectProperty ;
-	rdfs:label "Source Model" ;
-	rdfs:comment "A dataset was generated by using one or more models." ;
-	rdfs:domain ecoop:Dataset ;
-	rdfs:range ecoop:Model .	
+    rdfs:label "Source Model" ;
+    rdfs:comment "A dataset was generated by using one or more models." ;
+    rdfs:domain ecoop:Dataset ;
+    rdfs:range ecoop:Model .
 
 ecoop:sourceAlgorithm a owl:ObjectProperty ;
-	rdfs:label "Source Algorithm" ;
-	rdfs:comment "A dataset may be based on one or more algorithms." ;
-	rdfs:domain ecoop:Dataset ;
-	rdfs:range ecoop:Algorithm .
-	
+    rdfs:label "Source Algorithm" ;
+    rdfs:comment "A dataset may be based on one or more algorithms." ;
+    rdfs:domain ecoop:Dataset ;
+    rdfs:range ecoop:Algorithm .
+
 ecoop:sourceInstrument a owl:ObjectProperty ;
-	rdfs:label "Source Instrument" ;
-	rdfs:comment "A dataset was collected by using one or more instruments." ;
-	rdfs:domain ecoop:Dataset ;
-	rdfs:range ecoop:Instrument ;
-	rdfs:subPropertyOf dcterms:hasPart .
+    rdfs:label "Source Instrument" ;
+    rdfs:comment "A dataset was collected by using one or more instruments." ;
+    rdfs:domain ecoop:Dataset ;
+    rdfs:range ecoop:Instrument ;
+    rdfs:subPropertyOf dcterms:hasPart .
 
 ecoop:sourceLibrary a owl:ObjectProperty ;
-	rdfs:label "Source Library" ;
-	rdfs:comment "A dataset may be based on one or more libraries." ;
-	rdfs:domain ecoop:Dataset ;
-	rdfs:range ecoop:Library .	
-	
+    rdfs:label "Source Library" ;
+    rdfs:comment "A dataset may be based on one or more libraries." ;
+    rdfs:domain ecoop:Dataset ;
+    rdfs:range ecoop:Library .
+
 ecoop:hasSpatialExtents a owl:ObjectProperty ;
-	rdfs:label "Has Spatial Extents" ;
-	rdfs:comment "An entity of model run may have spatial extents." ;
-	rdfs:domain ecoop:ModelRun ;
-	rdfs:range ecoop:SpatialExtents .
+    rdfs:label "Has Spatial Extents" ;
+    rdfs:comment "An entity of model run may have spatial extents." ;
+    rdfs:domain ecoop:ModelRun ;
+    rdfs:range ecoop:SpatialExtents .
 
 ecoop:hasTemporalExtents a owl:ObjectProperty ;
-	rdfs:label "Has Temporal Extents" ;
-	rdfs:comment "An entity of model run may have temporal extents." ;
-	rdfs:domain ecoop:ModelRun ;
-	rdfs:range ecoop:TemporalExtents .
+    rdfs:label "Has Temporal Extents" ;
+    rdfs:comment "An entity of model run may have temporal extents." ;
+    rdfs:domain ecoop:ModelRun ;
+    rdfs:range ecoop:TemporalExtents .
 
 ecoop:hasSpatialResolution a owl:ObjectProperty ;
-	rdfs:label "Has Spatial Resolution" ;
-	rdfs:comment "An entity of model run may have a spatial resolution." ;
-	rdfs:domain ecoop:ModelRun ;
-	rdfs:range ecoop:SpatialResolution .
+    rdfs:label "Has Spatial Resolution" ;
+    rdfs:comment "An entity of model run may have a spatial resolution." ;
+    rdfs:domain ecoop:ModelRun ;
+    rdfs:range ecoop:SpatialResolution .
 
 ecoop:hasTemporalResolution a owl:ObjectProperty ;
-	rdfs:label "Has Temporal Resolution" ;
-	rdfs:comment "An entity of model run may have a temporal resoltuion." ;
-	rdfs:domain ecoop:ModelRun ;
-	rdfs:range ecoop:TemporalResolution .	
-	
+    rdfs:label "Has Temporal Resolution" ;
+    rdfs:comment "An entity of model run may have a temporal resoltuion." ;
+    rdfs:domain ecoop:ModelRun ;
+    rdfs:range ecoop:TemporalResolution .
+
 ecoop:extentTypeCode a owl:DatatypeProperty ;
-	rdfs:label "Extent Type Code" ;
-	rdfs:comment "The extent type code of a spatial extent." ;
-	rdfs:domain ecoop:SpatialExtents ;
-	rdfs:range xsd:string .
+    rdfs:label "Extent Type Code" ;
+    rdfs:comment "The extent type code of a spatial extent." ;
+    rdfs:domain ecoop:SpatialExtents ;
+    rdfs:range xsd:string .
 
 ecoop:westBoundLongitude a owl:DatatypeProperty ;
-	rdfs:label "West Bound Longitude" ;
-	rdfs:comment "The value of west bound longitude." ;
-	rdfs:domain ecoop:SpatialExtents ;
-	rdfs:range xsd:float .
+    rdfs:label "West Bound Longitude" ;
+    rdfs:comment "The value of west bound longitude." ;
+    rdfs:domain ecoop:SpatialExtents ;
+    rdfs:range xsd:float .
 
 ecoop:eastBoundLongitude a owl:DatatypeProperty ;
-	rdfs:label "East Bound Longitude" ;
-	rdfs:comment "The value of east bound longitude." ;
-	rdfs:domain ecoop:SpatialExtents ;
-	rdfs:range xsd:float .
+    rdfs:label "East Bound Longitude" ;
+    rdfs:comment "The value of east bound longitude." ;
+    rdfs:domain ecoop:SpatialExtents ;
+    rdfs:range xsd:float .
 
 ecoop:southBoundLatitude a owl:DatatypeProperty ;
-	rdfs:label "South Bound Latitude" ;
-	rdfs:comment "the value of south bound latitude." ;
-	rdfs:domain ecoop:SpatialExtents ;
-	rdfs:range xsd:float .
+    rdfs:label "South Bound Latitude" ;
+    rdfs:comment "the value of south bound latitude." ;
+    rdfs:domain ecoop:SpatialExtents ;
+    rdfs:range xsd:float .
 
 ecoop:northBoundLatitude a owl:DatatypeProperty ;
-	rdfs:label "North Bound Latitude" ;
-	rdfs:comment "The value of north bound latitude." ;
-	rdfs:domain ecoop:SpatialExtents ;
-	rdfs:range xsd:float .	
+    rdfs:label "North Bound Latitude" ;
+    rdfs:comment "The value of north bound latitude." ;
+    rdfs:domain ecoop:SpatialExtents ;
+    rdfs:range xsd:float .
 
 ecoop:beginPosition a owl:DatatypeProperty ;
-	rdfs:label "Begin Position" ;
-	rdfs:comment "The start date/time of a temporal extent." ;
-	rdfs:domain ecoop:TemporalExtents ;
-	rdfs:range xsd:dateTime .
+    rdfs:label "Begin Position" ;
+    rdfs:comment "The start date/time of a temporal extent." ;
+    rdfs:domain ecoop:TemporalExtents ;
+    rdfs:range xsd:dateTime .
 
 ecoop:endPosition a owl:DatatypeProperty ;
-	rdfs:label "End Position" ;
-	rdfs:comment "The end date/time of a temporal extent." ;
-	rdfs:domain ecoop:TemporalExtents ;
-	rdfs:range xsd:dateTime .
+    rdfs:label "End Position" ;
+    rdfs:comment "The end date/time of a temporal extent." ;
+    rdfs:domain ecoop:TemporalExtents ;
+    rdfs:range xsd:dateTime .
 
 ecoop:resolution a owl:DatatypeProperty ;
-	rdfs:label "Resolution" ;
-	rdfs:comment "The degree of fineness with which an image can be recorded or produced." ;
-	rdfs:domain ecoop:SpatialResolution ;
-	rdfs:range xsd:string .
+    rdfs:label "Resolution" ;
+    rdfs:comment "The degree of fineness with which an image can be recorded or produced." ;
+    rdfs:domain ecoop:SpatialResolution ;
+    rdfs:range xsd:string .
 
 ecoop:equivalentScale a owl:DatatypeProperty ;
-	rdfs:label "Equivalent Scale" ;
-	rdfs:comment "The equivalent scale of a graph." ;
-	rdfs:domain ecoop:SpatialResolution ;
-	rdfs:range xsd:string .
+    rdfs:label "Equivalent Scale" ;
+    rdfs:comment "The equivalent scale of a graph." ;
+    rdfs:domain ecoop:SpatialResolution ;
+    rdfs:range xsd:string .
 
 ecoop:hasTemporalUnit a owl:ObjectProperty ;
-	rdfs:label "Has Temporal Unit" ;
-	rdfs:comment "A temporal resolution has one or more tempporal units." ;
-	rdfs:domain ecoop:TemporalResolution ;
-	rdfs:range ecoop:TemporalUnit .	
+    rdfs:label "Has Temporal Unit" ;
+    rdfs:comment "A temporal resolution has one or more tempporal units." ;
+    rdfs:domain ecoop:TemporalResolution ;
+    rdfs:range ecoop:TemporalUnit .
 
 ecoop:address a owl:DatatypeProperty ;
-	rdfs:label "Address" ;
-	rdfs:comment "An agent has an address." ;
-	rdfs:domain foaf:Agent ;
-	rdfs:range xsd:string .	
+    rdfs:label "Address" ;
+    rdfs:comment "An agent has an address." ;
+    rdfs:domain foaf:Agent ;
+    rdfs:range xsd:string .
 
 ecoop:homepageURL a owl:DatatypeProperty ;
-	rdfs:label "HomePage URL" ;
-	rdfs:comment "An agent may have a homepage on the Web." ;
-	rdfs:domain foaf:Agent ;
-	rdfs:range xsd:anyURI .	
+    rdfs:label "HomePage URL" ;
+    rdfs:comment "An agent may have a homepage on the Web." ;
+    rdfs:domain foaf:Agent ;
+    rdfs:range xsd:anyURI .
 
 ecoop:hasMember a owl:ObjectProperty ;
-	rdfs:label "Has Member" ;
-	rdfs:comment "An agent has some members." ;
-	rdfs:domain foaf:Agent ; 
-	rdfs:range foaf:Agent ;
-	owl:inverseOf ecoop:isMemberOf ;
-	rdfs:subPropertyOf prov:hadDelegate .
+    rdfs:label "Has Member" ;
+    rdfs:comment "An agent has some members." ;
+    rdfs:domain foaf:Agent ;
+    rdfs:range foaf:Agent ;
+    owl:inverseOf ecoop:isMemberOf ;
+    rdfs:subPropertyOf prov:hadDelegate .
 
 ecoop:isMemberOf a owl:ObjectProperty ;
-	rdfs:label "Is Member Of" ;
-	rdfs:comment "The relationship that an agent belongs to another agent." ;
-	rdfs:domain foaf:Agent ; 
-	rdfs:range foaf:Agent ;	
-	owl:inverseOf ecoop:hasMember ;
-	rdfs:subPropertyOf prov:actedOnBehalfOf .	
-	
+    rdfs:label "Is Member Of" ;
+    rdfs:comment "The relationship that an agent belongs to another agent." ;
+    rdfs:domain foaf:Agent ;
+    rdfs:range foaf:Agent ;
+    owl:inverseOf ecoop:hasMember ;
+    rdfs:subPropertyOf prov:actedOnBehalfOf .
+
 ecoop:hasSubOrganization  a owl:ObjectProperty ;
-	rdfs:label "Has Sub-organization" ;
-	rdfs:comment "Represents hierarchical containment of Organizations or OrganizationalUnits; indicates an organization which is a sub-part or child of this organization." ;
-	owl:inverseOf ecoop:subOrganizationOf ;
-	rdfs:domain foaf:Organization ; 
-	rdfs:range foaf:Organization ;
-	rdfs:subPropertyOf prov:hadDelegate .
+    rdfs:label "Has Sub-organization" ;
+    rdfs:comment "Represents hierarchical containment of Organizations or OrganizationalUnits; indicates an organization which is a sub-part or child of this organization." ;
+    owl:inverseOf ecoop:subOrganizationOf ;
+    rdfs:domain foaf:Organization ;
+    rdfs:range foaf:Organization ;
+    rdfs:subPropertyOf prov:hadDelegate .
 
 ecoop:subOrganizationOf a owl:ObjectProperty ;
-	rdfs:label "Sub-organization Of" ;
-	rdfs:comment "An Organization is a component of another organization." ;
-	rdfs:domain foaf:Organization ;
-	rdfs:range foaf:Organization ;
-	rdfs:subPropertyOf prov:actedOnBehalfOf .	
-	
+    rdfs:label "Sub-organization Of" ;
+    rdfs:comment "An Organization is a component of another organization." ;
+    rdfs:domain foaf:Organization ;
+    rdfs:range foaf:Organization ;
+    rdfs:subPropertyOf prov:actedOnBehalfOf .
+
 dcat:distribution a rdf:Property ;
     rdfs:isDefinedBy <http://www.w3.org/ns/dcat#> ;
     rdfs:domain dcat:Dataset ;
@@ -587,14 +587,14 @@ prov:used a owl:ObjectProperty ;
     rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
     rdfs:label "used" ;
     rdfs:range prov:Entity ;
-    owl:inverseOf prov:wasUsedBy .	
+    owl:inverseOf prov:wasUsedBy .
 
 prov:wasUsedBy a owl:ObjectProperty ;
     rdfs:domain prov:Entity ;
     rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
     rdfs:label "wasUsedBy" ;
     rdfs:range prov:Activity ;
-    owl:inverseOf prov:used .	
+    owl:inverseOf prov:used .
 
 prov:wasDerivedFrom a owl:ObjectProperty ;
     rdfs:domain prov:Entity ;
@@ -613,79 +613,79 @@ prov:wasAttributedTo a owl:ObjectProperty ;
     rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
     rdfs:label "wasAttributedTo" ;
     rdfs:range prov:Agent .
-	
+
 prov:startedAtTime a owl:DatatypeProperty ;
     rdfs:domain prov:Activity ;
     rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
     rdfs:label "startedAtTime" ;
-    rdfs:range xsd:dateTime .	
+    rdfs:range xsd:dateTime .
 
 prov:endedAtTime a owl:DatatypeProperty ;
     rdfs:domain prov:Activity ;
     rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
     rdfs:label "endedAtTime" ;
     rdfs:range xsd:dateTime .
-	
-dct:hasPart a rdf:Property ;    
+
+dct:hasPart a rdf:Property ;
     rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
     rdfs:label "Has Part" .
 
-dct:isPartOf a rdf:Property ;    
+dct:isPartOf a rdf:Property ;
     rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
     rdfs:label "Is Part Of" .
 
-dct:title a rdf:Property ;    
+dct:title a rdf:Property ;
     rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
     rdfs:label "Title" .
 
-dct:description a rdf:Property ;    
+dct:description a rdf:Property ;
     rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
     rdfs:label "Description" .
 
-dct:hasVersion a rdf:Property ;    
+dct:hasVersion a rdf:Property ;
     rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
-    rdfs:label "Has Version" .	
+    rdfs:label "Has Version" .
 
-dct:subject a rdf:Property ;    
+dct:subject a rdf:Property ;
     rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
-    rdfs:label "Subject" .	
+    rdfs:label "Subject" .
 
-dct:identifier a rdf:Property ;    
+dct:identifier a rdf:Property ;
     rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
-    rdfs:label "Identifier" .	
+    rdfs:label "Identifier" .
 
-dct:license a rdf:Property ;    
+dct:license a rdf:Property ;
     rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
-    rdfs:label "License" .	
+    rdfs:label "License" .
 
-dct:format a rdf:Property ;    
+dct:format a rdf:Property ;
     rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
-    rdfs:label "Format" .	
+    rdfs:label "Format" .
 
-dct:language a rdf:Property ;    
+dct:language a rdf:Property ;
     rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
-    rdfs:label "Language" .	
+    rdfs:label "Language" .
 
-dct:issued a rdf:Property ;    
+dct:issued a rdf:Property ;
     rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
-    rdfs:label "Issued" .		
+    rdfs:label "Issued" .
 
-dct:modified a rdf:Property ;    
+dct:modified a rdf:Property ;
     rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
-    rdfs:label "Modified" .		
-	
-foaf:name a owl:DatatypeProperty ;    
+    rdfs:label "Modified" .
+
+foaf:name a owl:DatatypeProperty ;
     rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> .
 
-foaf:familyName a owl:DatatypeProperty ;    
+foaf:familyName a owl:DatatypeProperty ;
     rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> .
-	
-foaf:givenName a owl:DatatypeProperty ;    
-    rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> .	
-	
-foaf:mbox a owl:DatatypeProperty ;    
-    rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> .	
-	
-foaf:phone a owl:DatatypeProperty ;    
-    rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> .	
-	
+
+foaf:givenName a owl:DatatypeProperty ;
+    rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> .
+
+foaf:mbox a owl:DatatypeProperty ;
+    rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> .
+
+foaf:phone a owl:DatatypeProperty ;
+    rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> .
+
