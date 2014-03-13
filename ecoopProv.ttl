@@ -9,10 +9,11 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix qudt: <http://qudt.org/1.1/schema/qudt#> .
 
 <http://escience.rpi.edu/ontology/eco-op/> a owl:Ontology ;
     dct:title "Ontology for ECOOP Provenance Capturing" ;
-    dct:date "2013-03-06";
+    dct:date "2014-03-12";
     owl:versionInfo "1.1";
     rdfs:comment "An ontology designed for capturing provenance information in the research project INTEROP ECO-OP: Employing Cyber Infrastructure Data Technologies to Facilitate IEA for Climate Impacts in NE & CA LME's (#3 & #7). The ontology uses the namespace prefix ecoop." ;
     dct:identifier "http://escience.rpi.edu/ontology/eco-op/" ;
@@ -56,7 +57,7 @@ ecoop:NotebookScript a owl:Class ;
 
 ecoop:Cell a owl:Class ;
     rdfs:label "Cell" ;
-    rdfs:comment "A cell in iPythonNotebook is a multi-line text input field in IPython Notebook, and its contents can be executed by using Shift-Enter, or by clicking either the 'Play' button the toolbar, or Cell | Run in the menu bar. The execution behavior of a cell is determined the cell's type." ;
+    rdfs:comment "A cell in iPythonNotebook is a multi-line text input field in IPython Notebook, and its contents can be executed by using Shift-Enter, or by clicking either the “Play” button the toolbar, or Cell | Run in the menu bar. The execution behavior of a cell is determined the cell's type." ;
     rdfs:subClassOf prov:Entity .
 
 ecoop:CodeCell a owl:Class ;
@@ -261,6 +262,10 @@ skos:Concept a owl:Class ;
     rdfs:isDefinedBy <http://www.w3.org/2009/08/skos-reference/skos.rdf#> ;
     rdfs:label "Concept" .
 
+qudt:Unit a owl:Class ;
+    rdfs:isDefinedBy <http://qudt.org/1.1/schema/qudt#> ;
+    rdfs:label "Unit" .
+
 ecoop:hasFrontEnd a owl:ObjectProperty ;
     rdfs:label "has FrontEnd" ;
     rdfs:domain ecoop:IPythonKernel ;
@@ -410,7 +415,7 @@ ecoop:sourceModel a owl:ObjectProperty ;
 
 ecoop:sourceAlgorithm a owl:ObjectProperty ;
     rdfs:label "Source Algorithm" ;
-    rdfs:comment "A dataset may be based on one or more algorithms." ;
+    rdfs:comment "A dataset may be generated using one or more algorithms." ;
     rdfs:domain ecoop:Dataset ;
     rdfs:range ecoop:Algorithm .
 
@@ -429,26 +434,22 @@ ecoop:sourceLibrary a owl:ObjectProperty ;
 
 ecoop:hasSpatialExtents a owl:ObjectProperty ;
     rdfs:label "Has Spatial Extents" ;
-    rdfs:comment "An entity of model run may have spatial extents." ;
-    rdfs:domain ecoop:ModelRun ;
+    rdfs:comment "An entity may have spatial extents." ;
     rdfs:range ecoop:SpatialExtents .
 
 ecoop:hasTemporalExtents a owl:ObjectProperty ;
     rdfs:label "Has Temporal Extents" ;
-    rdfs:comment "An entity of model run may have temporal extents." ;
-    rdfs:domain ecoop:ModelRun ;
+    rdfs:comment "An entity may have temporal extents." ;
     rdfs:range ecoop:TemporalExtents .
 
 ecoop:hasSpatialResolution a owl:ObjectProperty ;
     rdfs:label "Has Spatial Resolution" ;
-    rdfs:comment "An entity of model run may have a spatial resolution." ;
-    rdfs:domain ecoop:ModelRun ;
+    rdfs:comment "An entity may have a spatial resolution." ;
     rdfs:range ecoop:SpatialResolution .
 
 ecoop:hasTemporalResolution a owl:ObjectProperty ;
     rdfs:label "Has Temporal Resolution" ;
-    rdfs:comment "An entity of model run may have a temporal resoltuion." ;
-    rdfs:domain ecoop:ModelRun ;
+    rdfs:comment "An entity may have a temporal resoltuion." ;
     rdfs:range ecoop:TemporalResolution .
 
 ecoop:extentTypeCode a owl:DatatypeProperty ;
@@ -553,6 +554,12 @@ ecoop:subOrganizationOf a owl:ObjectProperty ;
     rdfs:domain foaf:Organization ;
     rdfs:range foaf:Organization ;
     rdfs:subPropertyOf prov:actedOnBehalfOf .
+
+ecoop:hasUnit a owl:ObjectProperty ;
+    rdfs:label "Has Unit" ;
+    rdfs:comment "A dataset has units of measurement." ;
+    rdfs:domain ecoop:Dataset ;
+    rdfs:range qudt:Unit .
 
 dcat:distribution a rdf:Property ;
     rdfs:isDefinedBy <http://www.w3.org/ns/dcat#> ;
