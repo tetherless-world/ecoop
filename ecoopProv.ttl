@@ -57,7 +57,7 @@ ecoop:NotebookScript a owl:Class ;
 
 ecoop:Cell a owl:Class ;
     rdfs:label "Cell" ;
-    rdfs:comment "A cell in iPythonNotebook is a multi-line text input field in IPython Notebook, and its contents can be executed by using Shift-Enter, or by clicking either the “Play” button the toolbar, or Cell | Run in the menu bar. The execution behavior of a cell is determined the cell's type." ;
+    rdfs:comment "A cell in iPythonNotebook is a multi-line text input field in IPython Notebook, and its contents can be executed by using Shift-Enter, or by clicking either the 'Play' button the toolbar, or Cell | Run in the menu bar. The execution behavior of a cell is determined the cell's type." ;
     rdfs:subClassOf prov:Entity .
 
 ecoop:CodeCell a owl:Class ;
