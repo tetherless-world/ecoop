@@ -1,19 +1,19 @@
 {
   "@context": {
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-    "rdfs": "http://www.w3.org/2000/01/rdf-schema#" .
-    "ecoop": "http://escience.rpi.edu/ontology/eco-op/ecoopProv.ttl#" .
-    "owl": "http://www.w3.org/2002/07/owl#" .
-    "foaf": "http://xmlns.com/foaf/0.1/" .
-    "skos": "http://www.w3.org/2009/08/skos-reference/skos.rdf#" .
-    "dctype": "http://purl.org/dc/dcmitype/" .
-    "prov": "http://www.w3.org/ns/prov#" .
-    "dct": "http://purl.org/dc/terms/" .
-    "xsd": "http://www.w3.org/2001/XMLSchema#" .
-    "dcat": "http://www.w3.org/ns/dcat#" .
-    "qudt": "http://qudt.org/1.1/schema/qudt#" .
-    "doap": "http://usefulinc.com/ns/doap#" .
-    "ex" : "http://not.sure/yet#" .
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "ecoop": "http://escience.rpi.edu/ontology/eco-op/ecoopProv.ttl#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "skos": "http://www.w3.org/2009/08/skos-reference/skos.rdf#",
+    "dctype": "http://purl.org/dc/dcmitype/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "dct": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "qudt": "http://qudt.org/1.1/schema/qudt#",
+    "doap": "http://usefulinc.com/ns/doap#",
+    "ex" : "http://not.sure/yet#"
   },
   "@graph": [
     {
@@ -58,7 +58,7 @@
     {
       "@id": "ex:python_data",
       "@type": "prov:Entity",
-      "prov:wasDerivedFrom" "ex:loaded_data",
+      "prov:wasDerivedFrom": "ex:loaded_data",
       "prov:wasGeneratedBy": "ex:cell_1_run"
     },
     {
