@@ -1,0 +1,382 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ecoop.ecooputil &mdash; ecoop 0.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="ecoop 0.1.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../index.html"><img src="../../_static/ECOOP-logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">home</a>|&nbsp;</li>
+        <li><a href="../../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for ecoop.ecooputil</h1><div class="highlight"><pre>
+<span class="c">#/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="c">###############################################################################</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c"># Project: ECOOP, sponsored by The National Science Foundation</span>
+<span class="c"># Purpose: this code is part of the Cyberinfrastructure developed for the ECOOP project</span>
+<span class="c">#                http://tw.rpi.edu/web/project/ECOOP</span>
+<span class="c">#                from the TWC - Tetherless World Constellation</span>
+<span class="c">#                            at RPI - Rensselaer Polytechnic Institute</span>
+<span class="c">#                            founded by NSF</span>
+<span class="c">#</span>
+<span class="c"># Author:   Massimo Di Stefano , distem@rpi.edu -</span>
+<span class="c">#                http://tw.rpi.edu/web/person/MassimoDiStefano</span>
+<span class="c">#</span>
+<span class="c">###############################################################################</span>
+<span class="c"># Copyright (c) 2008-2014 Tetherless World Constellation at Rensselaer Polytechnic Institute</span>
+<span class="c"># Permission is hereby granted, free of charge, to any person obtaining a</span>
+<span class="c"># copy of this software and associated documentation files (the &quot;Software&quot;),</span>
+<span class="c"># to deal in the Software without restriction, including without limitation</span>
+<span class="c"># the rights to use, copy, modify, merge, publish, distribute, sublicense,</span>
+<span class="c"># and/or sell copies of the Software, and to permit persons to whom the</span>
+<span class="c"># Software is furnished to do so, subject to the following conditions:</span>
+<span class="c">#</span>
+<span class="c"># The above copyright notice and this permission notice shall be included</span>
+<span class="c"># in all copies or substantial portions of the Software.</span>
+<span class="c">#</span>
+<span class="c"># THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS</span>
+<span class="c"># OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL</span>
+<span class="c"># THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING</span>
+<span class="c"># FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER</span>
+<span class="c"># DEALINGS IN THE SOFTWARE.</span>
+<span class="c">###############################################################################</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">.. module:: ecoop</span>
+<span class="sd">  :synopsis: shareUtil class for the ecoop module</span>
+
+<span class="sd">.. moduleauthor:: Massimo Di Stefano</span>
+<span class="sd">.. currentmodule:: ecoop</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">zipfile</span> <span class="kn">import</span> <span class="n">ZipFile</span><span class="p">,</span> <span class="n">ZIP_DEFLATED</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">closing</span>
+<span class="kn">import</span> <span class="nn">paramiko</span>
+<span class="kn">import</span> <span class="nn">qrcode</span>
+<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Javascript</span>
+<span class="kn">import</span> <span class="nn">envoy</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<div class="viewcode-block" id="shareUtil"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil">[docs]</a><span class="k">class</span> <span class="nc">shareUtil</span><span class="p">():</span>
+<div class="viewcode-block" id="shareUtil.zipdir"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil.zipdir">[docs]</a>    <span class="k">def</span> <span class="nf">zipdir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basedir</span><span class="p">,</span> <span class="n">archivename</span><span class="p">,</span> <span class="n">rm</span><span class="o">=</span><span class="s">&#39;no&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        </span>
+<span class="sd">        Utility function to zip a single file or a directory</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; zipdir(input, output)</span>
+<span class="sd">        </span>
+<span class="sd">        :param basedir: input file or directory</span>
+<span class="sd">        :param archivename: output file.zip</span>
+<span class="sd">        :param rm: [yes, no], remove source file (optional, default=no)</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">basedir</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">closing</span><span class="p">(</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">archivename</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="n">ZIP_DEFLATED</span><span class="p">))</span> <span class="k">as</span> <span class="n">z</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">basedir</span><span class="p">):</span>
+                <span class="c">#NOTE: ignore empty directories</span>
+                <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+                    <span class="c">#print fn</span>
+                    <span class="n">absfn</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span>
+                    <span class="n">zfn</span> <span class="o">=</span> <span class="n">absfn</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">basedir</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">):]</span> <span class="c">#XXX: relative path</span>
+                    <span class="n">z</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">absfn</span><span class="p">,</span> <span class="n">zfn</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rm</span> <span class="o">!=</span> <span class="s">&#39;no&#39;</span><span class="p">:</span>
+            <span class="n">instruction</span> <span class="o">=</span> <span class="s">&#39;rm -rf </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">basedir</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">instruction</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="shareUtil.uploadfile"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil.uploadfile">[docs]</a>    <span class="k">def</span> <span class="nf">uploadfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;epi&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">&#39;epi&#39;</span><span class="p">,</span> <span class="n">hostname</span><span class="o">=</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">inputfile</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">outputfile</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">link</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">apacheroot</span><span class="o">=</span><span class="s">&#39;/var/www/&#39;</span><span class="p">,</span> <span class="nb">zip</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">qr</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+<span class="sd">        Utility function to upload file on remote server using sftp protocol</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; uploadfile(inputfile, outputfile)</span>
+<span class="sd">        </span>
+<span class="sd">        :param str username: username on remote server</span>
+<span class="sd">        :param str password: password to access remote server</span>
+<span class="sd">        :param str hostname: hostname of remote server (default: localhost)</span>
+<span class="sd">        :param int port: port number on remote server (default: 22)</span>
+<span class="sd">        :param str inputfile: local path to the file to uploaded</span>
+<span class="sd">        :param str outputfile: remote path to the file to upload</span>
+<span class="sd">        :param str link: bolean [True, False] default False, print a link to download the file (remote path needs to be in a web available directory)</span>
+<span class="sd">        :param str apacheroot: path to apache root default to &#39;/var/www/&#39; required if link == True</span>
+<span class="sd">        :param str zip: deafault False, zip the output</span>
+<span class="sd">        :param str qr:  deafault False, return qrcode as image</span>
+<span class="sd">        :return:  link to uploaded file if link=True or qr image if qr=True &amp; link=True, none if link is set to false</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">zip</span><span class="p">:</span>
+            <span class="c">#print &#39;add zipfile&#39;</span>
+            <span class="n">zipfile</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">inputfile</span> <span class="o">+</span> <span class="s">&#39;.zip&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">zipdir</span><span class="p">(</span><span class="n">inputfile</span><span class="p">,</span> <span class="n">zipfile</span><span class="p">)</span>
+            <span class="n">inputfile</span> <span class="o">=</span> <span class="n">zipfile</span>
+            <span class="c">#paramiko.util.log_to_file(&#39;/var/www/esr/paramiko.log&#39;)</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHClient</span><span class="p">()</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">set_missing_host_key_policy</span><span class="p">(</span><span class="n">paramiko</span><span class="o">.</span><span class="n">AutoAddPolicy</span><span class="p">())</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">)</span>
+        <span class="n">transport</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">Transport</span><span class="p">((</span><span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+        <span class="n">transport</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">)</span>
+        <span class="n">sftp</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SFTPClient</span><span class="o">.</span><span class="n">from_transport</span><span class="p">(</span><span class="n">transport</span><span class="p">)</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="n">outputfile</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)):</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="s">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">[:</span><span class="n">n</span><span class="p">])</span>
+            <span class="c">#print &#39;Path:&#39;, path,</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">sftp</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                <span class="c">#print &#39;mode =&#39;, oct(s.st_mode)</span>
+            <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="c">#print e</span>
+                <span class="c">#print &#39;adding dir: &#39;, path</span>
+                <span class="n">sftp</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">sftp</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">remotepath</span><span class="o">=</span><span class="n">outputfile</span><span class="p">,</span> <span class="n">localpath</span><span class="o">=</span><span class="n">inputfile</span><span class="p">)</span>
+            <span class="n">sftp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">transport</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">print</span> <span class="s">&#39;file uploaded&#39;</span>
+            <span class="k">if</span> <span class="n">qr</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">link</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">link</span><span class="p">:</span>
+                    <span class="k">print</span> <span class="s">&#39;WORNING: qrcode not generated, set the option link to True&#39;</span>
+            <span class="k">if</span> <span class="n">link</span><span class="p">:</span>
+                <span class="n">filelink</span> <span class="o">=</span> <span class="n">outputfile</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">apacheroot</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+                <span class="n">link</span> <span class="o">=</span> <span class="s">&#39;http://&#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">hostname</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">filelink</span><span class="p">)</span>
+                <span class="n">raw_html</span> <span class="o">=</span> <span class="s">&#39;&lt;a href=&quot;</span><span class="si">%s</span><span class="s">&quot; target=&quot;_blank&quot;&gt;ESR results&lt;/a&gt;&#39;</span> <span class="o">%</span> <span class="n">link</span>
+                <span class="k">print</span> <span class="s">&#39;results are now available for download at : &#39;</span><span class="p">,</span> <span class="n">link</span>
+                <span class="n">image</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="k">if</span> <span class="n">qr</span><span class="p">:</span>
+                    <span class="n">imagefile</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;.jpeg&#39;</span>
+                    <span class="n">qr</span> <span class="o">=</span> <span class="n">qrcode</span><span class="o">.</span><span class="n">QRCode</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">error_correction</span><span class="o">=</span><span class="n">qrcode</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">ERROR_CORRECT_L</span><span class="p">,</span> <span class="n">box_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+                    <span class="n">qr</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+                    <span class="n">qr</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">fit</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                    <span class="n">img</span> <span class="o">=</span> <span class="n">qr</span><span class="o">.</span><span class="n">make_image</span><span class="p">()</span>
+                    <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">imagefile</span><span class="p">,</span> <span class="s">&quot;JPEG&quot;</span><span class="p">)</span>
+                    <span class="k">print</span> <span class="s">&#39;alive&#39;</span>
+                    <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">imagefile</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">image</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">qr</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">HTML</span><span class="p">(</span><span class="n">raw_html</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;Error: can</span><span class="se">\&#39;</span><span class="s">t find file or read data check if input file exist and or remote location is writable&quot;</span>
+</div>
+<div class="viewcode-block" id="shareUtil.gistit"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil.gistit">[docs]</a>    <span class="k">def</span> <span class="nf">gistit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">jist</span><span class="o">=</span><span class="s">&#39;/usr/local/bin/jist&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;notebook&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+<span class="sd">        use the jist utility to paste a txt file on github as gist and return a link to it</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; gistit(notebookfile)</span>
+<span class="sd">        </span>
+<span class="sd">        :param str filename: path to the a text file or notebook file (.json)</span>
+<span class="sd">        :param str jist: path to the executable jist (default=/usr/local/bin/jist)</span>
+<span class="sd">        :param str type: notebook, text</span>
+<span class="sd">        :return: link to gist if type=text, link to nbviewer if type=notebook</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+                <span class="n">link</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="n">jist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="n">jist</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">jist</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">r</span> <span class="o">=</span> <span class="n">envoy</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> -p </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">jist</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s">&#39;notebook&#39;</span><span class="p">:</span>
+                            <span class="n">link</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">std_out</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;https://gist.github.com&#39;</span><span class="p">,</span>
+                                                                       <span class="s">&#39;http://nbviewer.ipython.org&#39;</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s">&#39;text&#39;</span><span class="p">:</span>
+                            <span class="n">link</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">std_out</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+                        <span class="k">return</span> <span class="n">link</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="k">print</span> <span class="s">&quot;can&#39;t generate gist, check if jist works bycommand line with: jist -p filename&quot;</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">jist</span><span class="p">:</span>
+                    <span class="k">print</span> <span class="s">&#39;cannot find jist utility, check if it is in your path&#39;</span>
+        <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&#39;input file </span><span class="si">%s</span><span class="s"> not found&#39;</span> <span class="o">%</span> <span class="n">filename</span>
+</div>
+<div class="viewcode-block" id="shareUtil.get_id"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil.get_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">suffix</span><span class="p">,</span> <span class="n">makedir</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+<span class="sd">        Generate a directory based on the suffix and a time stamp</span>
+<span class="sd">        output looks like : suffix_Thursday_26_September_2013_06_28_49_PM</span>
+<span class="sd">        usage: getID(suffix)</span>
+<span class="sd">        </span>
+<span class="sd">        :param str suffix: suffix for the directory to be generated,</span>
+<span class="sd">        :return: directory name</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">ID</span> <span class="o">=</span> <span class="n">suffix</span> <span class="o">+</span> <span class="s">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;%A_</span><span class="si">%d</span><span class="s">_%B_%Y_%I_%M_%S_%p&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">makedir</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ensure_dir</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&#39;session data directory : ID&#39;</span><span class="p">,</span> <span class="n">ID</span>
+        <span class="k">return</span> <span class="n">ID</span>
+</div>
+<div class="viewcode-block" id="shareUtil.ensure_dir"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil.ensure_dir">[docs]</a>    <span class="k">def</span> <span class="nf">ensure_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">dir</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+<span class="sd">        Make a directory on the file system if it does not exist</span>
+<span class="sd">        usage: ensure_dir(dir)</span>
+<span class="sd">        </span>
+<span class="sd">        :param str dir: path to a directory existent on the local filesystem</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="nb">dir</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="shareUtil.save_notebook"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil.save_notebook">[docs]</a>    <span class="k">def</span> <span class="nf">save_notebook</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ID</span><span class="p">,</span> <span class="n">notebookname</span><span class="p">,</span> <span class="n">web</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">notebookdir</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        </span>
+<span class="sd">        Save the notebook file as html and or as gist</span>
+<span class="sd">        </span>
+<span class="sd">        :param ID: directory name where to store the saved notebook</span>
+<span class="sd">        :param notebookname: name of the notebook</span>
+<span class="sd">        :param web:</span>
+<span class="sd">        :param notebookdir:</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">notebookdir</span><span class="p">:</span>
+            <span class="n">notebookdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">Javascript</span><span class="p">(</span><span class="s">&quot;IPython.notebook.save_notebook()&quot;</span><span class="p">))</span>
+        <span class="n">notebookfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notebookdir</span><span class="p">,</span> <span class="n">notebookname</span><span class="p">)</span>
+        <span class="n">savedir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">ID</span><span class="p">)</span>
+        <span class="n">command1</span> <span class="o">=</span> <span class="s">&#39;cp </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">notebookfile</span><span class="p">,</span> <span class="n">savedir</span><span class="p">)</span>
+        <span class="n">newnotebook</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">savedir</span><span class="p">,</span> <span class="n">notebookname</span><span class="p">)</span>
+        <span class="n">command2</span> <span class="o">=</span> <span class="s">&#39;ipython nbconvert </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">newnotebook</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">command1</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">command2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">web</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">gistit</span><span class="p">(</span><span class="n">notebookfile</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&quot;can&#39;t genrate a gist&quot;</span>
+</div>
+<div class="viewcode-block" id="shareUtil.which"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil.which">[docs]</a>    <span class="k">def</span> <span class="nf">which</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">program</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        </span>
+<span class="sd">        Check if a program exist and return the full path</span>
+<span class="sd">        </span>
+<span class="sd">        :param str program: executable name or path to executable</span>
+<span class="sd">        :return: full path to executable</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">is_exe</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">access</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">X_OK</span><span class="p">)</span>
+        <span class="n">fpath</span><span class="p">,</span> <span class="n">fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">program</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fpath</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_exe</span><span class="p">(</span><span class="n">program</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">program</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&quot;PATH&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">pathsep</span><span class="p">):</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&#39;&quot;&#39;</span><span class="p">)</span>
+                <span class="n">exe_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">program</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">is_exe</span><span class="p">(</span><span class="n">exe_file</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="n">exe_file</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="shareUtil.getTime"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil.getTime">[docs]</a>    <span class="k">def</span> <span class="nf">getTime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">now</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">home</a>|&nbsp;</li>
+        <li><a href="../../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Massimo Di Stefano.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+  </body>
+</html>
