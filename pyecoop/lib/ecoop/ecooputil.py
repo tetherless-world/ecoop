@@ -45,10 +45,9 @@
 
 """
 
-
+from __future__ import print_function
 import os
 import sys
-from sys import version_info
 from zipfile import ZipFile, ZIP_DEFLATED
 from contextlib import closing
 import paramiko
@@ -127,26 +126,17 @@ class shareUtil():
             sftp.put(remotepath=outputfile, localpath=inputfile)
             sftp.close()
             transport.close()
-            if version_info[0]==2:
-                print 'file uploaded'
-            if version_info[0]==3:
-                print('file uploaded')
+            print('file uploaded')
             if qr:
                 if link:
                     pass
                 if not link:
-                    if version_info[0]==2:
-                        print 'WORNING: qrcode not generated, set the option link to True' 
-                    if version_info[0]==3:
-                        print('WORNING: qrcode not generated, set the option link to True')
+                    print('WORNING: qrcode not generated, set the option link to True')
             if link:
                 filelink = outputfile.replace(apacheroot, '')
                 link = 'http://' + os.path.normpath(hostname + '/' + filelink)
                 raw_html = '<a href="%s" target="_blank">ESR results</a>' % link
-                if version_info[0]==2:
-                    print 'results are now available for download at : ' % link 
-                if version_info[0]==3:
-                    print('results are now available for download at : ' % link)
+                print('results are now available for download at : ' % link)
                 image = None
                 if qr:
                     imagefile = parts[-1].split('.')[0] + '.jpeg'
@@ -160,10 +150,7 @@ class shareUtil():
                 if not qr:
                     return HTML(raw_html)
         except IOError:
-            if version_info[0]==2:
-                print "Error: can\'t find file or read data check if input file exist and or remote location is writable"
-            if version_info[0]==3:
-                print("Error: can\'t find file or read data check if input file exist and or remote location is writable")
+            print("Error: can\'t find file or read data check if input file exist and or remote location is writable")
 
     def gistit(self, filename, jist='/usr/local/bin/jist', type='notebook'):
         '''
@@ -193,20 +180,11 @@ class shareUtil():
                             link = r.std_out.replace('\n', '')
                         return link
                     except:
-                        if version_info[0]==2:
-                            print "can't generate gist, check if jist works bycommand line with: jist -p filename"
-                        if version_info[0]==3:
-                            print("can't generate gist, check if jist works bycommand line with: jist -p filename")
+                        print("can't generate gist, check if jist works bycommand line with: jist -p filename")
                 if not jist:
-                    if version_info[0]==2:
-                        print 'cannot find jist utility, check if it is in your path'
-                    if version_info[0]==3:
-                        print('cannot find jist utility, check if it is in your path')
+                    print('cannot find jist utility, check if it is in your path')
         except IOError:
-            if version_info[0]==2:
-                print 'input file %s not found' % filename
-            if version_info[0]==3:
-                print('input file %s not found' % filename)
+            print('input file %s not found' % filename)
 
     def get_id(self, suffix, makedir=True):
         '''
@@ -223,10 +201,7 @@ class shareUtil():
         ID = suffix + '_' + str(datetime.now().utcnow().strftime("%A_%d_%B_%Y_%I_%M_%S_%p"))
         if makedir:
             self.ensure_dir(ID)
-        if version_info[0]==2:
-            print 'session data directory : %s' % ID 
-        if version_info[0]==3:
-            print('session data directory : %s' % ID)
+        print('session data directory : %s' % ID)
         return ID
 
     def ensure_dir(self, dir):
@@ -267,10 +242,7 @@ class shareUtil():
             try:
                 self.gistit(notebookfile)
             except IOError:
-                if version_info[0]==2:
-                    print "can't genrate a gist"
-                if version_info[0]==3:
-                    print("can't genrate a gist")
+                print("can't genrate a gist")
 
     def which(self, program):
         """

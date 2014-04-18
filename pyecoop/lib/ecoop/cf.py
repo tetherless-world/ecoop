@@ -36,9 +36,8 @@
 ###############################################################################
 
 
-
+from __future__ import print_function
 import os
-from sys import version_info
 import envoy
 
 from datetime import datetime
@@ -85,10 +84,7 @@ class cfData():
                     print('nao data saved in : ' + output)
             return naodata
         except IOError:
-            if version_info[0]==2:
-                print 'unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url
-            if version_info[0]==3:
-                print('unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
+            print('unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
             # try cached version / history-linked-uri
 
 
@@ -106,10 +102,7 @@ class cfData():
         try:
             ts_raw = pd.read_table(url, sep=' ', header=0, skiprows=0, parse_dates=[['YR', 'MON']], skipinitialspace=True,
                                    index_col=0, date_parser=parse)
-            if version_info[0]==2:
-                print 'dataset used: %s' % url
-            if version_info[0]==3:
-                print('dataset used: %s' % url)
+            print('dataset used: %s' % url)
             ts_year_group = ts_raw.groupby(lambda x: x.year).apply(lambda sdf: sdf if len(sdf) > 11 else None)
             ts_range = pd.date_range(ts_year_group.index[0][1], ts_year_group.index[-1][1] + pd.DateOffset(months=1),
                                      freq="M")
@@ -124,16 +117,10 @@ class cfData():
                 eu.ensure_dir(save)
                 output = os.path.join(save, csvout)
                 nin_anomalies.to_csv(output, sep=',', header=True, index=True, index_label='Date')
-                if version_info[0]==2:
-                    print 'data saved as %s ' % output
-                if version_info[0]==3:
-                    print('data saved as %s ' % output)
+                print('data saved as %s ' % output)
             return nin_anomalies
         except IOError:
-            if version_info[0]==2:
-                print 'unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url
-            if version_info[0]==3:
-                print('unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
+            print('unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
             # try cached version / history-linked-uri
 
 
@@ -167,10 +154,7 @@ class cfData():
             ts_raw = pd.read_table(url, sep=' ', skiprows=1,
                                    names=['year', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct',
                                           'nov', 'dec'], skipinitialspace=True, parse_dates=True, skipfooter=4, index_col=0)
-            if version_info[0]==2:
-                print 'dataset used: %s' % url
-            if version_info[0]==3:
-                print('dataset used: %s' % url)
+            print('dataset used: %s' % url)
             ts_raw.replace(-9.99900000e+01, np.NAN, inplace=True)
             amodata = ts_raw.mean(axis=1)
             amodata.name = "amo"
@@ -185,12 +169,7 @@ class cfData():
                     print('data saved as %s ' % output)
             return amodata
         except:
-            if version_info[0]==2:
-                print 'doh'
-                print 'unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url
-            if version_info[0]==3:
-                print('doh')
-                print('unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
+            print('unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
             # try cached version / history-linked-uri
 
 
@@ -311,10 +290,7 @@ class cfPlot():
                 ax1.plot(xx, newy, 'o', xnew, f(xnew), '-', xnew, f2(xnew), '--')
                 ##
             if scategory == 'ewma':
-                if version_info[0]==2:
-                    print 'to do'
-                if version_info[0]==3:
-                    print('todo')
+                print('todo')
             plt.xticks(data.index.year[::xticks].astype('int'), data.index.year[::xticks].astype('int'),
                        fontsize=xticks_fontsize)
             plt.autoscale(enable=True, axis='both', tight=True)
@@ -324,10 +300,7 @@ class cfPlot():
                 eu.ensure_dir(output)
                 ffigsave = os.path.join(output, figsave)
                 plt.savefig(ffigsave, dpi=dpi)
-                if version_info[0]==2:
-                    print 'graph saved in: %s ' % ffigsave
-                if version_info[0]==3:
-                    print('graph saved in: %s ' % ffigsave)
+                print('graph saved in: %s ' % ffigsave)
                 if scategory:
                     smoutput = name + '_' + scategory + '.csv'
                     if smoother:
@@ -339,23 +312,15 @@ class cfPlot():
                         newdataframe.to_csv(smoutput, sep=',', header=True, index=True, index_label='Year')
                     else:
                         newy.to_csv(smoutput, sep=',', header=True, index=True, index_label='Year')
-                    if version_info[0]==2:
-                        print name + ' smoothed data saved in : %s ' % smoutput 
-                    if version_info[0]==3:
-                        print(name + ' smoothed data saved in : %s ' % smoutput)
+                    print(name + ' smoothed data saved in : %s ' % smoutput)
             if nb:
                 fig.subplots_adjust(left=-1.0)
                 fig.subplots_adjust(right=1.0)
             plt.show()
         except AssertionError:
-            if version_info[0]==2:
-                if type(data) != pd.core.frame.DataFrame:
-                    print('input data not compatible, it has to be of type : pandas.core.frame.DataFrame')
-                print 'data not loaded correctly'
-            if version_info[0]==3:
-                if type(data) != pd.core.frame.DataFrame:
-                    print('input data not compatible, it has to be of type : pandas.core.frame.DataFrame')
-                print('data not loaded correctly')
+            if type(data) != pd.core.frame.DataFrame:
+                print('input data not compatible, it has to be of type : pandas.core.frame.DataFrame')
+            print('data not loaded correctly')
 
 
     def rolling_smoother(self, data, stype='rolling_mean', win_size=10, win_type='boxcar', center=False, std=0.1, beta=0.1,
@@ -528,18 +493,12 @@ class cfPrint():
         linestring = template % (
             cf, naotxt, naofigfile, naodatalink, nbviewerlink, amotxt, amofigfile, amodatalink, nbviewerlink)
         newfile = open(os.path.join(ID, 'climate_forcing.tex'), 'w')
-        if version_info[0]==2:
-            print textfile, ID
-        if version_info[0]==3:    
-            print(textfile, ID)
+        print(textfile, ID)
         texoutput = os.path.join(ID, textfile)
         newfile = open(texoutput, 'w')
         newfile.write(linestring)
         newfile.close()
-        if version_info[0]==2:
-            print texoutput
-        if version_info[0]==3:
-            print(texoutput)
+        print(texoutput)
 
     def openDocument(self, col='twocolumn'):
         """
@@ -647,10 +606,7 @@ class openLayers():
                 features.append(my_feature)
             return features
         except:
-            if version_info[0]==2:
-                print 'done'
-            if version_info[0]==3:
-                print('done')
+            print('done')
         #return features
 
     def addWMS(self, name, getcapabilities, layername, title):
@@ -687,10 +643,7 @@ class openLayers():
                               )
                 features.append(my_feature)
         except:
-            if version_info[0]==2:
-                print 'done'
-            if version_info[0]==3:
-                print('done')
+            print('done')
         return features
 
     def makeSingleStyle(self, vectorlist):
