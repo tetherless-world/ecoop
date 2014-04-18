@@ -72,9 +72,9 @@ class cfData():
         try:
             naodata = pd.read_csv(url, sep='  ', header=0, skiprows=0, index_col=0, parse_dates=True, skip_footer=1)
             if version_info[0]==2:
-				print 'dataset used: %s' % url
-			if version_info[0]==3:
-				print('dataset used: %s' % url)
+            	print 'dataset used: %s' % url
+            if version_info[0]==3:
+            	print('dataset used: %s' % url)
             if save:
                 eu.ensure_dir(save)
                 output = os.path.join(save, csvout)
@@ -85,10 +85,10 @@ class cfData():
 					print('nao data saved in : ' + output)
             return naodata
         except IOError:
-			if version_info[0]==2:
-				print 'unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url
-            if version_info[0]==3:
-				print('unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
+        	if version_info[0]==2:
+        		print 'unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url
+        	if version_info[0]==3:
+        		print('unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
             # try cached version / history-linked-uri
 
 
