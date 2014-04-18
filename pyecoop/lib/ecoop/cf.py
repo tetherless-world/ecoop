@@ -157,10 +157,7 @@ class cfData():
                 eu.ensure_dir(save)
                 output = os.path.join(save, csvout)
                 amodata.to_csv(output, sep=',', header=True, index=True, index_label='Date')
-                if version_info[0]==2:
-                    print 'data saved as %s ' % output
-                if version_info[0]==3:
-                    print('data saved as %s ' % output)
+                print('data saved as %s ' % output)
             return amodata
         except:
             print('unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
