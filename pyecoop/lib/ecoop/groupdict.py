@@ -1,0 +1,10 @@
+group = {}
+group[''] = {}
+group['']['subgroup'] = ''
+group['']['organization'] = ''
+group['']['homepageURL'] = ''
+group['']['mbox'] = ''
+group['']['address'] = ''
+group['']['phone'] = ''
+group['']['name'] = ''
+group['']['members'] = ''
