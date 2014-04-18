@@ -1,3 +1,10 @@
+#/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Dictionary to store users information
+
+"""
 users = {}
 users['epinux'] = {}
 users['epinux']['Organization'] = 'Rensselaer Polytechnic Institute'
