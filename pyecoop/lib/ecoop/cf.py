@@ -49,7 +49,7 @@ lowess = sm.nonparametric.lowess
 from scipy.interpolate import interp1d
 import pandas as pd
 import matplotlib.pyplot as plt
-from ecooputil import shareUtil as EU
+from ecoop.ecooputil import shareUtil as EU
 eu = EU()
 
 class cfData():
