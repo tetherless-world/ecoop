@@ -72,23 +72,24 @@ class cfData():
         try:
             naodata = pd.read_csv(url, sep='  ', header=0, skiprows=0, index_col=0, parse_dates=True, skip_footer=1)
             if version_info[0]==2:
-                print 'dataset used: %s' % url
+            	print 'dataset used: %s' % url
             if version_info[0]==3:
-                print('dataset used: %s' % url)
+            	print('dataset used: %s' % url)
             if save:
                 eu.ensure_dir(save)
                 output = os.path.join(save, csvout)
                 naodata.to_csv(output, sep=',', header=True, index=True, index_label='Date')
                 if version_info[0]==2:
-                    print 'nao data saved in : %s ' % output
-                if version_info[0]==3:
-                    print('nao data saved in : ' + output)
+					print 'nao data saved in : %s ' % output
+				if version_info[0]==3:
+					print('nao data saved in : ' + output)
             return naodata
         except IOError:
-            if version_info[0]==2:
-                print 'unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url
-            if version_info[0]==3:
-                print('unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
+        	if version_info[0]==2:
+        		print 'unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url
+        	if version_info[0]==3:
+        		print('unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
+            # try cached version / history-linked-uri
 
 
     def nin_get(self, url='http://www.cpc.ncep.noaa.gov/data/indices/sstoi.indices', save=None, csvout='nin.csv'):
@@ -105,10 +106,10 @@ class cfData():
         try:
             ts_raw = pd.read_table(url, sep=' ', header=0, skiprows=0, parse_dates=[['YR', 'MON']], skipinitialspace=True,
                                    index_col=0, date_parser=parse)
-            if version_info[0]==2:
+			if version_info[0]==2:
                 print 'dataset used: %s' % url
-            if version_info[0]==3:
-                print('dataset used: %s' % url)
+			if version_info[0]==3:
+			    print('dataset used: %s' % url)
             ts_year_group = ts_raw.groupby(lambda x: x.year).apply(lambda sdf: sdf if len(sdf) > 11 else None)
             ts_range = pd.date_range(ts_year_group.index[0][1], ts_year_group.index[-1][1] + pd.DateOffset(months=1),
                                      freq="M")
@@ -339,7 +340,7 @@ class cfPlot():
                     else:
                         newy.to_csv(smoutput, sep=',', header=True, index=True, index_label='Year')
                     if version_info[0]==2:
-                        print name + ' smoothed data saved in : %s ' % smoutput
+                        print name + ' smoothed data saved in : %s ' % smoutput 
                     if version_info[0]==3:
                         print(name + ' smoothed data saved in : %s ' % smoutput)
             if nb:
@@ -529,7 +530,7 @@ class cfPrint():
         newfile = open(os.path.join(ID, 'climate_forcing.tex'), 'w')
         if version_info[0]==2:
             print textfile, ID
-        if version_info[0]==3:
+        if version_info[0]==3:    
             print(textfile, ID)
         texoutput = os.path.join(ID, textfile)
         newfile = open(texoutput, 'w')
