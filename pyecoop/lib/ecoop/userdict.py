@@ -5,16 +5,16 @@
 Dictionary to store users information
 
 """
-user = {}
-user['epinux'] = {}
-user['epinux']['Organization'] = 'Rensselaer Polytechnic Institute'
-user['epinux']['subOrganization'] = 'Tetherless World Constellation'
-user['epinux']['Group'] = 'ecoop'
-user['epinux']['homepageURL'] = 'http://tw.rpi.edu/web/person/MassimoDiStefano'
-user['epinux']['mbox'] = 'distem@rpi.edu'
-user['epinux']['address'] = '22 Millfield St Woods Hole MA US'
-user['epinux']['phone'] = '0015082924078'
-user['epinux']['givenName'] = 'Massimo'
-user['epinux']['familyName'] = 'Di Stefano'
+ecoopuser = {}
+ecoopuser['epinux'] = {}
+ecoopuser['epinux']['Organization'] = 'Rensselaer Polytechnic Institute'
+ecoopuser['epinux']['subOrganization'] = 'Tetherless World Constellation'
+ecoopuser['epinux']['Group'] = 'ecoop'
+ecoopuser['epinux']['homepageURL'] = 'http://tw.rpi.edu/web/person/MassimoDiStefano'
+ecoopuser['epinux']['mbox'] = 'distem@rpi.edu'
+ecoopuser['epinux']['address'] = '22 Millfield St Woods Hole MA US'
+ecoopuser['epinux']['phone'] = '0015082924078'
+ecoopuser['epinux']['givenName'] = 'Massimo'
+ecoopuser['epinux']['familyName'] = 'Di Stefano'
 
 
