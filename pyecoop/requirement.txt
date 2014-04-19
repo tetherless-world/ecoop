@@ -1,0 +1,9 @@
+envoy
+datetime
+numpy
+scipy
+statsmodels
+pandas
+matplotlib
+paramiko
+qrcode
