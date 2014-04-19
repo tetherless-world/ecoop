@@ -7,7 +7,7 @@ A collecton of python scripts for geo-science plus some utilities to be used fro
 Notebook used for the  Climate forcing UseCase :
 
 
-- [clean](http://nbviewer.ipython.org/urls/raw.githubusercontent.com/tetherless-world/ecoop/master/pyecoop/notebook/ESR_Test.ipynb?create=1)
+- [clean](https://raw.githubusercontent.com/tetherless-world/ecoop/master/pyecoop/notebook/ESR_Test.ipynb)
 
 - [executed](http://nbviewer.ipython.org/gist/anonymous/11072947)
 
