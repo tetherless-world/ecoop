@@ -107,7 +107,7 @@ if not release:
 
     a = open(filename, 'w')
     try:
-        a.write(cnt % {'author' = AUTHOR,
+        a.write(cnt % {'author' : AUTHOR,
                        'version': VERSION,
                        'full_version' : FULLVERSION,
                        'git_revision' : GIT_REVISION,
