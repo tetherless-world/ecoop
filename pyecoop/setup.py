@@ -83,10 +83,10 @@ def get_version_info():
     FULLVERSION = VERSION
     if os.path.exists('.git'):
         GIT_REVISION = git_version()
-    elif os.path.exists('numpy/version.py'):
+    elif os.path.exists('ecoop/version.py'):
         # must be a source distribution, use existing version file
         try:
-            from numpy.version import git_revision as GIT_REVISION
+            from ecoop.version import git_revision as GIT_REVISION
         except ImportError:
             raise ImportError("Unable to import git_revision. Try removing " \
                               "numpy/version.py and the build directory " \

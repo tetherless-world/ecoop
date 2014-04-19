@@ -122,6 +122,7 @@
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">version_info</span>
 <span class="kn">from</span> <span class="nn">zipfile</span> <span class="kn">import</span> <span class="n">ZipFile</span><span class="p">,</span> <span class="n">ZIP_DEFLATED</span>
 <span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">closing</span>
 <span class="kn">import</span> <span class="nn">paramiko</span>
@@ -149,7 +150,6 @@
             <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">basedir</span><span class="p">):</span>
                 <span class="c">#NOTE: ignore empty directories</span>
                 <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-                    <span class="c">#print fn</span>
                     <span class="n">absfn</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span>
                     <span class="n">zfn</span> <span class="o">=</span> <span class="n">absfn</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">basedir</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">):]</span> <span class="c">#XXX: relative path</span>
                     <span class="n">z</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">absfn</span><span class="p">,</span> <span class="n">zfn</span><span class="p">)</span>
@@ -179,7 +179,6 @@
 <span class="sd">        </span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="nb">zip</span><span class="p">:</span>
-            <span class="c">#print &#39;add zipfile&#39;</span>
             <span class="n">zipfile</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">inputfile</span> <span class="o">+</span> <span class="s">&#39;.zip&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">zipdir</span><span class="p">(</span><span class="n">inputfile</span><span class="p">,</span> <span class="n">zipfile</span><span class="p">)</span>
             <span class="n">inputfile</span> <span class="o">=</span> <span class="n">zipfile</span>
@@ -193,30 +192,35 @@
         <span class="n">parts</span> <span class="o">=</span> <span class="n">outputfile</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)):</span>
             <span class="n">path</span> <span class="o">=</span> <span class="s">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">[:</span><span class="n">n</span><span class="p">])</span>
-            <span class="c">#print &#39;Path:&#39;, path,</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">s</span> <span class="o">=</span> <span class="n">sftp</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-                <span class="c">#print &#39;mode =&#39;, oct(s.st_mode)</span>
             <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                <span class="c">#print e</span>
-                <span class="c">#print &#39;adding dir: &#39;, path</span>
                 <span class="n">sftp</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">sftp</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">remotepath</span><span class="o">=</span><span class="n">outputfile</span><span class="p">,</span> <span class="n">localpath</span><span class="o">=</span><span class="n">inputfile</span><span class="p">)</span>
             <span class="n">sftp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="n">transport</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-            <span class="k">print</span> <span class="s">&#39;file uploaded&#39;</span>
+            <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&#39;file uploaded&#39;</span>
+            <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&#39;file uploaded&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">qr</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">link</span><span class="p">:</span>
                     <span class="k">pass</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">link</span><span class="p">:</span>
-                    <span class="k">print</span> <span class="s">&#39;WORNING: qrcode not generated, set the option link to True&#39;</span>
+                    <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                        <span class="k">print</span> <span class="s">&#39;WORNING: qrcode not generated, set the option link to True&#39;</span> 
+                    <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+                        <span class="k">print</span><span class="p">(</span><span class="s">&#39;WORNING: qrcode not generated, set the option link to True&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">link</span><span class="p">:</span>
                 <span class="n">filelink</span> <span class="o">=</span> <span class="n">outputfile</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">apacheroot</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
                 <span class="n">link</span> <span class="o">=</span> <span class="s">&#39;http://&#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">hostname</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">filelink</span><span class="p">)</span>
                 <span class="n">raw_html</span> <span class="o">=</span> <span class="s">&#39;&lt;a href=&quot;</span><span class="si">%s</span><span class="s">&quot; target=&quot;_blank&quot;&gt;ESR results&lt;/a&gt;&#39;</span> <span class="o">%</span> <span class="n">link</span>
-                <span class="k">print</span> <span class="s">&#39;results are now available for download at : &#39;</span><span class="p">,</span> <span class="n">link</span>
+                <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                    <span class="k">print</span> <span class="s">&#39;results are now available for download at : &#39;</span> <span class="o">%</span> <span class="n">link</span> 
+                <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s">&#39;results are now available for download at : &#39;</span> <span class="o">%</span> <span class="n">link</span><span class="p">)</span>
                 <span class="n">image</span> <span class="o">=</span> <span class="bp">None</span>
                 <span class="k">if</span> <span class="n">qr</span><span class="p">:</span>
                     <span class="n">imagefile</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;.jpeg&#39;</span>
@@ -225,13 +229,15 @@
                     <span class="n">qr</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">fit</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
                     <span class="n">img</span> <span class="o">=</span> <span class="n">qr</span><span class="o">.</span><span class="n">make_image</span><span class="p">()</span>
                     <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">imagefile</span><span class="p">,</span> <span class="s">&quot;JPEG&quot;</span><span class="p">)</span>
-                    <span class="k">print</span> <span class="s">&#39;alive&#39;</span>
                     <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">imagefile</span><span class="p">)</span>
                     <span class="k">return</span> <span class="n">image</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">qr</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">HTML</span><span class="p">(</span><span class="n">raw_html</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s">&quot;Error: can</span><span class="se">\&#39;</span><span class="s">t find file or read data check if input file exist and or remote location is writable&quot;</span>
+            <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&quot;Error: can</span><span class="se">\&#39;</span><span class="s">t find file or read data check if input file exist and or remote location is writable&quot;</span>
+            <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;Error: can</span><span class="se">\&#39;</span><span class="s">t find file or read data check if input file exist and or remote location is writable&quot;</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="shareUtil.gistit"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil.gistit">[docs]</a>    <span class="k">def</span> <span class="nf">gistit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">jist</span><span class="o">=</span><span class="s">&#39;/usr/local/bin/jist&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;notebook&#39;</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
@@ -261,11 +267,20 @@
                             <span class="n">link</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">std_out</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
                         <span class="k">return</span> <span class="n">link</span>
                     <span class="k">except</span><span class="p">:</span>
-                        <span class="k">print</span> <span class="s">&quot;can&#39;t generate gist, check if jist works bycommand line with: jist -p filename&quot;</span>
+                        <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                            <span class="k">print</span> <span class="s">&quot;can&#39;t generate gist, check if jist works bycommand line with: jist -p filename&quot;</span>
+                        <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+                            <span class="k">print</span><span class="p">(</span><span class="s">&quot;can&#39;t generate gist, check if jist works bycommand line with: jist -p filename&quot;</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">jist</span><span class="p">:</span>
-                    <span class="k">print</span> <span class="s">&#39;cannot find jist utility, check if it is in your path&#39;</span>
+                    <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                        <span class="k">print</span> <span class="s">&#39;cannot find jist utility, check if it is in your path&#39;</span>
+                    <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+                        <span class="k">print</span><span class="p">(</span><span class="s">&#39;cannot find jist utility, check if it is in your path&#39;</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s">&#39;input file </span><span class="si">%s</span><span class="s"> not found&#39;</span> <span class="o">%</span> <span class="n">filename</span>
+            <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&#39;input file </span><span class="si">%s</span><span class="s"> not found&#39;</span> <span class="o">%</span> <span class="n">filename</span>
+            <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&#39;input file </span><span class="si">%s</span><span class="s"> not found&#39;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="shareUtil.get_id"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil.get_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">suffix</span><span class="p">,</span> <span class="n">makedir</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
@@ -282,7 +297,10 @@
         <span class="n">ID</span> <span class="o">=</span> <span class="n">suffix</span> <span class="o">+</span> <span class="s">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;%A_</span><span class="si">%d</span><span class="s">_%B_%Y_%I_%M_%S_%p&quot;</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">makedir</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ensure_dir</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span>
-        <span class="k">print</span> <span class="s">&#39;session data directory : ID&#39;</span><span class="p">,</span> <span class="n">ID</span>
+        <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&#39;session data directory : </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">ID</span> 
+        <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&#39;session data directory : </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">ID</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ID</span>
 </div>
 <div class="viewcode-block" id="shareUtil.ensure_dir"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil.ensure_dir">[docs]</a>    <span class="k">def</span> <span class="nf">ensure_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">dir</span><span class="p">):</span>
@@ -323,7 +341,10 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">gistit</span><span class="p">(</span><span class="n">notebookfile</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
-                <span class="k">print</span> <span class="s">&quot;can&#39;t genrate a gist&quot;</span>
+                <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                    <span class="k">print</span> <span class="s">&quot;can&#39;t genrate a gist&quot;</span>
+                <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s">&quot;can&#39;t genrate a gist&quot;</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="shareUtil.which"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil.which">[docs]</a>    <span class="k">def</span> <span class="nf">which</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">program</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -376,7 +397,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2014, Massimo Di Stefano.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>
