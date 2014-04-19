@@ -40,12 +40,12 @@ Operating System :: Unix
 Operating System :: MacOS
 """
 
-MAJOR               = 1
-MINOR               = 9
+MAJOR               = 0
+MINOR               = 1
 MICRO               = 0
 ISRELEASED          = False
 VERSION             = '%d.%d.%d' % (MAJOR, MINOR, MICRO)
-
+GIT_REVISION = git_version()
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'lib'))
 
@@ -70,7 +70,7 @@ def git_version():
         GIT_REVISION = out.strip().decode('ascii')
     except OSError:
         GIT_REVISION = "Unknown"
-
+    print(GIT_REVISION)
     return GIT_REVISION
 
 # BEFORE importing distutils, remove MANIFEST. distutils doesn't properly
