@@ -5,6 +5,9 @@
 Dictionary to store users information
 
 """
+from ecoop.ecoopgroupdict import ecoopuser
+
+
 ecoopuser = {}
 ecoopuser['epinux'] = {}
 ecoopuser['epinux']['Organization'] = 'Rensselaer Polytechnic Institute'

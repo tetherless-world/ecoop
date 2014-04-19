@@ -1,11 +1,11 @@
-organization = {}
-organization[''] = {}
-organization['']['subOrganization'] = ''
-organization['']['Group'] = ''
-organization['']['homepageURL'] = ''
-organization['']['mbox'] = ''
-organization['']['address'] = ''
-organization['']['phone'] = ''
-organization['']['name'] = ''
-organization['']['members'] = ''
+ecooporganization = {}
+ecooporganization[''] = {}
+ecooporganization['']['subOrganization'] = ''
+ecooporganization['']['Group'] = ''
+ecooporganization['']['homepageURL'] = ''
+ecooporganization['']['mbox'] = ''
+ecooporganization['']['address'] = ''
+ecooporganization['']['phone'] = ''
+ecooporganization['']['name'] = ''
+ecooporganization['']['members'] = ''
 

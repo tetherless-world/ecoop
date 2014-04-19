@@ -52,6 +52,9 @@ import matplotlib.pyplot as plt
 from ecoop.ecooputil import shareUtil as EU
 eu = EU()
 
+
+from bokeh import pyplot
+
 class cfData():
     def __init__(self):
         self.x = ''
@@ -307,7 +310,8 @@ class cfPlot():
             if nb:
                 fig.subplots_adjust(left=-1.0)
                 fig.subplots_adjust(right=1.0)
-            plt.show()
+            #plt.show()
+            pyplot.show_bokeh(plt.gcf(), filename="subplots.html")
         except AssertionError:
             if type(data) != pd.core.frame.DataFrame:
                 print('input data not compatible, it has to be of type : pandas.core.frame.DataFrame')
