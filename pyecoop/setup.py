@@ -115,9 +115,6 @@ if not release:
         a.close()
 
 
-with open("__version__.py", "a") as myfile:
-    myfile.write(git_version())
-
 with open('README.md') as file:
     long_description = file.read()
 
