@@ -85,17 +85,6 @@ def get_version_info():
     FULLVERSION = VERSION
     #if os.path.exists('.git'):
     GIT_REVISION = git_version()
-    if os.path.exists('ecoop/version.py'):
-        # must be a source distribution, use existing version file
-        try:
-            from ecoop.version import git_revision as GIT_REVISION
-        except ImportError:
-            raise ImportError("Unable to import git_revision. Try removing " \
-                              "ecoop/version.py and the build directory " \
-                              "before building.")
-    else:
-        GIT_REVISION = "Unknown"
-
     if not ISRELEASED:
         FULLVERSION += '.dev-' + GIT_REVISION[:7]
 
