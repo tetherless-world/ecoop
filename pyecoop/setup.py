@@ -70,7 +70,7 @@ def git_version():
         GIT_REVISION = out.strip().decode('ascii')
     except OSError:
         GIT_REVISION = "Unknown"
-    print(GIT_REVISION)
+    #print(GIT_REVISION)
     return GIT_REVISION
 
 GIT_REVISION = git_version()
@@ -83,15 +83,15 @@ def get_version_info():
     # Adding the git rev number needs to be done inside write_version_py(),
     # otherwise the import of numpy.version messes up the build under Python 3.
     FULLVERSION = VERSION
-    if os.path.exists('.git'):
-        GIT_REVISION = git_version()
-    elif os.path.exists('ecoop/version.py'):
+    #if os.path.exists('.git'):
+    GIT_REVISION = git_version()
+    if os.path.exists('ecoop/version.py'):
         # must be a source distribution, use existing version file
         try:
             from ecoop.version import git_revision as GIT_REVISION
         except ImportError:
             raise ImportError("Unable to import git_revision. Try removing " \
-                              "numpy/version.py and the build directory " \
+                              "ecoop/version.py and the build directory " \
                               "before building.")
     else:
         GIT_REVISION = "Unknown"
