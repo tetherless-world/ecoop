@@ -45,7 +45,7 @@ MINOR               = 1
 MICRO               = 0
 ISRELEASED          = False
 VERSION             = '%d.%d.%d' % (MAJOR, MINOR, MICRO)
-GIT_REVISION = git_version()
+
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'lib'))
 
@@ -72,6 +72,8 @@ def git_version():
         GIT_REVISION = "Unknown"
     print(GIT_REVISION)
     return GIT_REVISION
+
+GIT_REVISION = git_version()
 
 # BEFORE importing distutils, remove MANIFEST. distutils doesn't properly
 # update it when the contents of directories change.
