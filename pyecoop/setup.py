@@ -39,7 +39,7 @@ Operating System :: POSIX
 Operating System :: Unix
 Operating System :: MacOS
 """
-
+AUTHOR              = 'epinux'
 MAJOR               = 0
 MINOR               = 1
 MICRO               = 0
@@ -93,7 +93,7 @@ def get_version_info():
 
 def write_version_py(filename='lib/ecoop/version.py'):
     cnt = """
-# THIS FILE IS GENERATED FROM NUMPY SETUP.PY
+# THIS FILE IS GENERATED FROM ecoop SETUP.PY
 short_version = '%(version)s'
 version = '%(version)s'
 full_version = '%(full_version)s'
@@ -107,7 +107,8 @@ if not release:
 
     a = open(filename, 'w')
     try:
-        a.write(cnt % {'version': VERSION,
+        a.write(cnt % {'author' = AUTHOR,
+                       'version': VERSION,
                        'full_version' : FULLVERSION,
                        'git_revision' : GIT_REVISION,
                        'isrelease': str(ISRELEASED)})
@@ -127,6 +128,7 @@ setup(
     description = 'A collecton of utilities to be used from inside an IPython Notebook to automatize the building of the Ecosystem Status Report for the NE-LME - Climate forcing UseCase',
     long_description=long_description,
     author = 'Massimo Di Stefano',
+    author_unixid = 'epinux',
     author_email = 'epiesasha@me.com',
     url = 'http://github.com/epifanio/ecoop',
     packages = ['ecoop'],

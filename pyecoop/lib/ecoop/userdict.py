@@ -5,14 +5,14 @@
 Dictionary to store users information
 
 """
-from ecoop.ecoopgroupdict import ecoopuser
+from ecoop.groupdict import ecoopgroup
 
 
 ecoopuser = {}
 ecoopuser['epinux'] = {}
 ecoopuser['epinux']['Organization'] = 'Rensselaer Polytechnic Institute'
 ecoopuser['epinux']['subOrganization'] = 'Tetherless World Constellation'
-ecoopuser['epinux']['Group'] = 'ecoop'
+ecoopuser['epinux']['Group'] = ecoopgroup['TWC']
 ecoopuser['epinux']['homepageURL'] = 'http://tw.rpi.edu/web/person/MassimoDiStefano'
 ecoopuser['epinux']['mbox'] = 'distem@rpi.edu'
 ecoopuser['epinux']['address'] = '22 Millfield St Woods Hole MA US'
