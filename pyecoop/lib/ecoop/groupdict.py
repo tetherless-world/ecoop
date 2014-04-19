@@ -1,0 +1,10 @@
+ecoopgroup = {}
+ecoopgroup['TWC'] = {}
+ecoopgroup['TWC']['subgroup'] = ''
+ecoopgroup['TWC']['organization'] = ''
+ecoopgroup['TWC']['homepageURL'] = ''
+ecoopgroup['TWC']['mbox'] = ''
+ecoopgroup['TWC']['address'] = ''
+ecoopgroup['TWC']['phone'] = ''
+ecoopgroup['TWC']['name'] = 'TWC'
+ecoopgroup['TWC']['members'] = ''

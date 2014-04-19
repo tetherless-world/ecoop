@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rdf:RDF xmlns="http://usefulinc.com/ns/doap#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<Project>
+<name>
+ecoop
+</name>
+
+<shortdesc>
+    ecoop: Utility to enable the reproducibility of a scientific workflow
+</shortdesc>
+
+<description>
+The latest development version is always available from ecoop's `GitHub
+site &lt;https://github.com/epifanio/ecoop/`_.
+</description>
+
+<download-page>
+    https://github.com/ipython/ipython/downloads
+</download-page>
+
+<homepage rdf:resource="https://github.com/epifanio/ecoop" />
+
+<maintainer>
+<foaf:Person><foaf:name>Massimo Di Stefano</foaf:name>
+<foaf:mbox_sha1sum>xxxx</foaf:mbox_sha1sum></foaf:Person>
+</maintainer>
+
+<release><Version><revision>0.0.1</revision></Version></release>
+
+</Project></rdf:RDF>
