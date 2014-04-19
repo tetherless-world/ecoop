@@ -13,6 +13,39 @@ ecoop_ utility functions to automatize the building of the Ecosystem Status Repo
 from distutils.core import setup
 import os
 import sys
+import subprocess
+
+if sys.version_info[:2] < (2, 6) or (3, 0) <= sys.version_info[0:2] < (3, 2):
+    raise RuntimeError("Python version 2.6, 2.7 or >= 3.2 required.")
+
+if sys.version_info[0] >= 3:
+    import builtins
+else:
+    import __builtin__ as builtins
+
+
+CLASSIFIERS = """\
+Development Status :: 5 - Production/Stable
+Intended Audience :: Science/Research
+Intended Audience :: Developers
+License :: OSI Approved
+Programming Language :: C
+Programming Language :: Python
+Programming Language :: Python :: 3
+Topic :: Software Development
+Topic :: Scientific/Engineering
+Operating System :: Microsoft :: Windows
+Operating System :: POSIX
+Operating System :: Unix
+Operating System :: MacOS
+"""
+
+MAJOR               = 1
+MINOR               = 9
+MICRO               = 0
+ISRELEASED          = False
+VERSION             = '%d.%d.%d' % (MAJOR, MINOR, MICRO)
+
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'lib'))
 
@@ -40,6 +73,56 @@ def git_version():
 
     return GIT_REVISION
 
+# BEFORE importing distutils, remove MANIFEST. distutils doesn't properly
+# update it when the contents of directories change.
+if os.path.exists('MANIFEST'): os.remove('MANIFEST')
+
+def get_version_info():
+    # Adding the git rev number needs to be done inside write_version_py(),
+    # otherwise the import of numpy.version messes up the build under Python 3.
+    FULLVERSION = VERSION
+    if os.path.exists('.git'):
+        GIT_REVISION = git_version()
+    elif os.path.exists('numpy/version.py'):
+        # must be a source distribution, use existing version file
+        try:
+            from numpy.version import git_revision as GIT_REVISION
+        except ImportError:
+            raise ImportError("Unable to import git_revision. Try removing " \
+                              "numpy/version.py and the build directory " \
+                              "before building.")
+    else:
+        GIT_REVISION = "Unknown"
+
+    if not ISRELEASED:
+        FULLVERSION += '.dev-' + GIT_REVISION[:7]
+
+    return FULLVERSION, GIT_REVISION
+
+
+def write_version_py(filename='lib/ecoop/version.py'):
+    cnt = """
+# THIS FILE IS GENERATED FROM NUMPY SETUP.PY
+short_version = '%(version)s'
+version = '%(version)s'
+full_version = '%(full_version)s'
+git_revision = '%(git_revision)s'
+release = %(isrelease)s
+
+if not release:
+    version = full_version
+"""
+    FULLVERSION, GIT_REVISION = get_version_info()
+
+    a = open(filename, 'w')
+    try:
+        a.write(cnt % {'version': VERSION,
+                       'full_version' : FULLVERSION,
+                       'git_revision' : GIT_REVISION,
+                       'isrelease': str(ISRELEASED)})
+    finally:
+        a.close()
+
 
 with open("__version__.py", "a") as myfile:
     myfile.write(git_version())
@@ -60,6 +143,7 @@ setup(
     packages = ['ecoop'],
     package_dir = {'': 'lib'},
     license = 'BSD 3-Clause license',
+    platforms = ["Windows", "Linux", "Solaris", "Mac OS-X", "Unix"],
     classifiers = [
         'Development Status :: 1 - Beta',
         'Environment :: Console',
@@ -70,5 +154,18 @@ setup(
         'Programming Language :: Python',
         'Topic :: Internet',
         'Topic :: Software Development :: Libraries',
+        'Development Status :: 5 - Production/Stable',
+        'Intended Audience :: Science/Research',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved',
+        'Programming Language :: C',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
+        'Topic :: Software Development',
+        'Topic :: Scientific/Engineering',
+        'Operating System :: Microsoft :: Windows',
+        'Operating System :: POSIX',
+        'Operating System :: Unix',
+        'Operating System :: MacOS
     ],
 )
