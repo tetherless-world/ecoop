@@ -17,8 +17,8 @@ INSTALLATION:
 * Download and install the ecoop code and its dependencies
     
     ```
-    git clone https://github.com/epifanio/ecoop-1
-    cd ecoop-1/pyecoop
+    git clone https://github.com/tetherless-world/ecoop
+    cd ecoop/pyecoop
     pip install -r requirement.txt
     python setup.py install
     ```
