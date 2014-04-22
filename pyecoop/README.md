@@ -7,23 +7,31 @@ A collecton of python scripts for geo-science plus some utilities to be used fro
 Notebook used for the  Climate forcing UseCase :
 
 
-- [clean](http://nbviewer.ipython.org/urls/raw.github.com/epifanio/ecoop/master/notebook/ecoop_t1.ipynb)
+- [clean](http://nbviewer.ipython.org/urls/raw.githubusercontent.com/tetherless-world/ecoop/master/pyecoop/notebook/ESR_Test.ipynb?create=1)
 
-- [executed](http://nbviewer.ipython.org/7307864)
+- [executed](http://nbviewer.ipython.org/gist/anonymous/11072947)
 
-List of python packages :
 
-* paramiko
-* qrcode
-* ipython
-* envoy
-* numpy 
-* scipy
-* statsmodels
-* pandas 
-* matplotlib
+INSTALLATION:
 
-external dependencies :
+* Download and install the ecoop code and its dependencies
+    
+    ```
+    git clone https://github.com/tetherless-world/ecoop
+    cd ecoop/pyecoop
+    pip install -r requirement.txt
+    python setup.py install
+    ```
 
-* latex-live
-* jist
+*  pdflatex<br>
+
+    ```
+    apt-get install texlive texlive-latex-extra      
+    ```
+      
+* gist utility:
+
+    ```
+    apt-get install rubygems
+    gem install gist
+    ```
