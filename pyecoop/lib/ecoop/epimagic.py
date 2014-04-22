@@ -59,7 +59,7 @@ class MyMagics(Magics):
             f.write(cell)
         
 
-        display(metadata={'filename' : filename} )
+        display(metadata={'filename': filename})
         print(filename)
 
 
