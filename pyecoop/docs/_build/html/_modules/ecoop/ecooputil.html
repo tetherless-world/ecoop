@@ -131,6 +131,15 @@
 <span class="kn">import</span> <span class="nn">envoy</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
+<span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">import</span> <span class="nn">mimetypes</span>
+<span class="kn">import</span> <span class="nn">email</span>
+<span class="kn">import</span> <span class="nn">email.mime.application</span>
+<span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+<span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<span class="kn">from</span> <span class="nn">email.mime.image</span> <span class="kn">import</span> <span class="n">MIMEImage</span>
+
+
 <div class="viewcode-block" id="shareUtil"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil">[docs]</a><span class="k">class</span> <span class="nc">shareUtil</span><span class="p">():</span>
 <div class="viewcode-block" id="shareUtil.zipdir"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil.zipdir">[docs]</a>    <span class="k">def</span> <span class="nf">zipdir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basedir</span><span class="p">,</span> <span class="n">archivename</span><span class="p">,</span> <span class="n">rm</span><span class="o">=</span><span class="s">&#39;no&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -155,6 +164,72 @@
         <span class="k">if</span> <span class="n">rm</span> <span class="o">!=</span> <span class="s">&#39;no&#39;</span><span class="p">:</span>
             <span class="n">instruction</span> <span class="o">=</span> <span class="s">&#39;rm -rf </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">basedir</span>
             <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">instruction</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="shareUtil.sendGeoHabMail"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil.sendGeoHabMail">[docs]</a>    <span class="k">def</span> <span class="nf">sendGeoHabMail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">msgfrom</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">msgto</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span>
+                       <span class="n">text</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">inlineimage</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">pdfattachment</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">msgtype</span><span class="o">=</span><span class="s">&#39;html&#39;</span><span class="p">,</span>
+                       <span class="n">smtp</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">mime</span><span class="o">.</span><span class="n">Multipart</span><span class="o">.</span><span class="n">MIMEMultipart</span><span class="p">()</span>
+        <span class="n">msg</span><span class="p">[</span><span class="s">&#39;Subject&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">subject</span>
+        <span class="n">msg</span><span class="p">[</span><span class="s">&#39;From&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">msgfrom</span>
+        <span class="c"># msg as plain text</span>
+        <span class="k">if</span> <span class="n">msgtype</span><span class="o">==</span><span class="s">&#39;plain&#39;</span><span class="p">:</span>
+            <span class="n">part</span> <span class="o">=</span> <span class="n">MIMEText</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s">&#39;plain&#39;</span><span class="p">)</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+        <span class="c"># msg as html</span>
+        <span class="k">if</span> <span class="n">msgtype</span><span class="o">==</span><span class="s">&#39;html&#39;</span><span class="p">:</span>
+            <span class="n">part</span> <span class="o">=</span> <span class="n">MIMEText</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s">&#39;html&#39;</span><span class="p">)</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+
+        <span class="c"># Inline image attachment</span>
+        <span class="k">if</span> <span class="n">inlineimage</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inlineimage</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                    <span class="n">ctype</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="n">mimetypes</span><span class="o">.</span><span class="n">guess_type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="n">ctype</span> <span class="o">=</span> <span class="s">&#39;application/octet-stream&#39;</span>
+                    <span class="n">maintype</span><span class="p">,</span> <span class="n">subtype</span> <span class="o">=</span> <span class="n">ctype</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                    <span class="n">fp</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="s">&#39;rb&#39;</span><span class="p">)</span>
+                    <span class="n">part</span> <span class="o">=</span> <span class="n">MIMEImage</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">_subtype</span><span class="o">=</span><span class="n">subtype</span><span class="p">)</span>
+                    <span class="n">part</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="s">&#39;Content-Disposition&#39;</span><span class="p">,</span> <span class="s">&#39;attachment&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+                    <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+
+        <span class="c"># PDF attachment</span>
+        <span class="k">if</span> <span class="n">pdfattachment</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pdfattachment</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                    <span class="n">fp</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="s">&#39;rb&#39;</span><span class="p">)</span>
+                    <span class="n">att</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">mime</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">MIMEApplication</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span><span class="n">_subtype</span><span class="o">=</span><span class="s">&quot;pdf&quot;</span><span class="p">)</span>
+                    <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="n">att</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="s">&#39;Content-Disposition&#39;</span><span class="p">,</span><span class="s">&#39;attachment&#39;</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+                    <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">att</span><span class="p">)</span>
+
+        <span class="n">s</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="n">smtp</span><span class="p">)</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="s">&#39;info@geohab.org&#39;</span><span class="p">,</span> <span class="n">msgto</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">as_string</span><span class="p">())</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+
+</div>
+<div class="viewcode-block" id="shareUtil.dict2Table"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil.dict2Table">[docs]</a>    <span class="k">def</span> <span class="nf">dict2Table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">row_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dictval</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="n">table</span><span class="o">=</span><span class="s">&#39;&#39;</span>
+        <span class="n">table</span> <span class="o">+=</span> <span class="s">&#39;&lt;table&gt;&#39;</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">counter</span> <span class="o">%</span> <span class="n">row_length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">+=</span> <span class="s">&#39;&lt;tr&gt;&#39;</span>
+            <span class="n">table</span> <span class="o">+=</span> <span class="s">&#39;&lt;td&gt;</span><span class="si">%s</span><span class="s">&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="n">element</span>
+            <span class="k">if</span> <span class="n">dictval</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">+=</span> <span class="s">&#39;&lt;td&gt;</span><span class="si">%s</span><span class="s">&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="n">data</span><span class="p">[</span><span class="n">element</span><span class="p">]</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">counter</span> <span class="o">%</span> <span class="n">row_length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">+=</span> <span class="s">&#39;&lt;/tr&gt;&#39;</span>
+        <span class="k">if</span> <span class="n">counter</span> <span class="o">%</span> <span class="n">row_length</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">row_length</span> <span class="o">-</span> <span class="n">counter</span> <span class="o">%</span> <span class="n">row_length</span><span class="p">):</span>
+                <span class="n">table</span> <span class="o">+=</span> <span class="s">&#39;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&#39;</span>
+            <span class="n">table</span> <span class="o">+=</span> <span class="s">&#39;&lt;/tr&gt;&#39;</span>
+        <span class="n">table</span> <span class="o">+=</span> <span class="s">&#39;&lt;/table&gt;&#39;</span>
+        <span class="k">return</span> <span class="n">HTML</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="shareUtil.uploadfile"><a class="viewcode-back" href="../../ecoop.html#ecoop.ecooputil.shareUtil.uploadfile">[docs]</a>    <span class="k">def</span> <span class="nf">uploadfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;epi&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">&#39;epi&#39;</span><span class="p">,</span> <span class="n">hostname</span><span class="o">=</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">inputfile</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">outputfile</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">link</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">apacheroot</span><span class="o">=</span><span class="s">&#39;/var/www/&#39;</span><span class="p">,</span> <span class="nb">zip</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">qr</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
