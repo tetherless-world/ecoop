@@ -89,11 +89,8 @@ class cfData():
                 function['name']= 'nao_get'
                 function['parameters']={}
                 function['parameters']['url'] = url
-                function['parameters']['header'] = header
-                function['parameters']['skiprows'] = skiprows
-                function['parameters']['index_col'] = index_col
-                function['parameters']['parse_dates'] = parse_dates
-                function['parameters']['skip_footer'] = skip_footer
+                function['parameters']['save'] = save
+                function['parameters']['csvout'] = csvout
                 display('cell-output metadata saved', metadata={'nao_get': function})
             return naodata
         except IOError:
