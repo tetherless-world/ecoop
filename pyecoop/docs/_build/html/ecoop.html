@@ -93,7 +93,7 @@
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <dl class="method">
 <dt id="ecoop.cf.cfData.amo_get">
-<tt class="descname">amo_get</tt><big>(</big><em>url='http://www.cdc.noaa.gov/Correlation/amon.us.long.data'</em>, <em>save=None</em>, <em>csvout='amo.csv'</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfData.amo_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfData.amo_get" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">amo_get</tt><big>(</big><em>url='http://www.cdc.noaa.gov/Correlation/amon.us.long.data'</em>, <em>save=None</em>, <em>csvout='amo.csv'</em>, <em>prov=False</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfData.amo_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfData.amo_get" title="Permalink to this definition">¶</a></dt>
 <dd><p>read AMO data from url and return a pandas dataframe</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -117,7 +117,7 @@
 
 <dl class="method">
 <dt id="ecoop.cf.cfData.nao_get">
-<tt class="descname">nao_get</tt><big>(</big><em>url='https://climatedataguide.ucar.edu/sites/default/files/climate_index_files/nao_station_djfm.txt'</em>, <em>save=None</em>, <em>csvout='nao.csv'</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfData.nao_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfData.nao_get" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">nao_get</tt><big>(</big><em>url='https://climatedataguide.ucar.edu/sites/default/files/climate_index_files/nao_station_djfm.txt'</em>, <em>save=None</em>, <em>csvout='nao.csv'</em>, <em>prov=False</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfData.nao_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfData.nao_get" title="Permalink to this definition">¶</a></dt>
 <dd><p>read NAO data from url and return a pandas dataframe</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -142,7 +142,7 @@
 
 <dl class="method">
 <dt id="ecoop.cf.cfData.nin_get">
-<tt class="descname">nin_get</tt><big>(</big><em>url='http://www.cpc.ncep.noaa.gov/data/indices/sstoi.indices'</em>, <em>save=None</em>, <em>csvout='nin.csv'</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfData.nin_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfData.nin_get" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">nin_get</tt><big>(</big><em>url='http://www.cpc.ncep.noaa.gov/data/indices/sstoi.indices'</em>, <em>save=None</em>, <em>csvout='nin.csv'</em>, <em>prov=False</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfData.nin_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfData.nin_get" title="Permalink to this definition">¶</a></dt>
 <dd><p>read NIN data from url and return a pandas dataframe</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -227,7 +227,7 @@ expanding_kurt  Unbiased kurtosis (4th moment)</p>
 
 <dl class="method">
 <dt id="ecoop.cf.cfPlot.plot_index">
-<tt class="descname">plot_index</tt><big>(</big><em>data</em>, <em>name='Index'</em>, <em>nb=True</em>, <em>datarange=None</em>, <em>xticks=10</em>, <em>xticks_fontsize=10</em>, <em>dateformat=False</em>, <em>figsize=(10</em>, <em>8)</em>, <em>xmargin=True</em>, <em>ymargin=True</em>, <em>legend=True</em>, <em>smoother=None</em>, <em>output=None</em>, <em>dpi=300</em>, <em>grid=True</em>, <em>xlabel='Year'</em>, <em>ylabel=''</em>, <em>title=''</em>, <em>win_size=10</em>, <em>win_type='boxcar'</em>, <em>center=False</em>, <em>std=0.1</em>, <em>beta=0.1</em>, <em>power=1</em>, <em>width=1</em>, <em>min_periods=None</em>, <em>freq=None</em>, <em>scategory=None</em>, <em>frac=0.3333333333333333</em>, <em>it=3</em>, <em>figsave=None</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfPlot.plot_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfPlot.plot_index" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">plot_index</tt><big>(</big><em>data</em>, <em>name='Index'</em>, <em>nb=True</em>, <em>datarange=None</em>, <em>xticks=10</em>, <em>xticks_fontsize=10</em>, <em>dateformat=False</em>, <em>figsize=(10</em>, <em>8)</em>, <em>xmargin=True</em>, <em>ymargin=True</em>, <em>legend=True</em>, <em>smoother=None</em>, <em>output=None</em>, <em>dpi=300</em>, <em>grid=True</em>, <em>xlabel='Year'</em>, <em>ylabel=''</em>, <em>title=''</em>, <em>win_size=10</em>, <em>win_type='boxcar'</em>, <em>center=False</em>, <em>std=0.1</em>, <em>beta=0.1</em>, <em>power=1</em>, <em>width=1</em>, <em>min_periods=None</em>, <em>freq=None</em>, <em>scategory=None</em>, <em>frac=0.3333333333333333</em>, <em>it=3</em>, <em>figsave=None</em>, <em>prov=False</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfPlot.plot_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfPlot.plot_index" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to plot the Climate Forcing indicator for the ESR 2013, it follow graphic guidlines from the past ESR
 adding functionalities like :
 several kind of smoothline with different</p>
@@ -484,6 +484,11 @@ slepian (needs width)</p>
 <em class="property">class </em><tt class="descclassname">ecoop.ecooputil.</tt><tt class="descname">shareUtil</tt><a class="reference internal" href="_modules/ecoop/ecooputil.html#shareUtil"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.ecooputil.shareUtil" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <dl class="method">
+<dt id="ecoop.ecooputil.shareUtil.dict2Table">
+<tt class="descname">dict2Table</tt><big>(</big><em>data</em>, <em>row_length=1</em>, <em>dictval=False</em><big>)</big><a class="reference internal" href="_modules/ecoop/ecooputil.html#shareUtil.dict2Table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.ecooputil.shareUtil.dict2Table" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="ecoop.ecooputil.shareUtil.ensure_dir">
 <tt class="descname">ensure_dir</tt><big>(</big><em>dir</em><big>)</big><a class="reference internal" href="_modules/ecoop/ecooputil.html#shareUtil.ensure_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.ecooputil.shareUtil.ensure_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a directory on the file system if it does not exist
@@ -572,6 +577,11 @@ usage: getID(suffix)</p>
 </tbody>
 </table>
 </dd></dl>
+
+<dl class="method">
+<dt id="ecoop.ecooputil.shareUtil.sendGeoHabMail">
+<tt class="descname">sendGeoHabMail</tt><big>(</big><em>subject=''</em>, <em>msgfrom=''</em>, <em>msgto=''</em>, <em>text=''</em>, <em>html=''</em>, <em>inlineimage=None</em>, <em>pdfattachment=None</em>, <em>msgtype='html'</em>, <em>smtp=''</em>, <em>username=''</em>, <em>password=''</em><big>)</big><a class="reference internal" href="_modules/ecoop/ecooputil.html#shareUtil.sendGeoHabMail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.ecooputil.shareUtil.sendGeoHabMail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="ecoop.ecooputil.shareUtil.uploadfile">
