@@ -40,7 +40,6 @@ class MyMagics(Magics):
     
     @cell_magic
     def writefileref(self, line, cell):
-
         args = magic_arguments.parse_argstring(self.writefileref, line)
         filename = os.path.expanduser(unquote_filename(args.filename))
         if os.path.exists(filename):
@@ -51,7 +50,8 @@ class MyMagics(Magics):
         with io.open(filename, mode, encoding='utf-8') as f:
             f.write(cell)
         username = os.path.expanduser(args.username)
-        display('', metadata={'references': ecoopuser[username]})
+        if username in ecoopuser.keys():
+            display('added references for user %s' % username, metadata={'references': ecoopuser[username]})
 
 ip = get_ipython()
 ip.register_magics(MyMagics)

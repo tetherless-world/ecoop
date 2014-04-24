@@ -50,7 +50,12 @@ from scipy.interpolate import interp1d
 import pandas as pd
 import matplotlib.pyplot as plt
 from ecoop.ecooputil import shareUtil as EU
+try:
+    from IPython.core.display import display
+except:
+    print('you need to run this code from inside an IPython notebook in order to save provenance dictionaies')
 eu = EU()
+
 
 
 from bokeh import pyplot
@@ -59,7 +64,7 @@ class cfData():
     def __init__(self):
         self.x = ''
 
-    def nao_get(self, url="https://climatedataguide.ucar.edu/sites/default/files/climate_index_files/nao_station_djfm.txt",save=None, csvout='nao.csv'):
+    def nao_get(self, url="https://climatedataguide.ucar.edu/sites/default/files/climate_index_files/nao_station_djfm.txt",save=None, csvout='nao.csv', prov=False):
         """
         
         read NAO data from url and return a pandas dataframe
@@ -79,13 +84,25 @@ class cfData():
                 output = os.path.join(save, csvout)
                 naodata.to_csv(output, sep=',', header=True, index=True, index_label='Date')
                 print('nao data saved in : ' + output)
+            if prov:
+                function = {}
+                function['name']= 'nao_get'
+                function['parameters']={}
+                function['parameters']['url'] = url
+                function['parameters']['sep'] = sep
+                function['parameters']['header'] = header
+                function['parameters']['skiprows'] = skiprows
+                function['parameters']['index_col'] = index_col
+                function['parameters']['parse_dates'] = parse_dates
+                function['parameters']['skip_footer'] = skip_footer
+                display('cell-output metadata saved', metadata={'nao_get': function})
             return naodata
         except IOError:
             print('unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
             # try cached version / history-linked-uri
 
 
-    def nin_get(self, url='http://www.cpc.ncep.noaa.gov/data/indices/sstoi.indices', save=None, csvout='nin.csv'):
+    def nin_get(self, url='http://www.cpc.ncep.noaa.gov/data/indices/sstoi.indices', save=None, csvout='nin.csv', prov=False):
         """
         
         read NIN data from url and return a pandas dataframe
@@ -115,6 +132,14 @@ class cfData():
                 output = os.path.join(save, csvout)
                 nin_anomalies.to_csv(output, sep=',', header=True, index=True, index_label='Date')
                 print('data saved as %s ' % output)
+            if prov:
+                function = {}
+                function['name']= 'nin_get'
+                function['parameters']={}
+                function['parameters']['url'] = url
+                function['parameters']['save'] = save
+                function['parameters']['csvout'] = csvout
+                display('cell-output metadata saved', metadata={'nin_get': function})
             return nin_anomalies
         except IOError:
             print('unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
@@ -136,7 +161,7 @@ class cfData():
         return date
 
 
-    def amo_get(self, url='http://www.cdc.noaa.gov/Correlation/amon.us.long.data', save=None, csvout='amo.csv'):
+    def amo_get(self, url='http://www.cdc.noaa.gov/Correlation/amon.us.long.data', save=None, csvout='amo.csv', prov=False):
         """
         
         read AMO data from url and return a pandas dataframe
@@ -161,6 +186,14 @@ class cfData():
                 output = os.path.join(save, csvout)
                 amodata.to_csv(output, sep=',', header=True, index=True, index_label='Date')
                 print('data saved as %s ' % output)
+            if prov:
+                function = {}
+                function['name']= 'amo_get'
+                function['parameters']={}
+                function['parameters']['url'] = url
+                function['parameters']['save'] = save
+                function['parameters']['csvout'] = csvout
+                display('cell-output metadata saved', metadata={'amo_get': function})
             return amodata
         except:
             print('unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
@@ -181,7 +214,7 @@ class cfPlot():
                    center=False, std=0.1,
                    beta=0.1, power=1, width=1,
                    min_periods=None, freq=None,
-                   scategory=None, frac=1. / 3, it=3, figsave=None):
+                   scategory=None, frac=1. / 3, it=3, figsave=None, prov=False):
         """
         
         Function to plot the Climate Forcing indicator for the ESR 2013, it follow graphic guidlines from the past ESR
@@ -311,6 +344,42 @@ class cfPlot():
                 fig.subplots_adjust(left=-1.0)
                 fig.subplots_adjust(right=1.0)
             #plt.show()
+            if prov:
+                function = {}
+                function['name'] = 'plot_index'
+                function['parameters'] = {}
+                function['parameters']['data'] = data
+                function['parameters']['name'] = name
+                function['parameters']['nb'] = nb
+                function['parameters']['datarange'] = datarange
+                function['parameters']['xticks'] = xticks
+                function['parameters']['xticks_fontsize'] = xticks_fontsize
+                function['parameters']['dateformat'] = dateformat
+                function['parameters']['figsize'] = figsize
+                function['parameters']['xmargin'] = xmargin
+                function['parameters']['ymargin'] = ymargin
+                function['parameters']['legend'] = legend
+                function['parameters']['smoother'] = smoother
+                function['parameters']['output'] = output
+                function['parameters']['dpi'] = dpi
+                function['parameters']['grid'] = grid
+                function['parameters']['xlabel'] = xlabel
+                function['parameters']['ylabel'] = ylabel
+                function['parameters']['title'] = title
+                function['parameters']['win_size'] = win_size
+                function['parameters']['win_type'] = win_type
+                function['parameters']['center'] = center
+                function['parameters']['std'] = std
+                function['parameters']['beta'] = beta
+                function['parameters']['power'] = power
+                function['parameters']['width'] = width
+                function['parameters']['min_periods'] = min_periods
+                function['parameters']['freq'] = freq
+                function['parameters']['scategory'] = scategory
+                function['parameters']['frac'] = frac
+                function['parameters']['it'] = it
+                function['parameters']['figsave'] = figsave
+                display('cell-output metadata saved', metadata={'amo_get': function})
             pyplot.show_bokeh(plt.gcf(), filename="subplots.html")
         except AssertionError:
             if type(data) != pd.core.frame.DataFrame:
