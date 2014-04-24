@@ -85,8 +85,394 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="ecoop-package">
-<h1>ecoop Package<a class="headerlink" href="#ecoop-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-ecoop.cf">
+<span id="ecoop-package"></span><h1>ecoop Package<a class="headerlink" href="#module-ecoop.cf" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="ecoop.cf.cfData">
+<em class="property">class </em><tt class="descclassname">ecoop.cf.</tt><tt class="descname">cfData</tt><a class="reference internal" href="_modules/ecoop/cf.html#cfData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<dl class="method">
+<dt id="ecoop.cf.cfData.amo_get">
+<tt class="descname">amo_get</tt><big>(</big><em>url='http://www.cdc.noaa.gov/Correlation/amon.us.long.data'</em>, <em>save=None</em>, <em>csvout='amo.csv'</em>, <em>prov=False</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfData.amo_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfData.amo_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>read AMO data from url and return a pandas dataframe</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> (<em>str</em>) &#8211; url to data online default is set to : <a class="reference external" href="http://www.cdc.noaa.gov/Correlation/amon.us.long.data">http://www.cdc.noaa.gov/Correlation/amon.us.long.data</a></li>
+<li><strong>save</strong> (<em>str</em>) &#8211; directory where to save raw data as csv</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">amodata as pandas dataframe</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas dataframe</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecoop.cf.cfData.nao_get">
+<tt class="descname">nao_get</tt><big>(</big><em>url='https://climatedataguide.ucar.edu/sites/default/files/climate_index_files/nao_station_djfm.txt'</em>, <em>save=None</em>, <em>csvout='nao.csv'</em>, <em>prov=False</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfData.nao_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfData.nao_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>read NAO data from url and return a pandas dataframe</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> (<em>str</em>) &#8211; url to data online default is set to :
+<a class="reference external" href="https://climatedataguide.ucar.edu/sites/default/files/climate_index_files/nao_station_djfm.txt">https://climatedataguide.ucar.edu/sites/default/files/climate_index_files/nao_station_djfm.txt</a></li>
+<li><strong>save</strong> (<em>str</em>) &#8211; directory where to save raw data as csv</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">naodata as pandas dataframe</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas dataframe</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecoop.cf.cfData.nin_get">
+<tt class="descname">nin_get</tt><big>(</big><em>url='http://www.cpc.ncep.noaa.gov/data/indices/sstoi.indices'</em>, <em>save=None</em>, <em>csvout='nin.csv'</em>, <em>prov=False</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfData.nin_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfData.nin_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>read NIN data from url and return a pandas dataframe</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> (<em>str</em>) &#8211; url to data online default is set to : <a class="reference external" href="http://www.cpc.ncep.noaa.gov/data/indices/sstoi.indices">http://www.cpc.ncep.noaa.gov/data/indices/sstoi.indices</a></li>
+<li><strong>save</strong> (<em>str</em>) &#8211; directory where to save raw data as csv</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">nindata as pandas dataframe</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas dataframe</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecoop.cf.cfData.parse">
+<tt class="descname">parse</tt><big>(</big><em>yr</em>, <em>mon</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfData.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfData.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert year and month to a datatime object, day hardcoded to 2nd day of each month</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>yr</strong> &#8211; year date integer or string</li>
+<li><strong>mon</strong> &#8211; month date integer or string</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">datatime object (time stamp)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">datatime</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ecoop.cf.cfPlot">
+<em class="property">class </em><tt class="descclassname">ecoop.cf.</tt><tt class="descname">cfPlot</tt><a class="reference internal" href="_modules/ecoop/cf.html#cfPlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<dl class="method">
+<dt id="ecoop.cf.cfPlot.expanding_smoother">
+<tt class="descname">expanding_smoother</tt><big>(</big><em>data</em>, <em>stype='rolling_mean'</em>, <em>min_periods=None</em>, <em>freq=None</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfPlot.expanding_smoother"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfPlot.expanding_smoother" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a expanding smooting on the data for a complete help refer to <a class="reference external" href="http://pandas.pydata.org/pandas-docs/dev/computation.html">http://pandas.pydata.org/pandas-docs/dev/computation.html</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> &#8211; pandas dataframe input data</li>
+<li><strong>stype</strong> &#8211; soothing type</li>
+<li><strong>min_periods</strong> &#8211; periods</li>
+<li><strong>freq</strong> &#8211; frequence</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>smoothing types:
+expanding_count Number of non-null observations
+expanding_sum   Sum of values
+expanding_mean  Mean of values
+expanding_median        Arithmetic median of values
+expanding_min   Minimum
+expanding_max   Maximum
+expandingg_std  Unbiased standard deviation
+expanding_var   Unbiased variance
+expanding_skew  Unbiased skewness (3rd moment)
+expanding_kurt  Unbiased kurtosis (4th moment)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecoop.cf.cfPlot.plot_index">
+<tt class="descname">plot_index</tt><big>(</big><em>data</em>, <em>name='Index'</em>, <em>nb=True</em>, <em>datarange=None</em>, <em>xticks=10</em>, <em>xticks_fontsize=10</em>, <em>dateformat=False</em>, <em>figsize=(10</em>, <em>8)</em>, <em>xmargin=True</em>, <em>ymargin=True</em>, <em>legend=True</em>, <em>smoother=None</em>, <em>output=None</em>, <em>dpi=300</em>, <em>grid=True</em>, <em>xlabel='Year'</em>, <em>ylabel=''</em>, <em>title=''</em>, <em>win_size=10</em>, <em>win_type='boxcar'</em>, <em>center=False</em>, <em>std=0.1</em>, <em>beta=0.1</em>, <em>power=1</em>, <em>width=1</em>, <em>min_periods=None</em>, <em>freq=None</em>, <em>scategory=None</em>, <em>frac=0.3333333333333333</em>, <em>it=3</em>, <em>figsave=None</em>, <em>prov=False</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfPlot.plot_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfPlot.plot_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to plot the Climate Forcing indicator for the ESR 2013, it follow graphic guidlines from the past ESR
+adding functionalities like :
+several kind of smoothline with different</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> &#8211; pandas dataframe - input data</li>
+<li><strong>name</strong> &#8211; string - name used as dataframe index</li>
+<li><strong>nb</strong> &#8211; bolean if True the function is optimized to render the png inside a notebook</li>
+<li><strong>datarange</strong> &#8211; list of 2 integer for mak min year</li>
+<li><strong>xticks</strong> &#8211; integer xtick spacing default=10</li>
+<li><strong>xticks_fontsize</strong> &#8211; integer xticks fontsize default=10</li>
+<li><strong>dateformat</strong> &#8211; boolean if True set the xticks labels in date format</li>
+<li><strong>figsize</strong> &#8211; tuple figure size default (10, 8)</li>
+<li><strong>xmargin</strong> &#8211; bolean default True</li>
+<li><strong>ymargin</strong> &#8211; bolean default True</li>
+<li><strong>legend</strong> &#8211; bolean default True</li>
+<li><strong>smoother</strong> &#8211; tuple (f,i)</li>
+<li><strong>output</strong> &#8211; directory where to save output default None</li>
+<li><strong>dpi</strong> &#8211; integer</li>
+<li><strong>grid</strong> &#8211; bolean default True</li>
+<li><strong>xlabel</strong> &#8211; string default &#8216;Year&#8217;</li>
+<li><strong>ylabel</strong> &#8211; string default &#8216;&#8217;</li>
+<li><strong>title</strong> &#8211; string default &#8216;&#8217;</li>
+<li><strong>win_size</strong> &#8211; integer default 10</li>
+<li><strong>win_type</strong> &#8211; string default &#8216;boxcar&#8217;</li>
+<li><strong>center</strong> &#8211; bolean default False</li>
+<li><strong>std</strong> &#8211; float default 0.1</li>
+<li><strong>beta</strong> &#8211; float default 0.1</li>
+<li><strong>power</strong> &#8211; integer default 1</li>
+<li><strong>width</strong> &#8211; integer default 1</li>
+<li><strong>min_periods</strong> &#8211; None</li>
+<li><strong>freq</strong> &#8211; None</li>
+<li><strong>scategory</strong> (<em>str</em>) &#8211; default &#8216;rolling&#8217;</li>
+<li><strong>frac</strong> (<em>float</em>) &#8211; default 0.6666666666666666 Between 0 and 1. The fraction of the data used when estimating each y-value.,</li>
+<li><strong>it</strong> (<em>int</em>) &#8211; default 3 The number of residual-based reweightings to perform.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecoop.cf.cfPlot.rolling_smoother">
+<tt class="descname">rolling_smoother</tt><big>(</big><em>data</em>, <em>stype='rolling_mean'</em>, <em>win_size=10</em>, <em>win_type='boxcar'</em>, <em>center=False</em>, <em>std=0.1</em>, <em>beta=0.1</em>, <em>power=1</em>, <em>width=1</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfPlot.rolling_smoother"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfPlot.rolling_smoother" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a espanding smooting on the data for a complete help refer to <a class="reference external" href="http://pandas.pydata.org/pandas-docs/dev/computation.html">http://pandas.pydata.org/pandas-docs/dev/computation.html</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> &#8211; </li>
+<li><strong>stype</strong> &#8211; </li>
+<li><strong>win_size</strong> &#8211; </li>
+<li><strong>win_type</strong> &#8211; </li>
+<li><strong>center</strong> &#8211; </li>
+<li><strong>std</strong> &#8211; </li>
+<li><strong>beta</strong> &#8211; </li>
+<li><strong>power</strong> &#8211; </li>
+<li><strong>width</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Moothing types:</th><td class="field-body"><dl class="first last docutils">
+<dt>ROLLING :</dt>
+<dd><p class="first">rolling_count   Number of non-null observations
+rolling_sum     Sum of values
+rolling_mean    Mean of values
+rolling_median  Arithmetic median of values
+rolling_min     Minimum
+rolling_max     Maximum
+rolling_std     Unbiased standard deviation
+rolling_var     Unbiased variance
+rolling_skew    Unbiased skewness (3rd moment)
+rolling_kurt    Unbiased kurtosis (4th moment)
+rolling_window  Moving window function</p>
+<blockquote class="last">
+<div><dl class="docutils">
+<dt>window types:</dt>
+<dd><p class="first last">boxcar
+triang
+blackman
+hamming
+bartlett
+parzen
+bohman
+blackmanharris
+nuttall
+barthann
+kaiser (needs beta)
+gaussian (needs std)
+general_gaussian (needs power, width)
+slepian (needs width)</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ecoop.cf.cfPrint">
+<em class="property">class </em><tt class="descclassname">ecoop.cf.</tt><tt class="descname">cfPrint</tt><a class="reference internal" href="_modules/ecoop/cf.html#cfPrint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfPrint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<dl class="method">
+<dt id="ecoop.cf.cfPrint.addFigure">
+<tt class="descname">addFigure</tt><big>(</big><em>img</em>, <em>name</em>, <em>metadata</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfPrint.addFigure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfPrint.addFigure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a figure to a latext section/subsection</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>img</strong> (<em>str</em>) &#8211; </li>
+<li><strong>name</strong> (<em>str</em>) &#8211; </li>
+<li><strong>metadata</strong> (<em>str</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecoop.cf.cfPrint.addSection">
+<tt class="descname">addSection</tt><big>(</big><em>name</em>, <em>data</em>, <em>fig=''</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfPrint.addSection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfPrint.addSection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a section to a latext template</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; </li>
+<li><strong>data</strong> (<em>str</em>) &#8211; </li>
+<li><strong>fig</strong> (<em>str</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecoop.cf.cfPrint.addSubSection">
+<tt class="descname">addSubSection</tt><big>(</big><em>name</em>, <em>data</em>, <em>fig=''</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfPrint.addSubSection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfPrint.addSubSection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a subsection to a latext template</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; </li>
+<li><strong>data</strong> (<em>str</em>) &#8211; </li>
+<li><strong>fig</strong> (<em>str</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecoop.cf.cfPrint.cftemplate">
+<tt class="descname">cftemplate</tt><big>(</big><em>ID</em>, <em>pdfdict</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfPrint.cftemplate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfPrint.cftemplate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ecoop.cf.cfPrint.closeDocument">
+<tt class="descname">closeDocument</tt><big>(</big><em>col='twocolumn'</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfPrint.closeDocument"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfPrint.closeDocument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close a latex document template
+:return: str</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecoop.cf.cfPrint.openDocument">
+<tt class="descname">openDocument</tt><big>(</big><em>col='twocolumn'</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#cfPrint.openDocument"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.cfPrint.openDocument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start a latext template opening the document</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Rerurn:</th><td class="field-body">latext library import and document initialization</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ecoop.cf.openLayers">
+<em class="property">class </em><tt class="descclassname">ecoop.cf.</tt><tt class="descname">openLayers</tt><a class="reference internal" href="_modules/ecoop/cf.html#openLayers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.openLayers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<dl class="method">
+<dt id="ecoop.cf.openLayers.addWMS">
+<tt class="descname">addWMS</tt><big>(</big><em>name</em>, <em>getcapabilities</em>, <em>layername</em>, <em>title</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#openLayers.addWMS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.openLayers.addWMS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ecoop.cf.openLayers.control3">
+<tt class="descname">control3</tt><big>(</big><em>vectorlist</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#openLayers.control3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.openLayers.control3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ecoop.cf.openLayers.df2feature">
+<tt class="descname">df2feature</tt><big>(</big><em>df</em>, <em>lat='LATITUDE'</em>, <em>lon='LONGITUDE'</em>, <em>prec=5</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#openLayers.df2feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.openLayers.df2feature" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ecoop.cf.openLayers.makeQuery3">
+<tt class="descname">makeQuery3</tt><big>(</big><em>vectorlist</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#openLayers.makeQuery3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.openLayers.makeQuery3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ecoop.cf.openLayers.makeSingleStyle">
+<tt class="descname">makeSingleStyle</tt><big>(</big><em>vectorlist</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#openLayers.makeSingleStyle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.openLayers.makeSingleStyle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ecoop.cf.openLayers.makeStyle3">
+<tt class="descname">makeStyle3</tt><big>(</big><em>vectorlist</em><big>)</big><a class="reference internal" href="_modules/ecoop/cf.html#openLayers.makeStyle3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.cf.openLayers.makeStyle3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <div class="section" id="module-ecoop.ecooprovdict">
 <span id="ecooprovdict-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ecooprovdict</span></tt> Module<a class="headerlink" href="#module-ecoop.ecooprovdict" title="Permalink to this headline">¶</a></h2>
 <p>Dictionary to store pair key-value to map the ECOOP CMAP</p>
@@ -96,7 +482,13 @@
 <span class="target" id="module-ecoop"></span><dl class="class">
 <dt id="ecoop.ecooputil.shareUtil">
 <em class="property">class </em><tt class="descclassname">ecoop.ecooputil.</tt><tt class="descname">shareUtil</tt><a class="reference internal" href="_modules/ecoop/ecooputil.html#shareUtil"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.ecooputil.shareUtil" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<dl class="method">
+<dt id="ecoop.ecooputil.shareUtil.dict2Table">
+<tt class="descname">dict2Table</tt><big>(</big><em>data</em>, <em>row_length=1</em>, <em>dictval=False</em><big>)</big><a class="reference internal" href="_modules/ecoop/ecooputil.html#shareUtil.dict2Table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.ecooputil.shareUtil.dict2Table" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="ecoop.ecooputil.shareUtil.ensure_dir">
 <tt class="descname">ensure_dir</tt><big>(</big><em>dir</em><big>)</big><a class="reference internal" href="_modules/ecoop/ecooputil.html#shareUtil.ensure_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.ecooputil.shareUtil.ensure_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a directory on the file system if it does not exist
@@ -185,6 +577,11 @@ usage: getID(suffix)</p>
 </tbody>
 </table>
 </dd></dl>
+
+<dl class="method">
+<dt id="ecoop.ecooputil.shareUtil.sendGeoHabMail">
+<tt class="descname">sendGeoHabMail</tt><big>(</big><em>subject=''</em>, <em>msgfrom=''</em>, <em>msgto=''</em>, <em>text=''</em>, <em>html=''</em>, <em>inlineimage=None</em>, <em>pdfattachment=None</em>, <em>msgtype='html'</em>, <em>smtp=''</em>, <em>username=''</em>, <em>password=''</em><big>)</big><a class="reference internal" href="_modules/ecoop/ecooputil.html#shareUtil.sendGeoHabMail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecoop.ecooputil.shareUtil.sendGeoHabMail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="ecoop.ecooputil.shareUtil.uploadfile">
