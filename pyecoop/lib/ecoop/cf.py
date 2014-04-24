@@ -89,7 +89,6 @@ class cfData():
                 function['name']= 'nao_get'
                 function['parameters']={}
                 function['parameters']['url'] = url
-                function['parameters']['sep'] = sep
                 function['parameters']['header'] = header
                 function['parameters']['skiprows'] = skiprows
                 function['parameters']['index_col'] = index_col
