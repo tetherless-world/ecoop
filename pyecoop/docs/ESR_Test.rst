@@ -56,6 +56,6 @@ North Atlantic Example
 
 
 
-.. image:: _static/output_7_3.png
+.. image:: _static/output_7_3.png:scale:50
 
 
