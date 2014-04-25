@@ -92,7 +92,7 @@ class shareUtil():
             os.system(instruction)
 
 
-    def sendGeoHabMail(self, subject='', msgfrom='', msgto='',
+    def sendMail(self, subject='', msgfrom='', msgto='',
                        text='', html='', inlineimage=None, pdfattachment=None, msgtype='html',
                        smtp='', username='', password=''):
         msg = email.mime.Multipart.MIMEMultipart()
