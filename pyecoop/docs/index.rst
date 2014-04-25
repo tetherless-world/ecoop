@@ -12,6 +12,9 @@ Contents:
    :maxdepth: 2
    
    getting_started.rst
+   NAO.rst
+   AMO.rst
+
 
 .. module:: ecoop
 
