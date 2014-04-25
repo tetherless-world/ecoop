@@ -13,6 +13,7 @@ Contents:
    
    getting_started.rst
    climate_forcing_example.rst
+   ESR_Test.rst
 
 
 .. module:: ecoop
