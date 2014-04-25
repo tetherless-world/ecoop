@@ -55,21 +55,9 @@ this will generate a directory :file:`.ipython/profile_ecoop` in your :file:`$HO
 Configure the IPython Notebook profile
 =============================
 
-Now we will start to customize out docs.  Grab a couple of files from
-the `web site <https://github.com/matplotlib/sampledoc>`_
-or git.  You will need :file:`getting_started.rst` and
-:file:`_static/basic_screenshot.png`.  All of the files live in the
-"completed" version of this tutorial, but since this is a tutorial,
-we'll just grab them one at a time, so you can learn what needs to be
-changed where.  Since we have more files to come, I'm going to grab
-the whole git directory and just copy the files I need over for now.
-First, I'll cd up back into the directory containing my project, check
-out the "finished" product from git, and then copy in just the files I
-need into my :file:`sampledoc` directory::
 
-    :ipython
-	In [1]: from IPython.lib import passwd
-	In [2]: passwd()
+	from IPython.lib import passwd
+	passwd()
 	Enter password:
 	Verify password:
 	Out[2]: 'sha1:67c9e60bb8b6:9ffede0825894254b2e042ea597d771089e11aed'
@@ -81,8 +69,8 @@ You can then add this to your ipython_notebook_config.py, e.g.::
 	c.NotebookApp.password =
 	u'sha1:67c9e60bb8b6:9ffede0825894254b2e042ea597d771089e11aed'
 	
-test
 
 
-:ref:`custom_look`.
+
+:ref:`climate_forcing_example`.
 
