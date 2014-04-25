@@ -72,5 +72,5 @@ You can then add this to your ipython_notebook_config.py, e.g.::
 
 
 
-:ref:`climate_forcing_example`.
+
 
