@@ -1,3 +1,5 @@
+.. _AMO:
+
 
 Atlantic Multidecadal Oscillation
 =================================

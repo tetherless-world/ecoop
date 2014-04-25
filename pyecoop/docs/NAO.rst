@@ -1,3 +1,5 @@
+.. _NAO:
+
 
 North Atlantic Oscillation
 ==========================
