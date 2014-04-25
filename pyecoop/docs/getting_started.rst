@@ -69,8 +69,9 @@ You can then add this to your ipython_notebook_config.py, e.g.::
 	c.NotebookApp.password =
 	u'sha1:67c9e60bb8b6:9ffede0825894254b2e042ea597d771089e11aed'
 
-:ref:`AMO`.
+
 :ref:`ANO`.
+
 
 
 
