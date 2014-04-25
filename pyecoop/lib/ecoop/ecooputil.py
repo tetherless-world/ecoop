@@ -95,6 +95,24 @@ class shareUtil():
     def sendMail(self, subject='', msgfrom='', msgto='',
                        text='', html='', inlineimage=None, pdfattachment=None, msgtype='html',
                        smtp='', username='', password=''):
+        '''
+
+        use the smtp and mail modules to send mails with multiple attachments (inline images, pdf files)
+
+
+        :param str subject: mail subject
+        :param str msgfrom: mail address used to send out the message
+        :param list msgto: list mail addresses (recipient) (string or list of strings)
+        :param str text: mail content text format
+        :param str html: mail content html format
+        :param str inlineimage: path to images attachment (string or list of strings)
+        :param str pdfattachment: path to pdf attachment (string or list of strings)
+        :param str msgtype: type of message (html or text)
+        :param str smtp: smtp address
+        :param str username: smtp username
+        :param str password: smtp password
+
+        '''
         msg = email.mime.Multipart.MIMEMultipart()
         msg['Subject'] = '%s' % subject
         msg['From'] = msgfrom
@@ -137,6 +155,14 @@ class shareUtil():
 
 
     def dict2Table(self, data, row_length=1, dictval=False):
+        """
+        render a python dictionary as HTML
+
+        :param str data: input dictionary
+        :param int row_length: html table length (num rows)
+        :param bol dictval: if False print out only dictionary keys
+
+        """
         table=''
         table += '<table>'
         counter = 0
