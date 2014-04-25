@@ -12,6 +12,10 @@ Contents:
    :maxdepth: 2
    
    getting_started.rst
+
+.. toctree::
+   :maxdepth: 2
+
    climate_forcing_example.rst
 
 .. module:: ecoop
