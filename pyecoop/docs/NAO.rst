@@ -7,6 +7,7 @@ North Atlantic Example
 .. code:: python
 
     from ecoop.cf import cfData, cfPlot
+
 -  Enable inline printing
 
 .. code:: python
