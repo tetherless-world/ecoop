@@ -57,6 +57,6 @@ North Atlantic Example
 
 
 .. image:: output_7_3.png
-      :scale: 50
+    :scale: 50
 
 
