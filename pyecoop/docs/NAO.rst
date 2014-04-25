@@ -3,13 +3,14 @@ North Atlantic Oscillation
 ==========================
 
 -  Enable inline printing
-   ~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
     %matplotlib inline
+
 -  Import the cfData, cfPlot classes from the ecoop library
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -19,7 +20,7 @@ North Atlantic Oscillation
     cfd = cfData()
     cfp = cfPlot()
 -  Retrieve the North Atlantic Oscillation dataset
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -37,7 +38,7 @@ North Atlantic Oscillation
 
 
 -  Plot the North Atlantic Oscillation dataset
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
