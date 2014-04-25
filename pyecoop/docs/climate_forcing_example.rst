@@ -1,73 +1,42 @@
-.. _getting_started:
+.. _climate_forcing:
 
 
 ***************
-Getting started
+Climate Forcing
 ***************
 
-.. _installing-ecoop:
+.. _north_atlantic_oscillation:
 
-Installing the ecoop library
+North Atlantic Oscillation Index
 =============================
 
-Download and install the ecoop code and its dependencies::
+do some suff ::
 
-  git clone https://github.com/tetherless-world/ecoop
-  cd ecoop/pyecoop
-  pip install -r requirement.txt
-  python setup.py install
-
-If not installed already add pdflatex to your system, on debian based distros run::
-
-  apt-get install texlive texlive-latex-extra      
-
-Now add the gist utility::
-
-  apt-get install rubygems
-  gem install gist
+  execute some code
 
 
-.. _create-an-IPython-Notebook-profile:
+
+
+Do some more stuff::
+
+  run other code
+
+
+.. _atlantic_multidecadal_oscillation:
     
-Create an IPython Notebook profile
+Atlantic Multidecadal Oscillation Index
 =============================
 
-Create a custom profile for the notebook, with the following command line, type:::
+do some suff ::
+
+  execute some code
 
 
-    ipython profile create ecoop
 
 
-this will generate a directory :file:`.ipython/profile_ecoop` in your :file:`$HOME` ::
+Do some more stuff::
 
-    
-	ls .ipython/profile_ecoop
-	db				log
-	history.sqlite			pid
-	ipython_config.py		security
-	ipython_nbconvert_config.py	startup
-	ipython_notebook_config.py	static
-
-
-.. _configure-an-IPython-Notebook-profile:
-
-
-Configure the IPython Notebook profile
-=============================
-
-
-	from IPython.lib import passwd
-	passwd()
-	Enter password:
-	Verify password:
-	Out[2]: 'sha1:67c9e60bb8b6:9ffede0825894254b2e042ea597d771089e11aed'
-	
-You can then add this to your ipython_notebook_config.py, e.g.::
-
-
-	c = get_config()
-	c.NotebookApp.password =
-	u'sha1:67c9e60bb8b6:9ffede0825894254b2e042ea597d771089e11aed'
+  run other code
 	
 
 
