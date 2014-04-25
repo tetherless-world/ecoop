@@ -12,8 +12,8 @@ Contents:
    :maxdepth: 2
    
    getting_started.rst
-   climate_forcing_example.rst
    NAO.rst
+   AMO.rst
 
 
 .. module:: ecoop
