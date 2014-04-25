@@ -1,6 +1,6 @@
 
-North Atlantic Oscillation
-==========================
+Atlantic Multidecadal Oscillation
+=================================
 
 -  Enable inline printing
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -18,16 +18,16 @@ North Atlantic Oscillation
 
     cfd = cfData()
     cfp = cfPlot()
--  Retrieve the North Atlantic Oscillation dataset
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-  Retrieve the Atlantic Multidecadal Oscillation dataset
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
-    naodata = cfd.nao_get(prov=True)
+    amodata = cfd.amo_get(prov=True)
 
 .. parsed-literal::
 
-    dataset used: https://climatedataguide.ucar.edu/sites/default/files/climate_index_files/nao_station_djfm.txt
+    dataset used: http://www.cdc.noaa.gov/Correlation/amon.us.long.data
 
 
 
@@ -36,14 +36,14 @@ North Atlantic Oscillation
     'cell-output metadata saved'
 
 
--  Plot the North Atlantic Oscillation dataset
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-  Plot the Atlantic Multidecadal Oscillation dataset
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
     # NAO
-    cfp.plot_index(name='NAO_lowess', xticks=10, xticks_fontsize=10, 
-                   data=naodata, nb='y', scategory='lowess', frac=1./6, it=6, 
+    cfp.plot_index(name='AMO_lowess', xticks=10, xticks_fontsize=10, 
+                   data=amodata, nb='y', scategory='lowess', frac=1./6, it=6, 
                    dateformat=True)
 
 .. parsed-literal::
@@ -52,5 +52,5 @@ North Atlantic Oscillation
 
 
 
-.. image:: NAO.png
+.. image:: AMO.png
      :scale: 50
