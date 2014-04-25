@@ -54,5 +54,5 @@ North Atlantic Oscillation
 
 
 
-.. image:: NAO.png
+.. image:: _static/NAO.png
      :scale: 50
