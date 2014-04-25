@@ -23,14 +23,6 @@ ecoop Package
     :show-inheritance:
 
 
-:mod:`epimagic` Module
------------------------
-
-.. automodule:: ecoop.epimagic
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 :mod:`groupdict` Module
 ------------------------
 
