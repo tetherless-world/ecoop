@@ -13,6 +13,7 @@ Contents:
    
    getting_started.rst
 
+
 .. module:: ecoop
 
 
