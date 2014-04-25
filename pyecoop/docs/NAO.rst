@@ -56,3 +56,6 @@ North Atlantic Oscillation
 
 .. image:: _static/NAO.png
      :scale: 50
+
+
+:ref:`AMO`.
