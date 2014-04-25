@@ -1,4 +1,4 @@
-.. _climate_forcing:
+.. _climate_forcing_example:
 
 
 ***************
