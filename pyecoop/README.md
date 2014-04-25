@@ -9,7 +9,7 @@ Notebook used for the  Climate forcing UseCase :
 
 - [clean](http://nbviewer.ipython.org/urls/raw.githubusercontent.com/epifanio/ecoop-1/master/pyecoop/notebook/ESR_Test.ipynb?create=1)
 
-- [executed](http://nbviewer.ipython.org/gist/anonymous/11262601)
+- [executed](http://nbviewer.ipython.org/urls/raw.githubusercontent.com/epifanio/ecoop-1/master/pyecoop/notebook/ESR_Test_executed.ipynb?create=1)
 
 - [API documentation](http://www.epinux.com/shared/pyecoop_doc/)
 
