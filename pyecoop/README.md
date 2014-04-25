@@ -11,7 +11,6 @@ Notebook used for the  Climate forcing UseCase :
 
 - [executed](http://nbviewer.ipython.org/gist/anonymous/11262601)
 
-
 - [API documentation](http://www.epinux.com/shared/pyecoop_doc/html/)
 
 INSTALLATION:

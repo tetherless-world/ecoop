@@ -22,6 +22,40 @@ ecoop Package
     :undoc-members:
     :show-inheritance:
 
+
+:mod:`epimagic` Module
+-----------------------
+
+.. automodule:: ecoop.epimagic
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`groupdict` Module
+------------------------
+
+.. automodule:: ecoop.groupdict
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`orgdict` Module
+------------------------
+
+.. automodule:: ecoop.orgdict
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`printer` Module
+------------------------
+
+.. automodule:: ecoop.printer
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
 :mod:`splashdict` Module
 ------------------------
 
@@ -38,3 +72,10 @@ ecoop Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`userdict` Module
+------------------------
+
+.. automodule:: ecoop.userdict
+    :members:
+    :undoc-members:
+    :show-inheritance:
