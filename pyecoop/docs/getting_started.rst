@@ -8,7 +8,7 @@ Getting started
 .. _installing-ecoop:
 
 Installing the ecoop library
-=============================
+============================
 
 Download and install the ecoop code and its dependencies::
 
@@ -30,7 +30,7 @@ Now add the gist utility::
 .. _create-an-IPython-Notebook-profile:
     
 Create an IPython Notebook profile
-=============================
+==================================
 
 Create a custom profile for the notebook, with the following command line, type:::
 
@@ -53,7 +53,7 @@ this will generate a directory :file:`.ipython/profile_ecoop` in your :file:`$HO
 
 
 Configure the IPython Notebook profile
-=============================
+======================================
 
 
 	from IPython.lib import passwd

@@ -8,7 +8,7 @@ Climate Forcing
 .. _north_atlantic_oscillation:
 
 North Atlantic Oscillation Index
-=============================
+================================
 
 do some suff ::
 
@@ -25,7 +25,7 @@ Do some more stuff::
 .. _atlantic_multidecadal_oscillation:
     
 Atlantic Multidecadal Oscillation Index
-=============================
+=======================================
 
 do some suff ::
 
