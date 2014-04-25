@@ -14,7 +14,7 @@ Contents:
    getting_started.rst
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
    climate_forcing_example.rst
 
