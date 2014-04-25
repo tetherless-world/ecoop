@@ -54,6 +54,6 @@ North Atlantic Oscillation
 
 
 
-.. image:: _static/output_9_1.png
+.. image:: _static/output_7_3.png
      :scale: 50
 
