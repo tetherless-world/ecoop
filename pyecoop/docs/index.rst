@@ -14,6 +14,7 @@ Contents:
    getting_started.rst
    NAO.rst
    AMO.rst
+   build_PDF.rst
 
 
 .. module:: ecoop

@@ -56,3 +56,6 @@ Atlantic Multidecadal Oscillation
 
 .. image:: _static/AMO.png
      :scale: 50
+
+
+:ref:`build_PDF`.
