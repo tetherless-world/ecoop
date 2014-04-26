@@ -1,4 +1,4 @@
-.. _build_pdf:
+.. _make_pdf:
 
 -  Import libraries
 ~~~~~~~~~~~~~~~~~~~
