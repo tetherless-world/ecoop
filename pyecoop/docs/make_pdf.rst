@@ -1,5 +1,8 @@
 .. _make_pdf:
 
+Build a PDF
+===========
+
 -  Import libraries
 ~~~~~~~~~~~~~~~~~~~
 
