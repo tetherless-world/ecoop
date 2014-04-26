@@ -58,4 +58,4 @@ Atlantic Multidecadal Oscillation
      :scale: 50
 
 
-:ref:`build_PDF`.
+:ref:`build_pdf`.
