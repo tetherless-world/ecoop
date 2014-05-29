@@ -53,8 +53,8 @@ export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 
 wget --no-check-certificate -c --progress=dot:mega http://cran.us.r-project.org/src/base/R-3/R-3.1.0.tar.gz
-tar -zxf R-3.0.2.tar.gz
-cd R-3.0.2
+tar -zxf R-3.1.0.tar.gz
+cd R-3.1.0
 CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib ./configure --prefix=$PREFIX/ --with-blas --with-lapack --enable-R-shlib
 make -j $np
 make install
