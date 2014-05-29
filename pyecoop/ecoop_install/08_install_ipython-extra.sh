@@ -36,11 +36,19 @@
 
 
 PREFIX=/home/$USER/Envs/env1
+TEMPBUILD=/home/$USER/$BUILD
+mkdir -p $TEMPBUILD
+mkdir -p $TEMPBUILD/tarball
+mkdir -p $TEMPBUILD/src
+
+cd $TEMPBUILD
+export PATH=$PREFIX/bin:$PATH
+export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 echo "install mpld3"
 git clone https://github.com/jakevdp/mpld3.git
 cd mpld3
-$PREFIX/bin/python setup.py install
+$PREFIX/bin/python3.4 setup.py install
 rm -rf build
 cd $TEMPBUILD
 mv mpld3 $TEMPBUILD/src
@@ -48,7 +56,7 @@ mv mpld3 $TEMPBUILD/src
 #https://github.com/jakevdp/ipywidgets.git
 git clone https://github.com/jakevdp/ipywidgets.git
 cd ipywidgets
-$PREFIX/bin/python setup.py install
+$PREFIX/bin/python3.4 setup.py install
 rm -rf build
 cd $TEMPBUILD
 mv ipywidgets $TEMPBUILD/src
@@ -57,7 +65,7 @@ mv ipywidgets $TEMPBUILD/src
 
 git clone https://github.com/epmoyer/ipy_table.git
 cd ipy_table
-$PREFIX/bin/python setup.py install
+$PREFIX/bin/python3.4 setup.py install
 rm -rf build
 cd $TEMPBUILD
 mv ipy_table $TEMPBUILD/src
@@ -67,6 +75,6 @@ mv ipy_table $TEMPBUILD/src
 
 git clone https://github.com/ContinuumIO/bokeh.git
 cd bokeh
-$PREFIX/bin/python setup.py install
+$PREFIX/bin/python3.4 setup.py install
 cd ..
 mv bokeh $TEMPBUILD/src
