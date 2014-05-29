@@ -34,9 +34,6 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
-np=${nproc}
-
-# PYTHON
 
 CURRENTDIR=${PWD}
 BUILD=epilib
