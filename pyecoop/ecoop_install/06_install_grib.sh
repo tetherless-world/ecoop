@@ -55,13 +55,13 @@ tar xzf grib_api-1.12.0.tar.gz
 
 cd grib_api-1.12.0
 export CFLAGS="-O2 -fPIC"
-./configure --enable-python --prefix=$PREFIX/
+./configure --enable-python --prefix=$PREFIX/ #--disable-numpy
 make -j $np
 make install
 make distclean
 cd $TEMPBUILD
-mv grib_api-1.12.0.tar.gz $TEMPBUILD/tarball
-mv grib_api-1.12.0 $TEMPBUILD/src
+#mv grib_api-1.12.0.tar.gz $TEMPBUILD/tarball
+#mv grib_api-1.12.0 $TEMPBUILD/src
 
 echo "$PREFIX/lib/python3.4/site-packages/grib_api" > gribapi.pth
 cp gribapi.pth $PREFIX/lib/python3.4/site-packages/
@@ -71,4 +71,4 @@ cd activepapers-python
 $PREFIX/bin/python3.4 setup.py install
 rm -rf build
 cd $TEMPBUILD
-mv activepapers-python $TEMPBUILD/src
+#mv activepapers-python $TEMPBUILD/src

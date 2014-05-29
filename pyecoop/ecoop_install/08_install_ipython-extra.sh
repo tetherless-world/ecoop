@@ -51,7 +51,7 @@ cd mpld3
 $PREFIX/bin/python3.4 setup.py install
 rm -rf build
 cd $TEMPBUILD
-mv mpld3 $TEMPBUILD/src
+#mv mpld3 $TEMPBUILD/src
 
 #https://github.com/jakevdp/ipywidgets.git
 git clone https://github.com/jakevdp/ipywidgets.git
@@ -59,7 +59,7 @@ cd ipywidgets
 $PREFIX/bin/python3.4 setup.py install
 rm -rf build
 cd $TEMPBUILD
-mv ipywidgets $TEMPBUILD/src
+#mv ipywidgets $TEMPBUILD/src
 
 
 
@@ -68,7 +68,7 @@ cd ipy_table
 $PREFIX/bin/python3.4 setup.py install
 rm -rf build
 cd $TEMPBUILD
-mv ipy_table $TEMPBUILD/src
+#mv ipy_table $TEMPBUILD/src
 
 # think about ipython extension / profiles (grass binding, network interfaces)
 #
@@ -77,4 +77,4 @@ git clone https://github.com/ContinuumIO/bokeh.git
 cd bokeh
 $PREFIX/bin/python3.4 setup.py install
 cd ..
-mv bokeh $TEMPBUILD/src
+#mv bokeh $TEMPBUILD/src

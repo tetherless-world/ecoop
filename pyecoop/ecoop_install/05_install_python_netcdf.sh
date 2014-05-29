@@ -58,4 +58,4 @@ export NETCDF4_DIR=$PREFIX/
 $PREFIX/bin/python3.4 setup.py install
 rm -rf build
 cd $TEMPBUILD
-mv netcdf4-python $TEMPBUILD/src
+#mv netcdf4-python $TEMPBUILD/src

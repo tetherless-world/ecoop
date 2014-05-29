@@ -49,7 +49,7 @@ export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 cd $TEMPBUILD
-wget -c http://www.hdfgroup.org/ftp/lib-external/szip/2.1/src/szip-2.1.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://www.hdfgroup.org/ftp/lib-external/szip/2.1/src/szip-2.1.tar.gz
 tar -zxf szip-2.1.tar.gz
 cd szip-2.1
 ./configure --prefix=$PREFIX/ --enable-shared
@@ -57,10 +57,10 @@ make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv szip-2.1.tar.gz $TEMPBUILD/tarball
-mv szip-2.1 $TEMPBUILD/src
+#mv szip-2.1.tar.gz $TEMPBUILD/tarball
+#mv szip-2.1 $TEMPBUILD/src
 
-wget -c http://www.hdfgroup.org/ftp/HDF/releases/HDF4.2.9/src/hdf-4.2.9.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://www.hdfgroup.org/ftp/HDF/releases/HDF4.2.9/src/hdf-4.2.9.tar.gz
 tar -zxf hdf-4.2.9.tar.gz
 cd hdf-4.2.9
 ./configure --prefix=$PREFIX/ --enable-shared --disable-fortran --with-szlib=$PREFIX/ --enable-netcdf=no
@@ -68,11 +68,11 @@ make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv hdf-4.2.9.tar.gz $TEMPBUILD/tarball
-mv hdf-4.2.9 $TEMPBUILD/src
+#mv hdf-4.2.9.tar.gz $TEMPBUILD/tarball
+#mv hdf-4.2.9 $TEMPBUILD/src
 
 
-wget -c http://www.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8.13/src/hdf5-1.8.13.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://www.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8.13/src/hdf5-1.8.13.tar.gz
 tar -zxf hdf5-1.8.13.tar.gz
 cd hdf5-1.8.13
 ./configure --prefix=$PREFIX/ --enable-shared --enable-hl
@@ -80,10 +80,10 @@ make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv hdf5-1.8.13.tar.gz $TEMPBUILD/tarball
-mv hdf5-1.8.13 $TEMPBUILD/src
+#mv hdf5-1.8.13.tar.gz $TEMPBUILD/tarball
+#mv hdf5-1.8.13 $TEMPBUILD/src
 
-wget -c ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-4.3.2.tar.gz
+wget --no-check-certificate -c --progress=dot:mega ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-4.3.2.tar.gz
 tar -zxf netcdf-4.3.2.tar.gz
 cd netcdf-4.3.2
 LDFLAGS=-L$PREFIX/lib CPPFLAGS=-I$PREFIX/include ./configure --enable-netcdf-4 --enable-dap --enable-shared --prefix=$PREFIX
@@ -91,16 +91,16 @@ make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv netcdf-4.3.2.tar.gz $TEMPBUILD/tarball
-mv netcdf-4.3.2 $TEMPBUILD/src
+#mv netcdf-4.3.2.tar.gz $TEMPBUILD/tarball
+#mv netcdf-4.3.2 $TEMPBUILD/src
 
 
-wget ftp://ftp.unidata.ucar.edu/pub/udunits/udunits-2.1.24.tar.gz
+wget --no-check-certificate -c --progress=dot:mega ftp://ftp.unidata.ucar.edu/pub/udunits/udunits-2.1.24.tar.gz
 tar -zxf udunits-2.1.24.tar.gz
 cd udunits-2.1.24
 ./configure --prefix=$PREFIX
 make -j $np
 make install
 cd $TEMPBUILD
-mv udunits-2.1.24.tar.gz $TEMPBUILD/tarball
-mv udunits-2.1.24 $TEMPBUILD/src
+#mv udunits-2.1.24.tar.gz $TEMPBUILD/tarball
+#mv udunits-2.1.24 $TEMPBUILD/src

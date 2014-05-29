@@ -49,23 +49,23 @@ export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 
-wget http://download.osgeo.org/gdal/1.10.1/gdal-1.10.1.tar.gz
-tar -zxf gdal-1.10.1.tar.gz
-cd gdal-1.10.1
+wget -c http://download.osgeo.org/gdal/1.11.0/gdal-1.11.0.tar.gz
+tar -zxf gdal-1.11.0.tar.gz
+cd gdal-1.11.0
 #--with-pg=$PREFIX/bin/pg_config
 CPPFLAGS=-I$PREFIX/include ./configure --with-hdf5=$PREFIX/  --with-hdf4=$PREFIX/ --with-hdf4=/usr --with-geos=$PREFIX/bin/geos-config --with-spatialite=$PREFIX/ --with-freexl=$PREFIX/ --with-python=$PREFIX/bin/python --with-pg=$PREFIX/bin/pg_config --prefix=$PREFIX/ --with-netcdf=$PREFIX/
 make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv gdal-1.10.1.tar.gz $TEMPBUILD/tarball
-mv gdal-1.10.1 $TEMPBUILD/src
+mv gdal-1.11.0.tar.gz $TEMPBUILD/tarball
+mv gdal-1.11.0 $TEMPBUILD/src
 $PREFIX/bin/pip install fiona
 
 
-$PREFIX/bin/pip install Image
+$PREFIX/bin/pip install -U Image
 
-wget http://hivelocity.dl.sourceforge.net/project/pyke/pyke/1.1.1/pyke-1.1.1.zip
+wget -c http://downloads.sourceforge.net/project/pyke/pyke/1.1.1/pyke-1.1.1.zip
 unzip pyke-1.1.1.zip
 cd pyke-1.1.1
 $PREFIX/bin/python setup.py install

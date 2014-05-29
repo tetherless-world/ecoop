@@ -52,7 +52,7 @@ cd ipython
 $PREFIX/bin/python3.4 setup.py install
 rm -rf build
 cd $TEMPBUILD
-mv ipython $TEMPBUILD/src
+#mv ipython $TEMPBUILD/src
 
 ipython3 profile create default
 ipython3 profile create ecoop --ipython-dir=$PREFIX/.ipython --parallel

@@ -51,7 +51,7 @@ export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 
 echo "installing proj"
-wget http://download.osgeo.org/proj/proj-4.8.0.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://download.osgeo.org/proj/proj-4.8.0.tar.gz
 tar -zxf proj-4.8.0.tar.gz 
 cd proj-4.8.0
 ./configure --prefix=$PREFIX/
@@ -59,11 +59,11 @@ make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv proj-4.8.0.tar.gz $TEMPBUILD/tarball
-mv proj-4.8.0 $TEMPBUILD/src
+#mv proj-4.8.0.tar.gz $TEMPBUILD/tarball
+#mv proj-4.8.0 $TEMPBUILD/src
 
 echo "installing geos & basemap"
-wget http://softlayer-dal.dl.sourceforge.net/project/matplotlib/matplotlib-toolkits/basemap-1.0.7/basemap-1.0.7.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://softlayer-dal.dl.sourceforge.net/project/matplotlib/matplotlib-toolkits/basemap-1.0.7/basemap-1.0.7.tar.gz
 tar -zxf basemap-1.0.7.tar.gz
 cd basemap-1.0.7
 cd geos-3.3.3
@@ -73,11 +73,11 @@ make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd ..
-$PREFIX/bin/python setup.py install
+$PREFIX/bin/python3.4 setup.py install
 rm -rf build
 cd $TEMPBUILD
-mv basemap-1.0.7.tar.gz $TEMPBUILD/tarball
-mv basemap-1.0.7 $TEMPBUILD/src
+#mv basemap-1.0.7.tar.gz $TEMPBUILD/tarball
+#mv basemap-1.0.7 $TEMPBUILD/src
 
 
 echo "installing shapelib"
@@ -87,7 +87,7 @@ cd shapelib-1.3.0
 wget -c http://ftp.intevation.de/users/bh/pyshapelib/pyshapelib-0.3.tar.gz
 tar -zxf pyshapelib-0.3.tar.gz
 cd pyshapelib-0.3
-$PREFIX/bin/python setup.py install
+$PREFIX/bin/python3.4 setup.py install
 rm -rf build
 cd $TEMPBUILD 
 mv shapelib-1.3.0.tar.gz $TEMPBUILD/tarball
@@ -107,7 +107,7 @@ $PREFIX/bin/pip install -U descartes
 echo "installing cartopy"
 git clone https://github.com/SciTools/cartopy.git
 cd cartopy
-$PREFIX/bin/python setup.py install
+$PREFIX/bin/python3.4 setup.py install
 rm -rf build
 cd $TEMPBUILD 
 
