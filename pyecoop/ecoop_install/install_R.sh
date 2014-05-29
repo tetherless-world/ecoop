@@ -52,7 +52,7 @@ export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 
-wget http://cran.us.r-project.org/src/base/R-3/R-3.0.2.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://cran.us.r-project.org/src/base/R-3/R-3.1.0.tar.gz
 tar -zxf R-3.0.2.tar.gz
 cd R-3.0.2
 CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib ./configure --prefix=$PREFIX/ --with-blas --with-lapack --enable-R-shlib
@@ -60,8 +60,8 @@ make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv R-3.0.2.tar.gz $TEMPBUILD/tarball
-mv R-3.0.2 $TEMPBUILD/src
+#mv R-3.1.0.tar.gz $TEMPBUILD/tarball
+#mv R-3.1.0 $TEMPBUILD/src
 ln -s /usr/lib64/gcj-4.4.4/*.so $PREFIX/lib
 mkdir -p $PREFIX/lib/R/site-library/
 
