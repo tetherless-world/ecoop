@@ -49,7 +49,7 @@ export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 
-wget -c http://download.osgeo.org/gdal/1.11.0/gdal-1.11.0.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://download.osgeo.org/gdal/1.11.0/gdal-1.11.0.tar.gz
 tar -zxf gdal-1.11.0.tar.gz
 cd gdal-1.11.0
 #--with-pg=$PREFIX/bin/pg_config
@@ -58,20 +58,20 @@ make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv gdal-1.11.0.tar.gz $TEMPBUILD/tarball
-mv gdal-1.11.0 $TEMPBUILD/src
+#mv gdal-1.11.0.tar.gz $TEMPBUILD/tarball
+#mv gdal-1.11.0 $TEMPBUILD/src
 $PREFIX/bin/pip install fiona
 
 
 $PREFIX/bin/pip install -U Image
 
-wget -c http://downloads.sourceforge.net/project/pyke/pyke/1.1.1/pyke-1.1.1.zip
+wget --no-check-certificate -c --progress=dot:mega http://downloads.sourceforge.net/project/pyke/pyke/1.1.1/pyke-1.1.1.zip
 unzip pyke-1.1.1.zip
 cd pyke-1.1.1
 $PREFIX/bin/python setup.py install
 rm -rf build
 cd $TEMPBUILD
-mv pyke-1.1.1 $TEMPBUILD/src
+#mv pyke-1.1.1 $TEMPBUILD/src
 
 $PREFIX/bin/pip install biggus
 
