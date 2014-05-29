@@ -67,11 +67,11 @@ mv grib_api-1.9.16.tar.gz $TEMPBUILD/tarball
 mv grib_api-1.9.16 $TEMPBUILD/src
 
 echo "$PREFIX/lib/python3.4/site-packages/grib_api" > gribapi.pth
-cp gribapi.pth $PREFIX/lib/python2.7/site-packages/
+cp gribapi.pth $PREFIX/lib/python3.4/site-packages/
 
 git clone https://github.com/activepapers/activepapers-python.git
 cd activepapers-python
-$PREFIX/bin/python setup.py install
+$PREFIX/bin/python3.4 setup.py install
 rm -rf build
 cd $TEMPBUILD
 mv activepapers-python $TEMPBUILD/src
