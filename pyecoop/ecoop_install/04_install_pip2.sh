@@ -42,8 +42,8 @@ export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 version="2"
 if [[ "$version" == "2" ]]
-then pip=$pip2.7
-else pip=$pip3.4
+then pip=pip2.7
+else pip=pip3.4
 fi
 
 echo "installing h5py"
