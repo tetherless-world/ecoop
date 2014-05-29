@@ -36,6 +36,8 @@
 
 
 PREFIX=/home/$USER/Envs/env1
+export PATH=$PREFIX/bin:$PATH
+export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 echo "installing virtualenv"
 $PREFIX/bin/pip install -U virtualenv

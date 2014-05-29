@@ -80,16 +80,11 @@ mv basemap-1.0.7.tar.gz $TEMPBUILD/tarball
 mv basemap-1.0.7 $TEMPBUILD/src
 
 
-echo "installing shapely"
-$PREFIX/bin/pip install shapely
-echo "installing descartes"
-$PREFIX/bin/pip install descartes
-
 echo "installing shapelib"
-wget http://download.osgeo.org/shapelib/shapelib-1.3.0.tar.gz
+wget -c http://download.osgeo.org/shapelib/shapelib-1.3.0.tar.gz
 tar -zxf shapelib-1.3.0.tar.gz
 cd shapelib-1.3.0
-wget http://ftp.intevation.de/users/bh/pyshapelib/pyshapelib-0.3.tar.gz
+wget -c http://ftp.intevation.de/users/bh/pyshapelib/pyshapelib-0.3.tar.gz
 tar -zxf pyshapelib-0.3.tar.gz
 cd pyshapelib-0.3
 $PREFIX/bin/python setup.py install
@@ -104,7 +99,12 @@ echo "installing pyproj"
 export PROJ_DIR=$PREFIX
 $PREFIX/bin/pip install pyproj
 
-echo "installing pyproj"
+echo "installing shapely"
+$PREFIX/bin/pip install -u shapely
+echo "installing descartes"
+$PREFIX/bin/pip install -U descartes
+
+echo "installing cartopy"
 git clone https://github.com/SciTools/cartopy.git
 cd cartopy
 $PREFIX/bin/python setup.py install
