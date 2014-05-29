@@ -49,13 +49,13 @@ export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 git clone https://github.com/ipython/ipython
 cd ipython
-$PREFIX/bin/python setup.py install
+$PREFIX/bin/python3.4 setup.py install
 rm -rf build
 cd $TEMPBUILD
 mv ipython $TEMPBUILD/src
 
-ipython profile create default
-ipython profile create ecoop --ipython-dir=$PREFIX/.ipython --parallel
+ipython3 profile create default
+ipython3 profile create ecoop --ipython-dir=$PREFIX/.ipython --parallel
 
 mkdir -p /home/$USER/Envs/notebooks/
 cp $CURRENTDIR/ipython.sh $PREFIX/bin
