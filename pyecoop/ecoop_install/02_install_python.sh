@@ -53,6 +53,8 @@ export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 
 
+
+
 wget --no-check-certificate -c --progress=dot:mega https://www.python.org/ftp/python/3.4.1/Python-3.4.1.tar.xz
 tar xpvf Python-3.4.1.tar.xz
 cd Python-3.4.1

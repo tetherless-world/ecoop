@@ -34,52 +34,41 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
+np=${nproc}
 
+# PYTHON
 
+CURRENTDIR=${PWD}
+BUILD=epilib
 PREFIX=/home/$USER/Envs/env1
+
+TEMPBUILD=/home/$USER/$BUILD
+mkdir -p $TEMPBUILD
+mkdir -p $TEMPBUILD/tarball
+mkdir -p $TEMPBUILD/src
+
+cd $TEMPBUILD
 export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
-version="2"
-if [[ "$version" == "2" ]]
-then pip=$pip2.7
-else pip=$pip3.4
-fi
+wget --no-check-certificate -c --progress=dot:mega https://www.python.org/ftp/python/2.7.6/Python-2.7.6.tar.xz
+
+tar xpvf Python-2.7.6.tar.xz
+cd Python-2.7.6
+
+export CFLAGS="-fPIC"
+./configure --prefix=$PREFIX --enable-shared
+make -j $np
+make altinstall
+make distclean > /dev/null 2>&1
+cd $TEMPBUILD
 
 
-echo "installing virtualenv"
-$pip install -U virtualenv
-echo "installing setuptools"
-$pip install -U setuptools
-echo "installing dateutils"
-$pip install -U dateutils
-echo "installing docutils"
-$pip install -U docutils
-echo "installing jinja2"
-$pip install -U jinja2
-echo "installing nose"
-$pip install -U nose
-echo "installing numpy"
-$pip install -U numpy
-echo "installing paramiko"
-$pip install -U paramiko
-echo "installing Image"
-$pip install -U Image
-echo "installing pygments"
-$pip install -U pygments
-echo "installing scipy"
-$pip install -U scipy
-echo "installing sphinx"
-$pip install -U sphinx
-echo "installing pyzmq"
-$pip install -U pyzmq
-echo "installing tornado"
-$pip install -U tornado
-echo "installing envoy"
-$pip install -U envoy
-echo "installing qrcode"
-$pip install -U qrcode
-echo "installing requests"
-$pip install -U requests
-echo "installing owslib"
-$pip install -U owslib
+export PATH=$PREFIX/bin:$PATH
+
+ln -s $PREFIX/bin/python2.7 $PREFIX/bin/python
+wget --no-check-certificate -c --progress=dot:mega https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+$PREFIX/bin/python2.7 ez_setup.py
+
+echo "installing pip"
+$PREFIX/bin/easy_install-2.7 pip

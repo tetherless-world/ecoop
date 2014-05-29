@@ -40,51 +40,57 @@ PREFIX=/home/$USER/Envs/env1
 export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
+version="2"
+if [[ "$version" == "2" ]]
+then pip=$pip2.7
+else pip=$pip3.4
+fi
+
 echo "installing h5py"
-$PREFIX/bin/pip install -U h5py
+$pip install -U h5py
 echo "installing numexpr"
-$PREFIX/bin/pip install -U numexpr
+$pip install -U numexpr
 echo "installing Cython"
-$PREFIX/bin/pip install -U Cython
+$pip install -U Cython
 echo "installing tables"
-$PREFIX/bin/pip install -U tables
+$pip install -U tables
 echo "installing pandas"
-$PREFIX/bin/pip install -U pandas
+$pip install -U pandas
 echo "installing patsy"
-$PREFIX/bin/pip install -U patsy
+$pip install -U patsy
 echo "installing pysal"
-$PREFIX/bin/pip install -U pysal
+$pip install -U pysal
 echo "installing statsmodels"
-$PREFIX/bin/pip install -U statsmodels
+$pip install -U statsmodels
 echo "installing pyke"
-$PREFIX/bin/pip install -U pyke
+$pip install -U pyke
 echo "installing mock"
-$PREFIX/bin/pip install -U mock
+$pip install -U mock
 echo "installing sqlalchemy"
-$PREFIX/bin/pip install -U sqlalchemy
+$pip install -U sqlalchemy
 echo "installing tempdir"
-$PREFIX/bin/pip install -U tempdir
+$pip install -U tempdir
 echo "installing pysqlite"
-$PREFIX/bin/pip install -U pysqlite
+$pip install -U pysqlite
 echo "installing pycsw"
-$PREFIX/bin/pip install -U pycsw
+$pip install -U pycsw
 echo "installing sympy"
-$PREFIX/bin/pip install -U sympy
+$pip install -U sympy
 
 echo "installing six"
-$PREFIX/bin/pip install -U six
+$pip install -U six
 echo "installing husl"
-$PREFIX/bin/pip install -U husl
+$pip install -U husl
 echo "installing moss"
-$PREFIX/bin/pip install -U moss
+$pip install -U moss
 echo "installing seaborn"
-$PREFIX/bin/pip install -U seaborn
+$pip install -U seaborn
 
 echo "installing scikit-learn"
-$PREFIX/bin/pip install -U scikit-learn
+$pip install -U scikit-learn
 
 echo "installing scikit-image"
-$PREFIX/bin/pip install -U scikit-image
+$pip install -U scikit-image
 
 echo "installing sympy"
-$PREFIX/bin/pip install -U sympy
+$pip install -U sympy
