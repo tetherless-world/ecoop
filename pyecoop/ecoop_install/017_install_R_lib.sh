@@ -34,52 +34,10 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
-np=${nproc}
+# hardcoded path to lib - change it if the $USER is not : ecoop
+export PATH=/home/$USER/Envs/env1/bin:$PATH
+mkdir -p /home/$USER/Envs/env1/lib64/R/library/
+R --no-save < installRpackages.r
+R --no-save < install_spatial_view.r
 
-CURRENTDIR=${PWD}
-
-BUILD=epilib
-PREFIX=/home/$USER/Envs/env1
-
-TEMPBUILD=/home/$USER/$BUILD
-
-mkdir -p $TEMPBUILD
-mkdir -p $TEMPBUILD/tarball
-mkdir -p $TEMPBUILD/src
-
-cd $TEMPBUILD 
-export PATH=$PREFIX/bin:$PATH
-export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
-
-
-wget --no-check-certificate -c --progress=dot:mega http://cran.us.r-project.org/src/base/R-3/R-3.1.0.tar.gz
-tar -zxf R-3.1.0.tar.gz
-cd R-3.1.0
-CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib ./configure --prefix=$PREFIX/ --with-blas --with-lapack --enable-R-shlib
-make -j $np
-make install
-make distclean > /dev/null 2>&1
-cd $TEMPBUILD
-#mv R-3.1.0.tar.gz $TEMPBUILD/tarball
-#mv R-3.1.0 $TEMPBUILD/src
-ln -s /usr/lib64/gcj-4.4.4/*.so $PREFIX/lib
-mkdir -p $PREFIX/lib/R/site-library/
-
-cd $CURRENTDIR
-
-version="2"
-if [[ "$version" == "2" ]]
-then pip=$PREFIX/bin/pip2.7
-else pip=$PREFIX/bin/pip3.4
-fi
-
-
-echo "installing rpy2"
-$pip install rpy2
-
-
-$PREFIX/bin/R CMD javareconf -e
-export LD_LIBRARY_PATH=/usr/lib64/gcj-4.4.4/:$LD_LIBRARY_PATH
-$PREFIX/bin/R CMD javareconf -e
-
-
+# add warnings() and capture the output at the end of each R script before quit
