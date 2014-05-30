@@ -52,19 +52,19 @@ export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 
 
-wget http://dev.gentoo.org/%7Ebicatali/distfiles/suitesparseconfig-4.0.2.tar.gz
-tar -zxf suitesparseconfig-4.0.2.tar.gz
-cd suitesparseconfig-4.0.2
+wget --no-check-certificate -c --progress=dot:mega http://dev.gentoo.org/~bicatali/distfiles/suitesparseconfig-4.2.1.tar.bz2
+tar -zxf suitesparseconfig-4.2.1.tar.bz2
+cd suitesparseconfig-4.2.1
 ./configure --enable-shared --prefix=$PREFIX/
 make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv suitesparseconfig-4.0.2.tar.gz $TEMPBUILD/tarball
-mv suitesparseconfig-4.0.2 $TEMPBUILD/src
+#mv suitesparseconfig-4.0.2.tar.gz $TEMPBUILD/tarball
+#mv suitesparseconfig-4.0.2 $TEMPBUILD/src
 
 
-wget http://dev.gentoo.org/%7Ebicatali/distfiles/amd-2.3.1.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://dev.gentoo.org/%7Ebicatali/distfiles/amd-2.3.1.tar.gz
 tar -zxf amd-2.3.1.tar.gz
 cd amd-2.3.1
 LD_LIBRARY_PATH=$PREFIX/lib/ PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig ./configure --enable-shared --prefix=$PREFIX/
@@ -72,10 +72,10 @@ make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv amd-2.3.1.tar.gz $TEMPBUILD/tarball
-mv amd-2.3.1 $TEMPBUILD/src
+#mv amd-2.3.1.tar.gz $TEMPBUILD/tarball
+#mv amd-2.3.1 $TEMPBUILD/src
 
-wget http://dev.gentoo.org/%7Ebicatali/distfiles/btf-1.2.0.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://dev.gentoo.org/%7Ebicatali/distfiles/btf-1.2.0.tar.gz
 tar -zxf btf-1.2.0.tar.gz
 cd btf-1.2.0
 LD_LIBRARY_PATH=$PREFIX/lib/ PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig ./configure --enable-shared --prefix=$PREFIX/
@@ -83,11 +83,11 @@ make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv btf-1.2.0.tar.gz $TEMPBUILD/tarball
-mv btf-1.2.0 $TEMPBUILD/src
+#mv btf-1.2.0.tar.gz $TEMPBUILD/tarball
+#mv btf-1.2.0 $TEMPBUILD/src
 
 
-wget http://dev.gentoo.org/%7Ebicatali/distfiles/camd-2.3.1.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://dev.gentoo.org/%7Ebicatali/distfiles/camd-2.3.1.tar.gz
 tar -zxf camd-2.3.1.tar.gz
 cd camd-2.3.1
 LD_LIBRARY_PATH=$PREFIX/lib/ PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig ./configure --enable-shared --prefix=$PREFIX/
@@ -95,11 +95,11 @@ make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv camd-2.3.1.tar.gz $TEMPBUILD/tarball
-mv camd-2.3.1 $TEMPBUILD/src
+#mv camd-2.3.1.tar.gz $TEMPBUILD/tarball
+#mv camd-2.3.1 $TEMPBUILD/src
 
 
-wget http://dev.gentoo.org/%7Ebicatali/distfiles/ccolamd-2.8.0.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://dev.gentoo.org/%7Ebicatali/distfiles/ccolamd-2.8.0.tar.gz
 tar -zxf ccolamd-2.8.0.tar.gz
 cd ccolamd-2.8.0
 LD_LIBRARY_PATH=$PREFIX/lib/ PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig ./configure --enable-shared --prefix=$PREFIX/
@@ -107,21 +107,21 @@ make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv ccolamd-2.8.0.tar.gz $TEMPBUILD/tarball
-mv ccolamd-2.8.0 $TEMPBUILD/src
+#mv ccolamd-2.8.0.tar.gz $TEMPBUILD/tarball
+#mv ccolamd-2.8.0 $TEMPBUILD/src
 
-wget http://dev.gentoo.org/%7Ebicatali/distfiles/cfitsio-3.350.tar.gz
-tar -zxf cfitsio-3.350.tar.gz
-cd cfitsio-3.350
+wget --no-check-certificate -c --progress=dot:mega http://dev.gentoo.org/~bicatali/distfiles/cfitsio-3.360.tar.gz
+tar -zxf cfitsio-3.360.tar.gz
+cd cfitsio-3.360
 LD_LIBRARY_PATH=$PREFIX/lib/ PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig ./configure --enable-shared --prefix=$PREFIX/
 make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv cfitsio-3.350.tar.gz $TEMPBUILD/tarball
-mv cfitsio-3.350 $TEMPBUILD/src
+#mv cfitsio-3.360.tar.gz $TEMPBUILD/tarball
+#mv cfitsio-3.360 $TEMPBUILD/src
 
-wget http://dev.gentoo.org/%7Ebicatali/distfiles/colamd-2.8.0.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://dev.gentoo.org/%7Ebicatali/distfiles/colamd-2.8.0.tar.gz
 tar -zxf colamd-2.8.0.tar.gz
 cd colamd-2.8.0
 LD_LIBRARY_PATH=$PREFIX/lib/ PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig ./configure --enable-shared --prefix=$PREFIX/
@@ -129,10 +129,10 @@ make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD 
-mv colamd-2.8.0.tar.gz $TEMPBUILD/tarball
-mv colamd-2.8.0 $TEMPBUILD/src
+#mv colamd-2.8.0.tar.gz $TEMPBUILD/tarball
+#mv colamd-2.8.0 $TEMPBUILD/src
 
-wget http://dev.gentoo.org/%7Ebicatali/distfiles/cholmod-2.0.1.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://dev.gentoo.org/%7Ebicatali/distfiles/cholmod-2.0.1.tar.gz
 tar -zxf cholmod-2.0.1.tar.gz
 cd cholmod-2.0.1
 LD_LIBRARY_PATH=$PREFIX/lib/ PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig ./configure --enable-shared --prefix=$PREFIX/
@@ -140,52 +140,52 @@ make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD 
-mv cholmod-2.0.1.tar.gz $TEMPBUILD/tarball
-mv cholmod-2.0.1 $TEMPBUILD/src
+#mv cholmod-2.0.1.tar.gz $TEMPBUILD/tarball
+#mv cholmod-2.0.1 $TEMPBUILD/src
 
-wget http://dev.gentoo.org/%7Ebicatali/distfiles/cxsparse-3.1.1.tar.gz
-tar -zxf cxsparse-3.1.1.tar.gz
-cd cxsparse-3.1.1
+wget --no-check-certificate -c --progress=dot:mega http://dev.gentoo.org/%7Ebicatali/distfiles/cxsparse-3.1.2.tar.gz
+tar -zxf cxsparse-3.1.2.tar.gz
+cd cxsparse-3.1.2
 LD_LIBRARY_PATH=$PREFIX/lib/ PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig ./configure --enable-shared --prefix=$PREFIX/
 make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv cxsparse-3.1.1.tar.gz $TEMPBUILD/tarball
-mv cxsparse-3.1.1 $TEMPBUILD/src
+#mv cxsparse-3.1.2.tar.gz $TEMPBUILD/tarball
+#mv cxsparse-3.1.2 $TEMPBUILD/src
 
-wget http://dev.gentoo.org/%7Ebicatali/distfiles/umfpack-5.6.1.tar.gz
-tar -zxf umfpack-5.6.1.tar.gz
-cd umfpack-5.6.1
+wget --no-check-certificate -c --progress=dot:mega http://dev.gentoo.org/%7Ebicatali/distfiles/umfpack-5.6.2.tar.gz
+tar -zxf umfpack-5.6.2.tar.gz
+cd umfpack-5.6.2
 LD_LIBRARY_PATH=$PREFIX/lib/ PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig ./configure --enable-shared --prefix=$PREFIX/
 make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv umfpack-5.6.1.tar.gz $TEMPBUILD/tarball
-mv umfpack-5.6.1 $TEMPBUILD/src
+#mv umfpack-5.6.2.tar.gz $TEMPBUILD/tarball
+#mv umfpack-5.6.2 $TEMPBUILD/src
 
-wget http://softlayer-dal.dl.sourceforge.net/project/qrupdate/qrupdate/1.2/qrupdate-1.1.2.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://softlayer-dal.dl.sourceforge.net/project/qrupdate/qrupdate/1.2/qrupdate-1.1.2.tar.gz
 tar -zxf qrupdate-1.1.2.tar.gz
 cd qrupdate-1.1.2
 make -j $np
 cp libqrupdate.so $PREFIX/lib/
 make dictclean
 cd $TEMPBUILD
-mv qrupdate-1.1.2.tar.gz $TEMPBUILD/tarball
-mv qrupdate-1.1.2 $TEMPBUILD/src
+#mv qrupdate-1.1.2.tar.gz $TEMPBUILD/tarball
+#mv qrupdate-1.1.2 $TEMPBUILD/src
 
 # non va! :(
-wget http://ftp.gnu.org/gnu/glpk/glpk-4.52.tar.gz
-tar -zxf glpk-4.52.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://ftp.gnu.org/gnu/glpk/glpk-4.54.tar.gz
+tar -zxf glpk-4.54.tar.gz
 cd glpk-4.52
 LD_LIBRARY_PATH=$PREFIX/lib/ PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig ./configure --enable-shared --prefix=$PREFIX/
 make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv glpk-4.52.tar.gz $TEMPBUILD/tarball
-mv glpk-4.52 $TEMPBUILD/src
+#mv glpk-4.54.tar.gz $TEMPBUILD/tarball
+#mv glpk-4.54 $TEMPBUILD/src
 
 
 # non va! :(
@@ -199,15 +199,21 @@ mv glpk-4.52 $TEMPBUILD/src
 #mv qhull-2012.1-src.tgz $TEMPBUILD/tarball
 #mv qhull-2012.1-src $TEMPBUILD/src
 
-wget ftp://ftp.gnu.org/gnu/octave/octave-3.6.4.tar.gz
-tar -zxf octave-3.6.4.tar.gz
-cd octave-3.6.4
+wget --no-check-certificate -c --progress=dot:mega ftp://ftp.gnu.org/gnu/octave/octave-3.8.1.tar.gz
+tar -zxf octave-3.8.1.tar.gz
+cd octave-3.8.1
 CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib ./configure --with-hdf5-includedir=$PREFIX/include/ --with-hdf5-libdir=$PREFIX/lib --with-glpk-libdir=$PREFIX/lib --with-glpk-includedir=$PREFIX/include/ --prefix=$PREFIX/ --with-magick=ImageMagick --enable-shared
 make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv octave-3.6.4.tar.gz $TEMPBUILD/tarball
-mv octave-3.6.4 $TEMPBUILD/src
+#mv octave-3.8.1.tar.gz $TEMPBUILD/tarball
+#mv octave-3.8.1 $TEMPBUILD/src
 
-$PREFIX/bin/pip install oct2py
+version="2"
+if [[ "$version" == "2" ]]
+then pip=$PREFIX/bin/pip2.7
+else pip=$PREFIX/bin/pip3.4
+fi
+
+$pip -U install oct2py

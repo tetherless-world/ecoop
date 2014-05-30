@@ -63,4 +63,4 @@ make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv grass7_trunk $TEMPBUILD/src
+#mv grass7_trunk $TEMPBUILD/src
