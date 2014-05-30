@@ -50,7 +50,7 @@ export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 
-wget http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz 
+wget --no-check-certificate -c --progress=dot:mega http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz
 tar xvfz yasm-1.2.0.tar.gz 
 cd yasm-1.2.0 
 ./configure --prefix=$PREFIX 
@@ -76,7 +76,7 @@ make install
 make distclean
 
 cd $TEMPBUILD
-wget http://downloads.sourceforge.net/project/lame/lame/3.99/lame-3.99.5.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://downloads.sourceforge.net/project/lame/lame/3.99/lame-3.99.5.tar.gz
 tar xzvf lame-3.99.5.tar.gz
 cd lame-3.99.5
 ./configure --prefix=$PREFIX --enable-nasm --disable-shared
@@ -86,7 +86,7 @@ make distclean
 
 
 cd $TEMPBUILD
-wget http://downloads.xiph.org/releases/opus/opus-1.0.3.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://downloads.xiph.org/releases/opus/opus-1.0.3.tar.gz
 tar xzvf opus-1.0.3.tar.gz
 cd opus-1.0.3
 ./configure --prefix=$PREFIX --disable-shared
