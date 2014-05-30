@@ -52,9 +52,9 @@ export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 
 
-wget --no-check-certificate -c --progress=dot:mega http://dev.gentoo.org/~bicatali/distfiles/suitesparseconfig-4.2.1.tar.bz2
-tar -zxf suitesparseconfig-4.2.1.tar.bz2
-cd suitesparseconfig-4.2.1
+wget --no-check-certificate -c --progress=dot:mega http://dev.gentoo.org/~bicatali/distfiles/suitesparseconfig-4.0.2.tar.gz
+tar -zxf suitesparseconfig-4.0.2.tar.gz
+cd suitesparseconfig-4.0.2
 ./configure --enable-shared --prefix=$PREFIX/
 make -j $np
 make install
