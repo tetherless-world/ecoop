@@ -49,7 +49,7 @@ export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 
 echo "installing mapserver"
-wget http://download.osgeo.org/mapserver/mapserver-6.4.1.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://download.osgeo.org/mapserver/mapserver-6.4.1.tar.gz
 tar -zxf mapserver-6.4.1.tar.gz
 cd mapserver-6.4.1
 mkdir build
@@ -59,8 +59,8 @@ make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv mapserver-6.4.1.tar.gz $TEMPBUILD/tarball
-mv mapserver-6.4.1 $TEMPBUILD/src
+#mv mapserver-6.4.1.tar.gz $TEMPBUILD/tarball
+#mv mapserver-6.4.1 $TEMPBUILD/src
 
 
 

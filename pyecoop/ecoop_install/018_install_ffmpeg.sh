@@ -95,23 +95,45 @@ make install
 make distclean
 
 cd $TEMPBUILD
-git clone --depth 1 http://git.chromium.org/webm/libvpx.git
+git clone http://git.chromium.org/webm/libvpx.git
 cd libvpx
 ./configure --prefix=$PREFIX --disable-examples
 make -j $np
 make install
 make clean
 
+
+wget --no-check-certificate -c --progress=dot:mega http://fribidi.org/download/fribidi-0.19.6.tar.bz2
+tar xjvf fribidi-0.19.6.tar.bz2
+cd fribidi-0.19.6
+./configure --prefix=$PREFIX
+make make install
+
+
+
+cd $TEMPBUILD
+git clone https://github.com/libass/libass
+cd libass
+sh autogen.sh
+./configure --prefix=$PREFIX
+make -j $np
+make install
+make clean
+
+
+
 cd $TEMPBUILD
 git clone --depth 1 git://source.ffmpeg.org/ffmpeg
 cd ffmpeg
 PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 export PKG_CONFIG_PATH
-./configure --prefix=$PREFIX \
-  --extra-cflags="-I$PREFIX/include" --extra-ldflags="-L$PREFIX/lib" \
-  --extra-libs="-ldl" --enable-gpl --enable-libass --enable-libfdk-aac \
-  --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx \
-  --enable-libx264 --enable-nonfree --enable-x11grab
+#./configure --prefix=$PREFIX \
+#  --extra-cflags="-I$PREFIX/include" --extra-ldflags="-L$PREFIX/lib" \
+#  --extra-libs="-ldl" --enable-gpl --enable-libass --enable-libfdk-aac \
+#  --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx \
+#  --enable-libx264 --enable-nonfree --enable-x11grab
+./configure --prefix=$PREFIX   --extra-cflags="-I$PREFIX/include" --extra-ldflags="-L$PREFIX/lib"   --extra-libs="-ldl" --enable-gpl --enable-libfdk-aac   --enable-libmp3lame --enable-libopus --enable-libvpx   --enable-libx264 --enable-nonfree --enable-x11grab
+
 make -j $np
 make install
 make distclean
