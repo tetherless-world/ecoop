@@ -42,16 +42,17 @@ export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 version="2"
 if [[ "$version" == "2" ]]
-then pip=pip2.7
-else pip=pip3.4
+then pip=$PREFIX/bin/pip2.7
+else pip=$PREFIX/bin/pip3.4
 fi
 
-echo "installing h5py"
-$pip install -U h5py
+
 echo "installing numexpr"
 $pip install -U numexpr
 echo "installing Cython"
 $pip install -U Cython
+echo "installing h5py"
+$pip install -U h5py
 echo "installing tables"
 $pip install -U tables
 echo "installing pandas"

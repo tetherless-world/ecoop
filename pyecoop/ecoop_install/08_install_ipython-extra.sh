@@ -45,10 +45,17 @@ cd $TEMPBUILD
 export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
+version="2"
+if [[ "$version" == "2" ]]
+then python=$PREFIX/bin/python2.7
+else python=$PREFIX/bin/python3.4
+fi
+
+
 echo "install mpld3"
 git clone https://github.com/jakevdp/mpld3.git
 cd mpld3
-$PREFIX/bin/python3.4 setup.py install
+$python setup.py install
 rm -rf build
 cd $TEMPBUILD
 #mv mpld3 $TEMPBUILD/src
@@ -56,7 +63,7 @@ cd $TEMPBUILD
 #https://github.com/jakevdp/ipywidgets.git
 git clone https://github.com/jakevdp/ipywidgets.git
 cd ipywidgets
-$PREFIX/bin/python3.4 setup.py install
+$python setup.py install
 rm -rf build
 cd $TEMPBUILD
 #mv ipywidgets $TEMPBUILD/src
@@ -65,7 +72,7 @@ cd $TEMPBUILD
 
 git clone https://github.com/epmoyer/ipy_table.git
 cd ipy_table
-$PREFIX/bin/python3.4 setup.py install
+$python setup.py install
 rm -rf build
 cd $TEMPBUILD
 #mv ipy_table $TEMPBUILD/src
@@ -75,6 +82,6 @@ cd $TEMPBUILD
 
 git clone https://github.com/ContinuumIO/bokeh.git
 cd bokeh
-$PREFIX/bin/python3.4 setup.py install
+$python setup.py install
 cd ..
 #mv bokeh $TEMPBUILD/src

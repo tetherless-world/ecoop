@@ -68,7 +68,15 @@ cp gribapi.pth $PREFIX/lib/python3.4/site-packages/
 
 git clone https://github.com/activepapers/activepapers-python.git
 cd activepapers-python
-$PREFIX/bin/python3.4 setup.py install
+
+version="2"
+if [[ "$version" == "2" ]]
+then python=$PREFIX/bin/python2.7
+else python=$PREFIX/bin/python3.4
+fi
+
+$python setup.py install
+
 rm -rf build
 cd $TEMPBUILD
 #mv activepapers-python $TEMPBUILD/src

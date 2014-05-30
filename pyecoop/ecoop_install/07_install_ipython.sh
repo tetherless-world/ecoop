@@ -47,15 +47,26 @@ cd $TEMPBUILD
 export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
+version="2"
+if [[ "$version" == "2" ]]
+then python=$PREFIX/bin/python2.7
+else python=$PREFIX/bin/python3.4
+fi
+
+
 git clone https://github.com/ipython/ipython
 cd ipython
-$PREFIX/bin/python3.4 setup.py install
+$python setup.py install
 rm -rf build
 cd $TEMPBUILD
-#mv ipython $TEMPBUILD/src
 
-ipython3 profile create default
-ipython3 profile create ecoop --ipython-dir=$PREFIX/.ipython --parallel
+if [[ "$version" == "2" ]]
+then ipython=$PREFIX/bin/ipython2
+else ipython=$PREFIX/bin/ipython3
+fi
+
+$ipython profile create default
+$ipython profile create ecoop --ipython-dir=$PREFIX/.ipython --parallel
 
 mkdir -p /home/$USER/Envs/notebooks/
 cp $CURRENTDIR/ipython.sh $PREFIX/bin

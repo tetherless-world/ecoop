@@ -55,7 +55,14 @@ svn checkout http://netcdf4-python.googlecode.com/svn/trunk/ netcdf4-python
 cd netcdf4-python
 export HDF5_DIR=$PREFIX/
 export NETCDF4_DIR=$PREFIX/
-$PREFIX/bin/python3.4 setup.py install
+
+version="2"
+if [[ "$version" == "2" ]]
+then python=$PREFIX/bin/python2.7
+else python=$PREFIX/bin/python3.4
+fi
+
+$python setup.py install
 rm -rf build
 cd $TEMPBUILD
 #mv netcdf4-python $TEMPBUILD/src

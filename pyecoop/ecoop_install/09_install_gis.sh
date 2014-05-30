@@ -49,6 +49,17 @@ cd $TEMPBUILD
 export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
+version="2"
+if [[ "$version" == "2" ]]
+then python=$PREFIX/bin/python2.7
+else python=$PREFIX/bin/python3.4
+fi
+
+version="2"
+if [[ "$version" == "2" ]]
+then pip=$PREFIX/bin/pip2.7
+else pip=$PREFIX/bin/pip3.4
+fi
 
 echo "installing proj"
 wget --no-check-certificate -c --progress=dot:mega http://download.osgeo.org/proj/proj-4.8.0.tar.gz
@@ -73,7 +84,7 @@ make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd ..
-$PREFIX/bin/python3.4 setup.py install
+$python setup.py install
 rm -rf build
 cd $TEMPBUILD
 #mv basemap-1.0.7.tar.gz $TEMPBUILD/tarball
@@ -87,27 +98,27 @@ cd shapelib-1.3.0
 wget -c http://ftp.intevation.de/users/bh/pyshapelib/pyshapelib-0.3.tar.gz
 tar -zxf pyshapelib-0.3.tar.gz
 cd pyshapelib-0.3
-$PREFIX/bin/python3.4 setup.py install
+$python setup.py install
 rm -rf build
 cd $TEMPBUILD 
-mv shapelib-1.3.0.tar.gz $TEMPBUILD/tarball
-mv shapelib-1.3.0 $TEMPBUILD/src
+#mv shapelib-1.3.0.tar.gz $TEMPBUILD/tarball
+#mv shapelib-1.3.0 $TEMPBUILD/src
 
 
 
 echo "installing pyproj"
 export PROJ_DIR=$PREFIX
-$PREFIX/bin/pip install pyproj
+$pip install pyproj
 
 echo "installing shapely"
-$PREFIX/bin/pip install -u shapely
+$pip install -u shapely
 echo "installing descartes"
-$PREFIX/bin/pip install -U descartes
+$pip install -U descartes
 
 echo "installing cartopy"
 git clone https://github.com/SciTools/cartopy.git
 cd cartopy
-$PREFIX/bin/python3.4 setup.py install
+$python setup.py install
 rm -rf build
 cd $TEMPBUILD 
 

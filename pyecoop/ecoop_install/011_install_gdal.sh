@@ -48,6 +48,18 @@ cd $TEMPBUILD
 export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
+version="2"
+if [[ "$version" == "2" ]]
+then python=$PREFIX/bin/python2.7
+else python=$PREFIX/bin/python3.4
+fi
+
+
+if [[ "$version" == "2" ]]
+then pip=$PREFIX/bin/pip2.7
+else pip=$PREFIX/bin/pip3.4
+fi
+
 
 wget --no-check-certificate -c --progress=dot:mega http://download.osgeo.org/gdal/1.11.0/gdal-1.11.0.tar.gz
 tar -zxf gdal-1.11.0.tar.gz
@@ -60,20 +72,22 @@ make distclean > /dev/null 2>&1
 cd $TEMPBUILD
 #mv gdal-1.11.0.tar.gz $TEMPBUILD/tarball
 #mv gdal-1.11.0 $TEMPBUILD/src
-$PREFIX/bin/pip install fiona
+$pip install -U fiona
 
 
-$PREFIX/bin/pip install -U Image
+$pip install -U Image
 
 wget --no-check-certificate -c --progress=dot:mega http://downloads.sourceforge.net/project/pyke/pyke/1.1.1/pyke-1.1.1.zip
 unzip pyke-1.1.1.zip
 cd pyke-1.1.1
-$PREFIX/bin/python setup.py install
+$python setup.py install
 rm -rf build
 cd $TEMPBUILD
 #mv pyke-1.1.1 $TEMPBUILD/src
 
-$PREFIX/bin/pip install biggus
+
+
+$pip install -U biggus
 
 #git clone https://github.com/SciTools/iris.git
 #cd iris

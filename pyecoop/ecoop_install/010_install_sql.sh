@@ -88,15 +88,23 @@ cd $TEMPBUILD
 #mv postgresql-9.3.4.tar.gz $TEMPBUILD/tarball
 #mv postgresql-9.3.4 $TEMPBUILD/src
 
-$PREFIX/bin/pip install psycopg2 
-python setup.py build_ext --pg-config /path/to/pg_config build ...
+version="2"
+if [[ "$version" == "2" ]]
+then pip=$PREFIX/bin/pip2.7
+else pip=$PREFIX/bin/pip3.4
+fi
+
+if [[ "$version" == "2" ]]
+then python=$PREFIX/bin/python2.7
+else python=$PREFIX/bin/python3.4
+fi
 
 echo "installing psycopg2"
 wget --no-check-certificate -c --progress=dot:mega http://initd.org/psycopg/tarballs/PSYCOPG-2-5/psycopg2-2.5.3.tar.gz
 tar -zxf psycopg2-2.5.3.tar.gz
 cd psycopg2-2.5.3
-$PREFIX/bin/python setup.py build_ext --pg-config $PREFIX/bin/pg_config 
-$PREFIX/bin/python setup.py install
+$python setup.py build_ext --pg-config $PREFIX/bin/pg_config
+$python setup.py install
 rm -rf build
 cd $TEMPBUILD 
 #mv psycopg2-2.5.3.tar.gz $TEMPBUILD/tarball
