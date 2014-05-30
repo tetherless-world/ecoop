@@ -50,34 +50,34 @@ export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 
-wget http://www.haskell.org/ghc/dist/7.6.3/ghc-7.6.3-x86_64-unknown-linux.tar.bz2
-bunzip2 ghc-7.6.3-x86_64-unknown-linux.tar.bz2
-tar -xvf ghc-7.6.3-x86_64-unknown-linux.tar
-cd ghc-7.6.3
+wget --no-check-certificate -c --progress=dot:mega http://www.haskell.org/ghc/dist/7.8.2/ghc-7.8.2-x86_64-unknown-linux-centos65.tar.bz2
+bunzip2 ghc-7.8.2-x86_64-unknown-linux-centos65.tar.bz2
+tar -xvf ghc-7.8.2-x86_64-unknown-linux-centos65.tar
+cd ghc-7.8.2
 ./configure --prefix=$PREFIX
 make install -j $np
 
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv ghc-7.6.3-x86_64-unknown-linux.tar.bz2 $TEMPBUILD/tarball
-rm -rf ghc-7.6.3-x86_64-unknown-linux.tar
-mv ghc-7.6.3 $TEMPBUILD/src
+#mv ghc-7.6.3-x86_64-unknown-linux.tar.bz2 $TEMPBUILD/tarball
+#rm -rf ghc-7.6.3-x86_64-unknown-linux.tar
+#mv ghc-7.6.3 $TEMPBUILD/src
 
 cd $TEMPBUILD
 
 
-wget http://www.haskell.org/cabal/release/cabal-1.18.1.2/Cabal-1.18.1.2.tar.gz
-tar -zxvf Cabal-1.18.1.2.tar.gz
-cd Cabal-1.18.1.2
+wget --no-check-certificate -c --progress=dot:mega http://www.haskell.org/cabal/release/cabal-1.20.0.1/Cabal-1.20.0.1.tar.gz
+tar -zxvf Cabal-1.20.0.1.tar.gz
+cd Cabal-1.20.0.1
 ghc --make Setup
 ./Setup configure --user --prefix=$PREFIX
 ./Setup build
 ./Setup install
 
 cd ..
-wget http://www.haskell.org/cabal/release/cabal-install-1.18.0.2/cabal-install-1.18.0.2.tar.gz
-tar -zxvf cabal-install-1.18.0.2.tar.gz
-cd cabal-install-1.18.0.2
+wget --no-check-certificate -c --progress=dot:mega http://www.haskell.org/cabal/release/cabal-install-1.20.0.2/cabal-install-1.20.0.2.tar.gz
+tar -zxvf cabal-install-1.20.0.2.tar.gz
+cd cabal-install-1.20.0.2
 ./bootstrap.sh
 #ln -s /home/$USER/.cabal/bin/cabal $PREFIX/bin/
 export PATH=/home/$USER/.cabal/bin/cabal/bin:$PATH
@@ -85,4 +85,4 @@ cabal update
 cabal install alex
 cabal install happy
 cabal install pandoc
-cp -R /home/ecoop/.cabal/ /home/$USER/Envs/env1/cabal
+cp -R /home/$USER/.cabal/ /home/$USER/Envs/env1/cabal
