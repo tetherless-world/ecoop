@@ -55,7 +55,6 @@ then python=$PREFIX/bin/python2.7
 else python=$PREFIX/bin/python3.4
 fi
 
-version="2"
 if [[ "$version" == "2" ]]
 then pip=$PREFIX/bin/pip2.7
 else pip=$PREFIX/bin/pip3.4
