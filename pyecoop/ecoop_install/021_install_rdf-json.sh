@@ -34,10 +34,48 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
-# hardcoded path to lib - change it if the $USER is not : ecoop
-export PATH=/home/$USER/Envs/env1/bin:$PATH
-mkdir -p /home/$USER/Envs/env1/lib64/R/library/
-R --no-save < installRpackages.r
-R --no-save < install_spatial_view.r
+np=${nproc}
 
-# add warnings() and capture the output at the end of each R script before quit
+# PYTHON
+
+CURRENTDIR=${PWD}
+BUILD=epilib
+PREFIX=/home/$USER/Envs/env1
+
+TEMPBUILD=/home/$USER/$BUILD
+mkdir -p $TEMPBUILD
+mkdir -p $TEMPBUILD/tarball
+mkdir -p $TEMPBUILD/src
+
+cd $TEMPBUILD
+export PATH=$PREFIX/bin:$PATH
+export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
+
+version="2"
+if [[ "$version" == "2" ]]
+then python=$PREFIX/bin/python2.7
+else python=$PREFIX/bin/python3.4
+fi
+
+if [[ "$version" == "2" ]]
+then pip=$PREFIX/bin/pip2.7
+else pip=$PREFIX/bin/pip3.4
+fi
+
+
+git clone https://github.com/digitalbazaar/pyld.git
+cd pyld
+$python setup.py install
+rm -rf build
+cd $TEMPBUILD
+#mv pyld $TEMPBUILD/src
+
+echo "installing rdflib"
+$pip install rdflib
+
+git clone https://github.com/RDFLib/rdflib-jsonld.git
+cd rdflib-jsonld
+$python setup.py install
+rm -rf build
+cd $TEMPBUILD
+#mv rdflib-jsonld $TEMPBUILD/src

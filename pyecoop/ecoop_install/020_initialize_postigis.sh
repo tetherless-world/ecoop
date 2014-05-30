@@ -35,8 +35,6 @@
 ###############################################################################
 
 
-np=${nproc}
-
 PREFIX=/home/$USER/Envs/env1
 
 export PATH=$PREFIX/bin:$PATH

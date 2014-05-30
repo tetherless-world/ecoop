@@ -63,4 +63,4 @@ echo "install R libs"
 
 cp ipython.sh /home/$USER/Envs/env1/bin/
 
-#./install_R_lib.sh
+
