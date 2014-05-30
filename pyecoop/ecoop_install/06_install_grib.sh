@@ -63,17 +63,25 @@ cd $TEMPBUILD
 #mv grib_api-1.12.0.tar.gz $TEMPBUILD/tarball
 #mv grib_api-1.12.0 $TEMPBUILD/src
 
-echo "$PREFIX/lib/python3.4/site-packages/grib_api" > gribapi.pth
-cp gribapi.pth $PREFIX/lib/python3.4/site-packages/
-
-git clone https://github.com/activepapers/activepapers-python.git
-cd activepapers-python
-
 version="2"
 if [[ "$version" == "2" ]]
 then python=$PREFIX/bin/python2.7
 else python=$PREFIX/bin/python3.4
 fi
+
+if [[ "$version" == "2" ]]
+then
+echo "$PREFIX/lib/python2.7/site-packages/grib_api" > gribapi.pth;
+cp gribapi.pth $PREFIX/lib/python2.7/site-packages/;
+else
+echo "$PREFIX/lib/python3.4/site-packages/grib_api" > gribapi.pth;
+cp gribapi.pth $PREFIX/lib/python3.4/site-packages/;
+fi
+
+git clone https://github.com/activepapers/activepapers-python.git
+cd activepapers-python
+
+
 
 $python setup.py install
 
