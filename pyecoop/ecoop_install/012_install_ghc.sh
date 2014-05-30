@@ -80,7 +80,7 @@ tar -zxvf cabal-install-1.20.0.2.tar.gz
 cd cabal-install-1.20.0.2
 ./bootstrap.sh
 #ln -s /home/$USER/.cabal/bin/cabal $PREFIX/bin/
-export PATH=/home/$USER/.cabal/bin/cabal/bin:$PATH
+export PATH=/home/$USER/.cabal/bin:$PATH
 cabal update
 cabal install alex
 cabal install happy
