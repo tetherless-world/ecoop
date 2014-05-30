@@ -137,15 +137,3 @@ cd Theano
 $python setup.py install
 cd ..
 
-$pip install -U graphviz
-
-#wget http://www.graphviz.org/pub/graphviz/stable/SOURCES/graphviz-2.36.0.tar.gz
-#tar -zxvf graphviz-2.36.0.tar.gz
-#cd graphviz-2.36.0
-#./configure --prefix=$PREFIX
-#make -j $np
-#make install
-
-$pip install -U sh
-$pip install -U flask
-

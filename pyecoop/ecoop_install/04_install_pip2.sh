@@ -95,3 +95,19 @@ $pip install -U scikit-image
 
 echo "installing sympy"
 $pip install -U sympy
+
+echo "installing graphviz"
+$pip install -U graphviz
+
+#wget http://www.graphviz.org/pub/graphviz/stable/SOURCES/graphviz-2.36.0.tar.gz
+#tar -zxvf graphviz-2.36.0.tar.gz
+#cd graphviz-2.36.0
+#./configure --prefix=$PREFIX
+#make -j $np
+#make install
+
+echo "installing sh"
+$pip install -U sh
+
+echo "installing flask"
+$pip install -U flask
