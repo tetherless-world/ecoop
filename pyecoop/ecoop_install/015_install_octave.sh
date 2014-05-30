@@ -216,4 +216,4 @@ then pip=$PREFIX/bin/pip2.7
 else pip=$PREFIX/bin/pip3.4
 fi
 
-$pip -U install oct2py
+$pip install -U oct2py
