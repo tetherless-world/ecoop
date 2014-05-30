@@ -104,3 +104,14 @@ make install
 cd $TEMPBUILD
 #mv udunits-2.1.24.tar.gz $TEMPBUILD/tarball
 #mv udunits-2.1.24 $TEMPBUILD/src
+
+wget --no-check-certificate -c --progress=dot:mega http://www.cmake.org/files/v2.8/cmake-2.8.12.2.tar.gz
+tar -zxf cmake-2.8.12.2.tar.gz
+cd cmake-2.8.12.2
+./configure --prefix=$PREFIX
+gmake
+make install
+make distclean > /dev/null 2>&1
+cd $TEMPBUILD
+#mv cmake-2.8.12.2.tar.gz $TEMPBUILD/tarball
+#mv cmake-2.8.12.2 $TEMPBUILD/src
