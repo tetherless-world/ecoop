@@ -49,55 +49,59 @@ export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 cd $TEMPBUILD
-wget http://www.cmake.org/files/v2.8/cmake-2.8.12.2.tar.gz
-tar -zxvf cmake-2.8.12.2.tar.gz 
-cd cmake-2.8.12.2
-./configure --prefix=$PREFIX
-gmake
-make install
-make distclean > /dev/null 2>&1
-cd $TEMPBUILD
-mv cmake-2.8.12.2.tar.gz $TEMPBUILD/tarball
-mv cmake-2.8.12.2 $TEMPBUILD/src
 
+version="2"
+if [[ "$version" == "2" ]]
+then python=$PREFIX/bin/python2.7
+else python=$PREFIX/bin/python3.4
+fi
+
+if [[ "$version" == "2" ]]
+then pip=$PREFIX/bin/pip2.7
+else pip=$PREFIX/bin/pip3.4
+fi
 
 
 cd $PREFIX
-wget http://repo.continuum.io/pkgs/free/linux-64/llvm-3.2-0.tar.bz2
+wget --no-check-certificate -c --progress=dot:mega http://repo.continuum.io/pkgs/free/linux-64/llvm-3.2-0.tar.bz2
 tar -xjf llvm-3.2-0.tar.bz2
 rm -rf llvm-3.2-0.tar.bz2
-PATH+=$PREFIX/bin
-export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
+
+#PATH+=$PREFIX/bin
+#export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
+
 export LLVM_CONFIG_PATH=$PREFIX/bin/llvm-config
 $LLVM_CONFIG_PATH --cflags # test llvm-config
 export LLVMPY_DYNLINK=1
 export CFLAGS="-Wno-strict-aliasing -Wno-unused -Wno-write-strings -Wno-unused-function"
+
+cd $TEMPBUILD
 git clone https://github.com/hgrecco/llvmpy.git -q
-cd llvmpy ; python setup.py install -q >/dev/null ; cd ..
+cd llvmpy ; $python setup.py install -q >/dev/null ; cd ..
 #rm -rf llvmpy
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 git clone https://github.com/numba/numba.git
 cd numba
-$PREFIX/bin/pip install -r requirements.txt
-$PREFIX/bin/python setup.py install
+$pip install -r requirements.txt
+$python setup.py install
 cd ..
-rm -rf numba
-rm -rf llvmpy
+#rm -rf numba
+#rm -rf llvmpy
 # or move to src
 
 ### start Blaze and few extra pkg
 
-$PREFIX/bin/pip install Blosc
+$pip install -U Blosc
 
 git clone https://github.com/ContinuumIO/blz.git
 cd blz
-$PREFIX/bin/python setup.py install
+$python setup.py install
 cd ..
 # rm -rf blz
 
 git clone https://github.com/ContinuumIO/datashape.git
 cd datashape
-$PREFIX/bin/python setup.py install
+$python setup.py install
 cd ..
 # rm -rf datashape
 
@@ -116,24 +120,24 @@ cd ../..
 
 git clone https://github.com/pykit/pykit.git
 cd pykit
-$PREFIX/bin/python setup.py install
+$python setup.py install
 cd ..
 
 git clone https://github.com/ContinuumIO/blaze.git
 cd blaze
-$PREFIX/bin/python setup.py install
+$python setup.py install
 cd ..
 
-$PREFIX/bin/pip install pyyaml
-$PREFIX/bin/pip install ply
+$pip install -U pyyaml
+$pip install -U ply
 
 
 git clone git://github.com/Theano/Theano.git
 cd Theano
-$PREFIX/bin/python setup.py install
+$python setup.py install
 cd ..
 
-$PREFIX/bin/pip install graphviz
+$pip install -U graphviz
 
 #wget http://www.graphviz.org/pub/graphviz/stable/SOURCES/graphviz-2.36.0.tar.gz
 #tar -zxvf graphviz-2.36.0.tar.gz
@@ -142,6 +146,6 @@ $PREFIX/bin/pip install graphviz
 #make -j $np
 #make install
 
-$PREFIX/bin/pip install sh
-$PREFIX/bin/pip install flask
+$pip install -U sh
+$pip install -U flask
 

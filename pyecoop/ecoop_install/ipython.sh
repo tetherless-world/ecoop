@@ -36,7 +36,7 @@
 
 PREFIX=/home/$USER/Envs/env1
 
-export LD_LIBRARY_PATH=$PREFIX/grass-7.0.svn/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$PREFIX/grass-7.0.svn/lib:$PREFIX/lib64/R/lib:$LD_LIBRARY_PATH
 export PYTHONPATH=$PREFIX/grass-7.0.svn/etc/python:$PYTHONPATH
 export GISBASE=$PREFIX/grass-7.0.svn/
 export PATH=$PATH:$GISBASE/bin:$GISBASE/scripts
