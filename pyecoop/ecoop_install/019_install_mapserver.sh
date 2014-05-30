@@ -54,7 +54,7 @@ tar -zxf mapserver-6.4.1.tar.gz
 cd mapserver-6.4.1
 mkdir build
 cd build
-cmake ..
+cmake .. -DWITH_FCGI=OFF -DCMAKE_INSTALL_PREFIX=$PREFIX -DWITH_FRIBIDI=0
 make -j $np
 make install
 make distclean > /dev/null 2>&1
