@@ -53,7 +53,7 @@ export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 
 echo "installing postgis"
-wget http://download.osgeo.org/postgis/source/postgis-2.1.3.tar.gz
+wget --no-check-certificate -c --progress=dot:mega http://download.osgeo.org/postgis/source/postgis-2.1.3.tar.gz
 tar -zxf postgis-2.1.3.tar.gz
 cd postgis-2.1.3
 ./configure --prefix=$PREFIX/ --with-projdir=$PREFIX/ --with-gdalconfig=$PREFIX/bin/gdal-config --with-projdir=$PREFIX/
