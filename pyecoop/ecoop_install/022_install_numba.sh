@@ -63,9 +63,9 @@ fi
 
 
 cd $PREFIX
-wget --no-check-certificate -c --progress=dot:mega http://repo.continuum.io/pkgs/free/linux-64/llvm-3.2-0.tar.bz2
-tar -xjf llvm-3.2-0.tar.bz2
-rm -rf llvm-3.2-0.tar.bz2
+wget --no-check-certificate -c --progress=dot:mega http://repo.continuum.io/pkgs/free/linux-64/llvm-3.3-0.tar.bz2
+tar -xjf llvm-3.3-0.tar.bz2
+rm -rf llvm-3.3-0.tar.bz2
 
 #PATH+=$PREFIX/bin
 #export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
