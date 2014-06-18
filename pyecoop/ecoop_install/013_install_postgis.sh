@@ -35,7 +35,8 @@
 ###############################################################################
 
 
-np=${nproc}
+np=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
+
 
 BUILD=epilib
 PREFIX=/home/$USER/Envs/env1

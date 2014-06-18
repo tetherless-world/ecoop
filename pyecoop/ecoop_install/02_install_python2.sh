@@ -34,7 +34,8 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
-np=${nproc}
+np=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
+
 
 # PYTHON
 
@@ -59,7 +60,7 @@ cd Python-2.7.6
 export CFLAGS="-fPIC"
 ./configure --prefix=$PREFIX --enable-shared
 make -j $np
-make altinstall
+make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
 

@@ -34,6 +34,7 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
+np=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
 
 CURRENTDIR=${PWD}
 BUILD=epilib
@@ -47,6 +48,19 @@ mkdir -p $TEMPBUILD/src
 cd $TEMPBUILD
 export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
+
+
+cd $TEMPBUILD
+wget --no-check-certificate -c --progress=dot:mega https://gmplib.org/download/gmp/gmp-6.0.0a.tar.xz
+tar -xvf gmp-6.0.0a.tar.xz
+cd gmp-6.0.0
+./configure --prefix=$PREFIX/
+make -j $np
+make install
+make distclean > /dev/null 2>&1
+cd $TEMPBUILD
+
+
 
 cd $TEMPBUILD
 wget --no-check-certificate -c --progress=dot:mega http://www.hdfgroup.org/ftp/lib-external/szip/2.1/src/szip-2.1.tar.gz

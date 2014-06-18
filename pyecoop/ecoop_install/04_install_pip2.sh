@@ -111,3 +111,6 @@ $pip install -U sh
 
 echo "installing flask"
 $pip install -U flask
+
+echo "installing pymongo"
+$pip install -U pymongo

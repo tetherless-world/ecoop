@@ -34,6 +34,8 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
+np=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
+
 
 CURRENTDIR=${PWD}
 BUILD=epilib

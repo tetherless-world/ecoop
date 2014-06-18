@@ -83,3 +83,5 @@ echo "installing requests"
 $pip install -U requests
 echo "installing owslib"
 $pip install -U owslib
+echo "installing python-magic"
+$pip install -U python-magic
