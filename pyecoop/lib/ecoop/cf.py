@@ -1,12 +1,12 @@
-#/usr/bin/env python
+# /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-###############################################################################
+# ##############################################################################
 #
 #
 # Project: ECOOP, sponsored by The National Science Foundation
 # Purpose: this code is part of the Cyberinfrastructure developed for the ECOOP project
-#                http://tw.rpi.edu/web/project/ECOOP
+# http://tw.rpi.edu/web/project/ECOOP
 #                from the TWC - Tetherless World Constellation
 #                            at RPI - Rensselaer Polytechnic Institute
 #                            founded by NSF
@@ -50,21 +50,23 @@ from scipy.interpolate import interp1d
 import pandas as pd
 import matplotlib.pyplot as plt
 from ecoop.ecooputil import shareUtil as EU
+
 try:
     from IPython.core.display import display
 except:
-    print('you need to run this code from inside an IPython notebook in order to save provenance dictionaies')
+    print('you need to run this code from inside an IPython notebook in order to save provenance')
 eu = EU()
 
-
-
 from bokeh import pyplot
+
 
 class cfData():
     def __init__(self):
         self.x = ''
 
-    def nao_get(self, url="https://climatedataguide.ucar.edu/sites/default/files/climate_index_files/nao_station_djfm.txt",save=None, csvout='nao.csv', prov=False):
+    def nao_get(self,
+                url="https://climatedataguide.ucar.edu/sites/default/files/climate_index_files/nao_station_djfm.txt",
+                save=None, csvout='nao.csv', prov=False):
         """
         
         read NAO data from url and return a pandas dataframe
@@ -76,6 +78,7 @@ class cfData():
         :rtype: pandas dataframe
         
         """
+        #source_code_link = "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfData.nao_get"
         try:
             naodata = pd.read_csv(url, sep='  ', header=0, skiprows=0, index_col=0, parse_dates=True, skip_footer=1)
             print('dataset used: %s' % url)
@@ -85,20 +88,49 @@ class cfData():
                 naodata.to_csv(output, sep=',', header=True, index=True, index_label='Date')
                 print('nao data saved in : ' + output)
             if prov:
-                function = {}
-                function['name']= 'nao_get'
-                function['parameters']={}
-                function['parameters']['url'] = url
-                function['parameters']['save'] = save
-                function['parameters']['csvout'] = csvout
-                display('cell-output metadata saved', metadata={'nao_get': function})
+                #function = {}
+                #function['name']= 'nao_get'
+                #function['parameters']={}
+                #function['parameters']['url'] = url
+                #function['parameters']['save'] = save
+                #function['parameters']['csvout'] = csvout
+                jsonld = {
+                    "@id": "ex:NAO_dataset",
+                    "@type": ["prov:Entity", "ecoop:Dataset"],
+                    "ecoop_ext:hasCode": {
+                        "@id": "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfData.nao_get",
+                        "@type": "ecoop_ext:Code",
+                        "ecoop_ext:hasFunction_src_code_link": url,
+                        "ecoop_ext:hasParameter": [
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "csvout",
+                                "ecoop_ext:parameter_value": csvout
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "save",
+                                "ecoop_ext:parameter_value": save
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "url",
+                                "ecoop_ext:parameter_value": url
+                            }
+                        ]
+                    }
+                }
+                display('cell-output metadata saved', metadata={'nao_get': jsonld})
+
             return naodata
         except IOError:
-            print('unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
+            print(
+                'unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
             # try cached version / history-linked-uri
 
 
-    def nin_get(self, url='http://www.cpc.ncep.noaa.gov/data/indices/sstoi.indices', save=None, csvout='nin.csv', prov=False):
+    def nin_get(self, url='http://www.cpc.ncep.noaa.gov/data/indices/sstoi.indices', save=None, csvout='nin.csv',
+                prov=False):
         """
         
         read NIN data from url and return a pandas dataframe
@@ -110,7 +142,8 @@ class cfData():
 
         """
         try:
-            ts_raw = pd.read_table(url, sep=' ', header=0, skiprows=0, parse_dates=[['YR', 'MON']], skipinitialspace=True,
+            ts_raw = pd.read_table(url, sep=' ', header=0, skiprows=0, parse_dates=[['YR', 'MON']],
+                                   skipinitialspace=True,
                                    index_col=0, date_parser=parse)
             print('dataset used: %s' % url)
             ts_year_group = ts_raw.groupby(lambda x: x.year).apply(lambda sdf: sdf if len(sdf) > 11 else None)
@@ -120,7 +153,8 @@ class cfData():
             ts_fullyears_group = ts.groupby(lambda x: x.year)
             nin_anomalies = (ts_fullyears_group.mean()['ANOM.3'] - sts.nanmean(
                 ts_fullyears_group.mean()['ANOM.3'])) / sts.nanstd(ts_fullyears_group.mean()['ANOM.3'])
-            nin_anomalies = pd.DataFrame(nin_anomalies.values, index=pd.to_datetime([str(x) for x in nin_anomalies.index]))
+            nin_anomalies = pd.DataFrame(nin_anomalies.values,
+                                         index=pd.to_datetime([str(x) for x in nin_anomalies.index]))
             nin_anomalies = nin_anomalies.rename(columns={'0': 'nin'})
             nin_anomalies.columns = ['nin']
             if save:
@@ -130,15 +164,16 @@ class cfData():
                 print('data saved as %s ' % output)
             if prov:
                 function = {}
-                function['name']= 'nin_get'
-                function['parameters']={}
+                function['name'] = 'nin_get'
+                function['parameters'] = {}
                 function['parameters']['url'] = url
                 function['parameters']['save'] = save
                 function['parameters']['csvout'] = csvout
                 display('cell-output metadata saved', metadata={'nin_get': function})
             return nin_anomalies
         except IOError:
-            print('unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
+            print(
+                'unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
             # try cached version / history-linked-uri
 
 
@@ -157,7 +192,8 @@ class cfData():
         return date
 
 
-    def amo_get(self, url='http://www.cdc.noaa.gov/Correlation/amon.us.long.data', save=None, csvout='amo.csv', prov=False):
+    def amo_get(self, url='http://www.cdc.noaa.gov/Correlation/amon.us.long.data', save=None, csvout='amo.csv',
+                prov=False):
         """
         
         read AMO data from url and return a pandas dataframe
@@ -171,7 +207,8 @@ class cfData():
         try:
             ts_raw = pd.read_table(url, sep=' ', skiprows=1,
                                    names=['year', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct',
-                                          'nov', 'dec'], skipinitialspace=True, parse_dates=True, skipfooter=4, index_col=0)
+                                          'nov', 'dec'], skipinitialspace=True, parse_dates=True, skipfooter=4,
+                                   index_col=0)
             print('dataset used: %s' % url)
             ts_raw.replace(-9.99900000e+01, np.NAN, inplace=True)
             amodata = ts_raw.mean(axis=1)
@@ -184,15 +221,42 @@ class cfData():
                 print('data saved as %s ' % output)
             if prov:
                 function = {}
-                function['name']= 'amo_get'
-                function['parameters']={}
+                function['name'] = 'amo_get'
+                function['parameters'] = {}
                 function['parameters']['url'] = url
                 function['parameters']['save'] = save
                 function['parameters']['csvout'] = csvout
-                display('cell-output metadata saved', metadata={'amo_get': function})
+                jsonld = {
+                    "@id": "ex:AMO_dataset",
+                    "@type": ["prov:Entity", "ecoop:Dataset"],
+                    "ecoop_ext:hasCode": {
+                        "@id": "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfData.amo_get",
+                        "@type": "ecoop_ext:Code",
+                        "ecoop_ext:hasFunction_src_code_link": "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfData.amo_get",
+                        "ecoop_ext:hasParameter": [
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "csvout",
+                                "ecoop_ext:parameter_value": csvout
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "save",
+                                "ecoop_ext:parameter_value": save
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "url",
+                                "ecoop_ext:parameter_value": url
+                            }
+                        ]
+                    }
+                }
+                display('cell-output metadata saved', metadata={'amo_get': jsonld})
             return amodata
         except:
-            print('unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
+            print(
+                'unable to fetch the data, check if %s is a valid address and data is conform to AMO spec, for info about data spec. see [1]' % url)
             # try cached version / history-linked-uri
 
 
@@ -254,7 +318,7 @@ class cfPlot():
             #x = data.index.year
             #y = data.values
             if datarange:
-            #if datarange != None :
+                #if datarange != None :
                 mind = np.datetime64(str(datarange[0]))
                 maxd = np.datetime64(str(datarange[1]))
                 newdata = data.ix[mind:maxd]
@@ -294,8 +358,9 @@ class cfPlot():
             if not figsave:
                 figsave = name + '.png'
             if scategory == 'rolling':
-                newy = self.rolling_smoother(data, stype=smoother, win_size=win_size, win_type=win_type, center=center, std=std,
-                                        beta=beta, power=power, width=width)
+                newy = self.rolling_smoother(data, stype=smoother, win_size=win_size, win_type=win_type, center=center,
+                                             std=std,
+                                             beta=beta, power=power, width=width)
                 ax1.plot(newy.index.year, newy.values, lw=3, color='g')
             if scategory == 'expanding':
                 newy = self.expanding_smoother(data, stype=smoother, min_periods=min_periods, freq=freq)
@@ -375,7 +440,174 @@ class cfPlot():
                 function['parameters']['frac'] = frac
                 function['parameters']['it'] = it
                 function['parameters']['figsave'] = figsave
-                display('cell-output metadata saved', metadata={'amo_get': function})
+                jsonld = {
+                    "@id": "ex:NAO_figure",
+                    "@type": ["prov:Entity", "ecoop:Figure"],
+                    "ecoop_ext:hasData": "ecoop_data['NAO']",
+                    "ecoop_ext:hasCode": {
+                        "@type": "ecoop_ext:Code",
+                        "ecoop_ext:hasFunction_src_code_link": "",
+                        "ecoop_ext:hasParameter": [
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "beta",
+                                "ecoop_ext:parameter_value": beta
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "center",
+                                "ecoop_ext:parameter_value": center
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "data",
+                                "ecoop_ext:parameter_value": data
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "datarange",
+                                "ecoop_ext:parameter_value": datarange
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "dateformat",
+                                "ecoop_ext:parameter_value": dateformat
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "dpi",
+                                "ecoop_ext:parameter_value": dpi
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "figsave",
+                                "ecoop_ext:parameter_value": figsave
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "figsize",
+                                "ecoop_ext:parameter_value": figsize
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "frac",
+                                "ecoop_ext:parameter_value": frac
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "freq",
+                                "ecoop_ext:parameter_value": freq
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "grid",
+                                "ecoop_ext:parameter_value": grid
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "it",
+                                "ecoop_ext:parameter_value": it
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "legend",
+                                "ecoop_ext:parameter_value": legend
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "min_periods",
+                                "ecoop_ext:parameter_value": min_periods
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "name",
+                                "ecoop_ext:parameter_value": name
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "nb",
+                                "ecoop_ext:parameter_value": nb
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "output",
+                                "ecoop_ext:parameter_value": output
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "power",
+                                "ecoop_ext:parameter_value": power
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "scategory",
+                                "ecoop_ext:parameter_value": scategory
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "smoother",
+                                "ecoop_ext:parameter_value": smoother
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "std",
+                                "ecoop_ext:parameter_value": std
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "title",
+                                "ecoop_ext:parameter_value": title
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "width",
+                                "ecoop_ext:parameter_value": width
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "win_size",
+                                "ecoop_ext:parameter_value": win_size
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "win_type",
+                                "ecoop_ext:parameter_value": win_type
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "xlabel",
+                                "ecoop_ext:parameter_value": xlabel
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "xmargin",
+                                "ecoop_ext:parameter_value": xmargin
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "xticks",
+                                "ecoop_ext:parameter_value": xticks
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "xticks_fontsize",
+                                "ecoop_ext:parameter_value": xticks_fontsize
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "ylabel",
+                                "ecoop_ext:parameter_value": ylabel
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "ymargin",
+                                "ecoop_ext:parameter_value": ymargin
+                            }
+                        ]
+                    },
+                    "ecoop_ext:usedSoftware": [{"@id": "ex:ecoop_software"}, {"@id": "ex:ipython_software"}]
+                }
+                display('cell-output metadata saved', metadata={'amo_get': jsonld})
             pyplot.show_bokeh(plt.gcf(), filename="subplots.html")
         except AssertionError:
             if type(data) != pd.core.frame.DataFrame:
@@ -383,7 +615,8 @@ class cfPlot():
             print('data not loaded correctly')
 
 
-    def rolling_smoother(self, data, stype='rolling_mean', win_size=10, win_type='boxcar', center=False, std=0.1, beta=0.1,
+    def rolling_smoother(self, data, stype='rolling_mean', win_size=10, win_type='boxcar', center=False, std=0.1,
+                         beta=0.1,
                          power=1, width=1):
         """
         
@@ -503,462 +736,3 @@ class cfPlot():
         if stype == 'kurt':
             newy = pd.expanding_kurt(data, min_periods=min_periods, freq=freq)
         return newy
-
-
-
-class cfPrint():
-    def cftemplate(self,ID, pdfdict):
-        textfile = pdfdict['textfile']
-        cf = pdfdict['cf']
-        naotxt = pdfdict['naotxt']
-        naofigfile = pdfdict['naofigfile']
-        naodatalink = pdfdict['naodatalink']
-        nbviewerlink = pdfdict['nbviewerlink']
-        amotxt = pdfdict['amotxt']
-        amofigfile = pdfdict['amofigfile']
-        amodatalink = pdfdict['amodatalink']
-        nbviewerlink = pdfdict['nbviewerlink']
-        template = """\documentclass{article}
-        \\usepackage{multicol}
-        \\usepackage[english]{babel}
-        \\usepackage{blindtext}
-        \\usepackage[pdftex]{graphicx}
-        \\usepackage{graphicx}
-        \\usepackage{wrapfig}
-        \\usepackage{hyperref}
-        \\usepackage{fancyvrb}
-        \\usepackage[utf8]{inputenc}
-        \\begin{document}
-        \\begin{twocolumn}
-        \section{Climate Forcing}
-        \input{%s}
-        \subsection{North Atlantic Oscillation Index}
-        \inputencoding{utf8}
-        \input{%s}
-        \\begin{figure}[h]
-        {\includegraphics[width=60mm]{%s}}
-        \caption{North Atlantic Oscillation - \href{%s}{data} -
-        \href{%s}{code}.}
-        \end{figure}
-        \subsection{Atlantic Multidecadal Oscillation}
-        \inputencoding{utf8}
-        \input{%s}
-        \\begin{figure}[h]
-        {\includegraphics[width=60mm]{%s}}
-        \caption{Atlantic Multidecadal Oscillation - \href{%s}{data} - \href{%s}{code}.}
-        \end{figure}
-        \end{twocolumn}
-        \end{document}"""
-
-        linestring = template % (
-            cf, naotxt, naofigfile, naodatalink, nbviewerlink, amotxt, amofigfile, amodatalink, nbviewerlink)
-        newfile = open(os.path.join(ID, 'climate_forcing.tex'), 'w')
-        print(textfile, ID)
-        texoutput = os.path.join(ID, textfile)
-        newfile = open(texoutput, 'w')
-        newfile.write(linestring)
-        newfile.close()
-        print(texoutput)
-
-    def openDocument(self, col='twocolumn'):
-        """
-        Start a latext template opening the document
-        
-        :rerurn: latext library import and document initialization
-        :rtype: str
-        
-        """
-        doc = """\documentclass{article}
-        \\usepackage{multicol}
-        \\usepackage[english]{babel}
-        \\usepackage{blindtext}
-        \\usepackage[pdftex]{graphicx}
-        \\usepackage{graphicx}
-        \\usepackage{wrapfig}
-        \\usepackage{hyperref}
-        \\usepackage{fancyvrb}
-        \\usepackage[utf8]{inputenc}
-        \\begin{document}
-        \\begin{%s}
-        """ % col
-        return doc
-
-    def closeDocument(self, col='twocolumn'):
-        """
-        Close a latex document template
-        :return: str
-        
-        """
-        doc = """\end{%s}
-        \end{document}
-        """ % col
-        return doc
-
-
-    def addSection(self, name, data, fig=''):
-        """
-        Add a section to a latext template
-        
-        :param str name:
-        :param str data:
-        :param str fig:
-        :return: str
-        
-        """
-        doc = """\section{%s}
-        \input{%s}
-        %s
-        """ % (name, data, fig)
-        return doc
-
-    def addSubSection(self, name, data, fig=''):
-        """
-        Add a subsection to a latext template
-        
-        :param str name:
-        :param str data:
-        :param str fig:
-        :return: str
-        
-        """
-        doc = """\subsection{%s}
-        \input{%s}
-        %s
-        """ % (name, data, fig)
-        return doc
-
-
-    def addFigure(self, img, name, metadata):
-        """
-        Add a figure to a latext section/subsection
-        
-        :param str img:
-        :param str name:
-        :param str metadata:
-        :return: str
-        
-        """
-        doc ="""\\begin{figure}[h]
-        {\includegraphics[width=60mm]{%s}}
-        \caption{%s - \href{%s}{metadata}.}
-        \end{figure}
-        """ % (img, name, metadata)
-        return doc
-
-
-
-
-class openLayers():
-    def df2feature(self, df, lat='LATITUDE',lon='LONGITUDE',prec=5):
-        features = []
-        try :
-            for i, v in enumerate(df):
-                properties = {}
-                for j, k in enumerate(df.columns):
-                    if df.columns[j] in [lat, lon]:
-                        properties[df.columns[j]] = str(df[df.columns[j]][i])[:prec]
-                    elif df[df.columns[j]][i] > 0:
-                        properties[df.columns[j]] = str(df[df.columns[j]][i])[:prec]  #  df[df.columns[j]][i]
-                my_feature = Feature(
-                             geometry=Point((df.values[i][4], df.values[i][3])),
-                             properties=properties
-                              )
-                features.append(my_feature)
-            return features
-        except:
-            print('done')
-        #return features
-
-    def addWMS(self, name, getcapabilities, layername, title):
-        wms = """
-            var %s = new OpenLayers.Layer.WMS( "%s",
-         "%s",
-            {layers: '%s',
-            transparent: true,
-            srs: 'EPSG:4326',
-            isBaseLayer: false,
-            visibility: false
-            }
-
-        );
-        map.addLayer(%s);
-        %s.setIsBaseLayer(false);
-        """ % (name, title, getcapabilities, layername, name, name)
-        return wms
-
-
-    def df2feature(self, df, lat='LATITUDE', lon='LONGITUDE', prec=5):
-        features = []
-        try :
-            for i, v in enumerate(df):
-                properties = {}
-                for j, k in enumerate(df.columns):
-                    if df.columns[j] in [lat, lon]:
-                        properties[df.columns[j]] = str(df[df.columns[j]][i])[:prec]
-                    elif df[df.columns[j]][i] > 0:
-                        properties[df.columns[j]] = str(df[df.columns[j]][i])[:prec]  #  df[df.columns[j]][i]
-                my_feature = Feature(
-                             geometry=Point((df.values[i][4], df.values[i][3])),
-                             properties=properties
-                              )
-                features.append(my_feature)
-        except:
-            print('done')
-        return features
-
-    def makeSingleStyle(self, vectorlist):
-        fstylish = ''
-        for j, k in enumerate(vectorlist):
-            stylish = ''
-            if vectorlist[j]['type'] == 'point':
-                style = '''
-                var %s_template = {
-                    pointRadius: %s,
-                    strokeColor: "rgb%s",
-                    strokeOpacity: %s,
-                    fillColor: "rgb%s",
-                    fillOpacity: %s
-                    }
-                var %s_style = new OpenLayers.Style(%s_template)
-                ''' % (vectorlist[j]['name'], vectorlist[j]['style']['singlestyle']['pointRadius'], vectorlist[j]['style']['singlestyle']['strokeColor'], vectorlist[j]['style']['singlestyle']['strokeOpacity'], vectorlist[j]['style']['singlestyle']['fillColor'], vectorlist[j]['style']['singlestyle']['fillOpacity'], vectorlist[j]['name'], vectorlist[j]['name'])
-            fstylish += style
-        return fstylish
-
-
-
-
-    def makeStyle3(self, vectorlist):
-
-        fstylish = ''
-        for j, k in enumerate(vectorlist):
-            stylish = ''
-
-            openstyle = '''
-            var %s_style = new OpenLayers.Style(
-                OpenLayers.Util.applyDefaults({
-                    strokeColor: "${getStrokeColor}",
-                    strokeOpacity: "${getOpacity}",
-                    strokeWidth: "${getLineWidth}",
-                    fillColor: "${getFillColor}",
-                    fillOpacity: "${getOpacity}"
-                }, OpenLayers.Feature.Vector.style["default"]), {
-                    context: {
-                    ''' % vectorlist[j]['name']
-
-            OpenOpacity = '''
-                        getOpacity: function(feature) {
-                        '''
-
-            OpacityData = ''
-            for i, v in enumerate(vectorlist[j]['style'].keys()):
-                if i == 0:
-                    OpacityData += '''
-                            if (feature.attributes.LABEL=="%s"){
-                                element=%s;
-                            }
-                            ''' % (v, vectorlist[j]['style'][v]['Opacity'])
-                else:
-                    OpacityData += '''
-                            else if (feature.attributes.LABEL=="%s"){
-                                element=%s;
-                            }
-                            ''' % (v, vectorlist[j]['style'][v]['Opacity'])
-
-            CloseOpacity = '''
-                            else {
-                                element="NULL";
-                            }
-                            return element;
-                        },
-                        '''
-
-            OpenStrokeColor = '''
-                        getStrokeColor: function(feature) {
-                        '''
-
-            StrokeColorData = ''
-            for i, v in enumerate(vectorlist[j]['style'].keys()):
-                if i == 0:
-                    StrokeColorData += '''
-                            if (feature.attributes.LABEL=="%s"){
-                                element="rgb%s";
-                            }
-                            ''' % (v, vectorlist[j]['style'][v]['StrokeColor'])
-                else:
-                    StrokeColorData += '''
-                            else if (feature.attributes.LABEL=="%s"){
-                                element="rgb%s";
-                            }
-                            ''' % (v, vectorlist[j]['style'][v]['StrokeColor'])
-
-            CloseStrokeColor = '''
-                            else {
-                                element="NULL";
-                            }
-                            return element;
-                        },
-                        '''
-
-            OpenFillColor = '''
-                        getFillColor: function(feature) {
-                        '''
-
-            FillColorData = ''
-            for i, v in enumerate(vectorlist[j]['style'].keys()):
-                if i == 0:
-                    FillColorData += '''
-                            if (feature.attributes.LABEL=="%s"){
-                                element="rgb%s";
-                            }
-                            ''' % (v, vectorlist[j]['style'][v]['FillColor'])
-                else:
-                    FillColorData += '''
-                            else if (feature.attributes.LABEL=="%s"){
-                                element="rgb%s";
-                            }
-                            ''' % (v, vectorlist[j]['style'][v]['FillColor'])
-
-            CloseFillColor = '''
-                            else {
-                                element="NULL";
-                            }
-                            return element;
-                        },
-                        '''
-
-            OpenLineWidth = '''
-                        getLineWidth: function(feature) {
-                        '''
-
-            LineWidthData = ''
-            for i, v in enumerate(vectorlist[j]['style'].keys()):
-                if i == 0:
-                    LineWidthData += '''
-                            if (feature.attributes.LABEL=="%s"){
-                                element=%s;
-                            }
-                            ''' % (v, vectorlist[j]['style'][v]['LineWidth'])
-                else:
-                    LineWidthData += '''
-                            else if (feature.attributes.LABEL=="%s"){
-                                element=%s;
-                            }
-                            ''' % (v, vectorlist[j]['style'][v]['LineWidth'])
-
-            CloseLineWidth = '''
-                            else {
-                                element="NULL";
-                            }
-                            return element;
-                        },
-                        '''
-
-            CloseStyle = '''
-                    }
-                }
-            );'''
-
-
-            stylish += openstyle
-
-            stylish += OpenOpacity
-            stylish += OpacityData
-            stylish += CloseOpacity
-
-            stylish += OpenStrokeColor
-            stylish += StrokeColorData
-            stylish += CloseStrokeColor
-
-            stylish += OpenFillColor
-            stylish += FillColorData
-            stylish += CloseFillColor
-
-            stylish += OpenLineWidth
-            stylish += LineWidthData
-            stylish += CloseLineWidth
-
-            stylish += CloseStyle
-            fstylish += stylish
-        return fstylish
-
-    def makeQuery3(self, vectorlist):
-        # fields is a list of attributes,
-        # it should be derived directly form an input vector datasource
-        # like ogrinfo
-        querytemplate = ''
-        for i, v in enumerate(vectorlist):
-            query = """
-            function onPopupClose%s(evt) {
-                selectControl.unselect(selectedFeature);
-            }
-            function onFeatureSelect%s(feature){
-                selectedFeature = feature;
-            """ %  (vectorlist[i]['name'], vectorlist[i]['name'])
-            tablevector = '''tablevector="<html><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'><body><table>'''
-            for j in vectorlist[i]['fields']:
-                tablevector += '''<tr><td><b>%s:</b></td><td><i>"+feature.attributes["%s"]+"</i></td></tr>''' % (j, j)
-            tablevector += '''</table></body></html>";'''
-            query += tablevector
-            query += '''
-                popup = new OpenLayers.Popup.FramedCloud("chicken",
-                    feature.geometry.getBounds().getCenterLonLat(),
-                    new OpenLayers.Size(1000,500),
-                    tablevector,
-                    null,
-                    true,
-                    onPopupClose%s
-                );
-                feature.popup = popup;
-                map.addPopup(popup);
-            }
-            function onFeatureUnselect%s(feature) {
-                map.removePopup(feature.popup);
-                feature.popup.destroy();
-                feature.popup = null;
-            }
-            var %s = new OpenLayers.Layer.Vector("%s", {
-            styleMap: %s_style,
-            projection: "EPSG:4326",
-            strategies: [new OpenLayers.Strategy.Fixed()],
-            protocol: new OpenLayers.Protocol.HTTP({
-            url: "%s",
-            format: new OpenLayers.Format.GeoJSON()
-            })
-            });
-            map.addLayer(%s);
-            ''' % (vectorlist[i]['name'], vectorlist[i]['name'], vectorlist[i]['name'], vectorlist[i]['name'], vectorlist[i]['name'], vectorlist[i]['url'], vectorlist[i]['name'])
-            querytemplate += query
-        return querytemplate
-
-
-    def control3(self, vectorlist):
-        layerlist = []
-        s = ''
-        for i, v in enumerate(vectorlist):
-            s += str(vectorlist[i]['name'])+','
-        query = """
-    selectControl = new OpenLayers.Control.SelectFeature(
-                [%s ],
-                {
-                    clickout: true, toggle: false,
-                    multiple: false, hover: false,
-                    toggleKey: "ctrlKey", // ctrl key removes from selection
-                    multipleKey: "shiftKey" // shift key adds to selection
-                }
-            );""" % s  # vectorlist[i]['name']
-        query += """
-            map.addControl(selectControl);
-            selectControl.activate();
-            """
-        for i, v in enumerate(vectorlist):
-            query += """
-            %s.events.on({
-                "featureselected": function(e) {
-                    onFeatureSelect%s(e.feature);
-                },
-                "featureunselected": function(e) {
-                    onFeatureUnselect%s(e.feature);
-                }
-            });""" % (vectorlist[i]['name'], vectorlist[i]['name'], vectorlist[i]['name'])
-
-        return query
