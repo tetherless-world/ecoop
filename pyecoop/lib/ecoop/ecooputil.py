@@ -57,6 +57,15 @@ from IPython.display import display, Javascript
 import envoy
 from datetime import datetime
 
+import smtplib
+import mimetypes
+import email
+import email.mime.application
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+
+
 class shareUtil():
     def zipdir(self, basedir, archivename, rm='no'):
         """
@@ -81,6 +90,98 @@ class shareUtil():
         if rm != 'no':
             instruction = 'rm -rf %s' % basedir
             os.system(instruction)
+
+
+    def sendMail(self, subject='', msgfrom='', msgto='',
+                       text='', html='', inlineimage=None, pdfattachment=None, msgtype='html',
+                       smtp='', username='', password=''):
+        '''
+
+        use the smtp and mail modules to send mails with multiple attachments (inline images, pdf files)
+
+
+        :param str subject: mail subject
+        :param str msgfrom: mail address used to send out the message
+        :param list msgto: list mail addresses (recipient) (string or list of strings)
+        :param str text: mail content text format
+        :param str html: mail content html format
+        :param str inlineimage: path to images attachment (string or list of strings)
+        :param str pdfattachment: path to pdf attachment (string or list of strings)
+        :param str msgtype: type of message (html or text)
+        :param str smtp: smtp address
+        :param str username: smtp username
+        :param str password: smtp password
+
+        '''
+        msg = email.mime.Multipart.MIMEMultipart()
+        msg['Subject'] = '%s' % subject
+        msg['From'] = msgfrom
+        # msg as plain text
+        if msgtype=='plain':
+            part = MIMEText(text, 'plain')
+            msg.attach(part)
+        # msg as html
+        if msgtype=='html':
+            part = MIMEText(html, 'html')
+            msg.attach(part)
+
+        # Inline image attachment
+        if inlineimage:
+            for i in inlineimage:
+                if os.path.exists(i):
+                    ctype, encoding = mimetypes.guess_type(i)
+                    ctype = 'application/octet-stream'
+                    maintype, subtype = ctype.split('/', 1)
+                    fp=open(i,'rb')
+                    part = MIMEImage(fp.read(), _subtype=subtype)
+                    part.add_header('Content-Disposition', 'attachment', filename=i)
+                    fp.close()
+                    msg.attach(part)
+
+        # PDF attachment
+        if pdfattachment:
+            for i in pdfattachment:
+                if os.path.exists(i):
+                    fp=open(i,'rb')
+                    att = email.mime.application.MIMEApplication(fp.read(),_subtype="pdf")
+                    fp.close()
+                    att.add_header('Content-Disposition','attachment',filename=i)
+                    msg.attach(att)
+
+        s = smtplib.SMTP(smtp)
+        s.login(username, password)
+        s.sendmail('info@geohab.org', msgto, msg.as_string())
+        s.quit()
+
+
+    def dict2Table(self, data, row_length=1, dictval=False):
+        """
+        render a python dictionary as HTML
+
+        :param str data: input dictionary
+        :param int row_length: html table length (num rows)
+        :param bol dictval: if False print out only dictionary keys
+
+        """
+        table=''
+        table += '<table>'
+        counter = 0
+
+        for element in iter(sorted(data)):
+            if counter % row_length == 0:
+                table += '<tr>'
+            table += '<td>%s</td>' % element
+            if dictval:
+                table += '<td>%s</td>' % data[element]
+            counter += 1
+            if counter % row_length == 0:
+                table += '</tr>'
+        if counter % row_length != 0:
+            for i in range(0, row_length - counter % row_length):
+                table += '<td>&nbsp;</td>'
+            table += '</tr>'
+        table += '</table>'
+        return HTML(table)
 
     def uploadfile(self, username='epi', password='epi', hostname='localhost', port=22, inputfile=None, outputfile=None, link=False, apacheroot='/var/www/', zip=False, qr=False):
         '''
