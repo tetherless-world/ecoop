@@ -34,71 +34,39 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
-np=${nproc}
-
+CURRENTDIR=${PWD}
 BUILD=epilib
 PREFIX=/home/$USER/Envs/env1
 
 TEMPBUILD=/home/$USER/$BUILD
-
 mkdir -p $TEMPBUILD
 mkdir -p $TEMPBUILD/tarball
 mkdir -p $TEMPBUILD/src
 
-cd $TEMPBUILD 
+cd $TEMPBUILD
 export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
-
-echo "installing freexl"
-wget http://www.gaia-gis.it/gaia-sins/freexl-sources/freexl-1.0.0g.tar.gz
-tar -zxf freexl-1.0.0g.tar.gz
-cd freexl-1.0.0g
-./configure --prefix=$PREFIX/
-make -j $np
-make install
-make distclean
-cd $TEMPBUILD
-mv freexl-1.0.0g.tar.gz $TEMPBUILD/tarball
-mv freexl-1.0.0g $TEMPBUILD/src
+version="2"
+if [[ "$version" == "2" ]]
+then python=$PREFIX/bin/python2.7
+else python=$PREFIX/bin/python3.4
+fi
 
 
-echo "installing libspatialite"
-wget http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-4.1.1.tar.gz
-tar -zxf libspatialite-4.1.1.tar.gz
-cd libspatialite-4.1.1
-CPPFLAGS=-I$PREFIX/include/ LDFLAGS=-L$PREFIX/lib ./configure --with-geosconfig=$PREFIX/bin/geos-config --prefix=$PREFIX/
-make -j $np
-make install
-make distclean > /dev/null 2>&1
-cd $TEMPBUILD
-mv libspatialite-4.1.1.tar.gz $TEMPBUILD/tarball
-mv libspatialite-4.1.1 $TEMPBUILD/src
-
-
-echo "installing postgresql"
-wget http://ftp.postgresql.org/pub/source/v9.3.2/postgresql-9.3.2.tar.gz
-tar -zxf postgresql-9.3.2.tar.gz
-cd postgresql-9.3.2
-./configure --prefix=$PREFIX/
-make -j $np
-make install
-make distclean > /dev/null 2>&1
-cd $TEMPBUILD
-mv postgresql-9.3.2.tar.gz $TEMPBUILD/tarball
-mv postgresql-9.3.2 $TEMPBUILD/src
-
-$PREFIX/bin/pip install psycopg2 
-python setup.py build_ext --pg-config /path/to/pg_config build ...
-
-echo "installing psycopg2"
-wget http://initd.org/psycopg/tarballs/PSYCOPG-2-5/psycopg2-2.5.1.tar.gz
-tar -zxf psycopg2-2.5.1.tar.gz
-cd psycopg2-2.5.1
-$PREFIX/bin/python setup.py build_ext --pg-config $PREFIX/bin/pg_config 
-$PREFIX/bin/python setup.py install
+git clone https://github.com/ipython/ipython
+cd ipython
+$python setup.py install
 rm -rf build
-cd $TEMPBUILD 
-mv psycopg2-2.5.1.tar.gz $TEMPBUILD/tarball
-mv psycopg2-2.5.1 $TEMPBUILD/src
+cd $TEMPBUILD
 
+if [[ "$version" == "2" ]]
+then ipython=$PREFIX/bin/ipython2
+else ipython=$PREFIX/bin/ipython3
+fi
+
+$ipython profile create default
+$ipython profile create ecoop --ipython-dir=$PREFIX/.ipython --parallel
+
+mkdir -p /home/$USER/Envs/notebooks/
+cp $CURRENTDIR/ipython.sh $PREFIX/bin

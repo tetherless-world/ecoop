@@ -34,33 +34,54 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
-echo "install python sci*"
-./install_python.sh
-echo "install gis - basemap"
-./install_gis.sh
-echo "install SQL"
-./install_sql.sh
-echo "install gdal"
-./install_gdal.sh
-echo "install ghc"
-./install_ghc.sh
-echo "install postgis"
-./install_postgis.sh
-echo "install grass"
-./install_grass.sh
-echo "install "octave""
-./install_octave.sh
-echo "install R"
-./install_R.sh
-echo "install R libs"
-./install_R_lib.sh
-
-#PREFIX=/home/$USER/Envs/env1
-
-#export PATH=$PREFIX/bin:$PATH
-#R --no-save < installRpackages.r
-#R --no-save < install_spatial_view.r
-
-cp ipython.sh /home/$USER/Envs/env1/bin/
 
 
+PREFIX=/home/$USER/Envs/env1
+export PATH=$PREFIX/bin:$PATH
+export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
+
+version="2"
+if [[ "$version" == "2" ]]
+then pip=$PREFIX/bin/pip2.7
+else pip=$PREFIX/bin/pip3.4
+fi
+
+
+echo "installing virtualenv"
+$pip install -U virtualenv
+echo "installing setuptools"
+$pip install -U setuptools
+echo "installing dateutils"
+$pip install -U dateutils
+echo "installing docutils"
+$pip install -U docutils
+echo "installing jinja2"
+$pip install -U jinja2
+echo "installing nose"
+$pip install -U nose
+echo "installing numpy"
+$pip install -U numpy
+echo "installing paramiko"
+$pip install -U paramiko
+echo "installing Image"
+$pip install -U Image
+echo "installing pygments"
+$pip install -U pygments
+echo "installing scipy"
+$pip install -U scipy
+echo "installing sphinx"
+$pip install -U sphinx
+echo "installing pyzmq"
+$pip install -U pyzmq
+echo "installing tornado"
+$pip install -U tornado
+echo "installing envoy"
+$pip install -U envoy
+echo "installing qrcode"
+$pip install -U qrcode
+echo "installing requests"
+$pip install -U requests
+echo "installing owslib"
+$pip install -U owslib
+echo "installing python-magic"
+$pip install -U python-magic

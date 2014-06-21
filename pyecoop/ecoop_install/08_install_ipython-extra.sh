@@ -34,82 +34,54 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
-np=${nproc}
 
-BUILD=epilib
 PREFIX=/home/$USER/Envs/env1
-
 TEMPBUILD=/home/$USER/$BUILD
-
 mkdir -p $TEMPBUILD
 mkdir -p $TEMPBUILD/tarball
 mkdir -p $TEMPBUILD/src
 
-cd $TEMPBUILD 
+cd $TEMPBUILD
 export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
+version="2"
+if [[ "$version" == "2" ]]
+then python=$PREFIX/bin/python2.7
+else python=$PREFIX/bin/python3.4
+fi
 
-echo "installing proj"
-wget http://download.osgeo.org/proj/proj-4.8.0.tar.gz
-tar -zxf proj-4.8.0.tar.gz 
-cd proj-4.8.0
-./configure --prefix=$PREFIX/
-make -j $np
-make install
-make distclean > /dev/null 2>&1
+
+echo "install mpld3"
+git clone https://github.com/jakevdp/mpld3.git
+cd mpld3
+$python setup.py install
+rm -rf build
 cd $TEMPBUILD
-mv proj-4.8.0.tar.gz $TEMPBUILD/tarball
-mv proj-4.8.0 $TEMPBUILD/src
+#mv mpld3 $TEMPBUILD/src
 
-echo "installing geos & basemap"
-wget http://softlayer-dal.dl.sourceforge.net/project/matplotlib/matplotlib-toolkits/basemap-1.0.7/basemap-1.0.7.tar.gz
-tar -zxf basemap-1.0.7.tar.gz
-cd basemap-1.0.7
-cd geos-3.3.3
-export GEOS_DIR=$PREFIX/
-./configure --prefix=$GEOS_DIR
-make -j $np
-make install
-make distclean > /dev/null 2>&1
+#https://github.com/jakevdp/ipywidgets.git
+git clone https://github.com/jakevdp/ipywidgets.git
+cd ipywidgets
+$python setup.py install
+rm -rf build
+cd $TEMPBUILD
+#mv ipywidgets $TEMPBUILD/src
+
+
+
+git clone https://github.com/epmoyer/ipy_table.git
+cd ipy_table
+$python setup.py install
+rm -rf build
+cd $TEMPBUILD
+#mv ipy_table $TEMPBUILD/src
+
+# think about ipython extension / profiles (grass binding, network interfaces)
+#
+
+git clone https://github.com/ContinuumIO/bokeh.git
+cd bokeh
+$python setup.py install
 cd ..
-$PREFIX/bin/python setup.py install
-rm -rf build
-cd $TEMPBUILD
-mv basemap-1.0.7.tar.gz $TEMPBUILD/tarball
-mv basemap-1.0.7 $TEMPBUILD/src
-
-
-echo "installing shapely"
-$PREFIX/bin/pip install shapely
-echo "installing descartes"
-$PREFIX/bin/pip install descartes
-
-echo "installing shapelib"
-wget http://download.osgeo.org/shapelib/shapelib-1.3.0.tar.gz
-tar -zxf shapelib-1.3.0.tar.gz
-cd shapelib-1.3.0
-wget http://ftp.intevation.de/users/bh/pyshapelib/pyshapelib-0.3.tar.gz
-tar -zxf pyshapelib-0.3.tar.gz
-cd pyshapelib-0.3
-$PREFIX/bin/python setup.py install
-rm -rf build
-cd $TEMPBUILD 
-mv shapelib-1.3.0.tar.gz $TEMPBUILD/tarball
-mv shapelib-1.3.0 $TEMPBUILD/src
-
-
-
-echo "installing pyproj"
-export PROJ_DIR=$PREFIX
-$PREFIX/bin/pip install pyproj
-
-echo "installing pyproj"
-git clone https://github.com/SciTools/cartopy.git
-cd cartopy
-$PREFIX/bin/python setup.py install
-rm -rf build
-cd $TEMPBUILD 
-
-
-
+#mv bokeh $TEMPBUILD/src

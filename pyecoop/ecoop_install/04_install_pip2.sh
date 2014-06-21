@@ -35,13 +35,82 @@
 ###############################################################################
 
 
-np=${nproc}
-
 PREFIX=/home/$USER/Envs/env1
 
 export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
-$PREFIX/bin/createdb test
-$PREFIX/bin/psql -f $PREFIX/share/postgresql/contrib/postgis-2.1/postgis.sql -d test
-$PREFIX/bin/psql -f /home/$USER/Envs/env1/share/postgresql/contrib/postgis-2.1/spatial_ref_sys.sql -d test
+version="2"
+if [[ "$version" == "2" ]]
+then pip=$PREFIX/bin/pip2.7
+else pip=$PREFIX/bin/pip3.4
+fi
+
+
+echo "installing numexpr"
+$pip install -U numexpr
+echo "installing Cython"
+$pip install -U Cython
+echo "installing h5py"
+$pip install -U h5py
+echo "installing tables"
+$pip install -U tables
+echo "installing pandas"
+$pip install -U pandas
+echo "installing patsy"
+$pip install -U patsy
+echo "installing pysal"
+$pip install -U pysal
+echo "installing statsmodels"
+$pip install -U statsmodels
+echo "installing pyke"
+$pip install -U pyke
+echo "installing mock"
+$pip install -U mock
+echo "installing sqlalchemy"
+$pip install -U sqlalchemy
+echo "installing tempdir"
+$pip install -U tempdir
+echo "installing pysqlite"
+$pip install -U pysqlite
+echo "installing pycsw"
+$pip install -U pycsw
+echo "installing sympy"
+$pip install -U sympy
+
+echo "installing six"
+$pip install -U six
+echo "installing husl"
+$pip install -U husl
+echo "installing moss"
+$pip install -U moss
+echo "installing seaborn"
+$pip install -U seaborn
+
+echo "installing scikit-learn"
+$pip install -U scikit-learn
+
+echo "installing scikit-image"
+$pip install -U scikit-image
+
+echo "installing sympy"
+$pip install -U sympy
+
+echo "installing graphviz"
+$pip install -U graphviz
+
+#wget http://www.graphviz.org/pub/graphviz/stable/SOURCES/graphviz-2.36.0.tar.gz
+#tar -zxvf graphviz-2.36.0.tar.gz
+#cd graphviz-2.36.0
+#./configure --prefix=$PREFIX
+#make -j $np
+#make install
+
+echo "installing sh"
+$pip install -U sh
+
+echo "installing flask"
+$pip install -U flask
+
+echo "installing pymongo"
+$pip install -U pymongo

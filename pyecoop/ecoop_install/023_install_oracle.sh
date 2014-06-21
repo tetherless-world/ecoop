@@ -1,4 +1,4 @@
-#!/bin/bash -l
+#!/bin/bash
 
 ###############################################################################
 #
@@ -34,27 +34,43 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
-export LD_LIBRARY_PATH=$1grass-7.0.svn/lib:$LD_LIBRARY_PATH
-export PYTHONPATH=$1grass-7.0.svn/etc/python:$PYTHONPATH
-export GISBASE=$1grass-7.0.svn/
-export PATH=$PATH:$GISBASE/bin:$GISBASE/scripts
+np=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
 
-export GIS_LOCK=$$
 
-mkdir -p $1Envs/grass7data
-mkdir -p $1Envs/.grass7
+CURRENTDIR=${PWD}
+BUILD=epilib
+PREFIX=/home/$USER/Envs/env1
 
-export GISRC=$1Envs/.grass7/rc
+TEMPBUILD=/home/$USER/$BUILD
+mkdir -p $TEMPBUILD
+mkdir -p $TEMPBUILD/tarball
+mkdir -p $TEMPBUILD/src
 
-export GISDBASE=$1Envs/grass7data
+export PATH=$PREFIX/bin:$PATH
+export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
-export GRASS_TRANSPARENT=TRUE
-export GRASS_TRUECOLOR=TRUE
-export GRASS_PNG_COMPRESSION=9
-export GRASS_PNG_AUTO_WRITE=TRUE
+cd $TEMPBUILD
 
-export ORACLE_HOME=$1oracle/product/11.2.0/xe/
-export LD_LIBRARY_PATH=$1oracle/product/11.2.0/xe/lib:$LD_LIBRARY_PATH
-export PATH=$1oracle/product/11.2.0/xe:$1Envs/env1/bin:$1Envs/env1/cabal/bin:$PATH
 
-ipython notebook --pylab=inline --ipython-dir=$1Envs/env1/.ipython --profile=default --notebook-dir=$1Envs/notebooks/ --no-browser --script
+# assume root installed :
+# yum install oracle-xe-11.2.0-1.0.x86_64.rpm
+# is not open access (i've a local copy dw by oracle wit licens agreement)
+
+
+version="2"
+if [[ "$version" == "2" ]]
+then python=$PREFIX/bin/python2.7
+else python=$PREFIX/bin/python3.4
+fi
+
+export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe/
+export LD_LIBRARY_PATH=/u01/app/oracle/product/11.2.0/xe/lib:$LD_LIBRARY_PATH
+wget --no-check-certificate -c --progress=dot:mega http://softlayer-dal.dl.sourceforge.net/project/cx-oracle/5.1.2/cx_Oracle-5.1.2.tar.gz
+tar -zxf cx_Oracle-5.1.2.tar.gz
+cd cx_Oracle-5.1.2
+
+$python setup.py install
+rm -rf build
+cd $TEMPBUILD
+mv cx_Oracle-5.1.2.tar.gz $TEMPBUILD/tarball
+mv cx_Oracle-5.1.2 $TEMPBUILD/src

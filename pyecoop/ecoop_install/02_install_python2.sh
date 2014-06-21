@@ -34,33 +34,42 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
-echo "install python sci*"
-./install_python.sh
-echo "install gis - basemap"
-./install_gis.sh
-echo "install SQL"
-./install_sql.sh
-echo "install gdal"
-./install_gdal.sh
-echo "install ghc"
-./install_ghc.sh
-echo "install postgis"
-./install_postgis.sh
-echo "install grass"
-./install_grass.sh
-echo "install "octave""
-./install_octave.sh
-echo "install R"
-./install_R.sh
-echo "install R libs"
-./install_R_lib.sh
-
-#PREFIX=/home/$USER/Envs/env1
-
-#export PATH=$PREFIX/bin:$PATH
-#R --no-save < installRpackages.r
-#R --no-save < install_spatial_view.r
-
-cp ipython.sh /home/$USER/Envs/env1/bin/
+np=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
 
 
+# PYTHON
+
+CURRENTDIR=${PWD}
+BUILD=epilib
+PREFIX=/home/$USER/Envs/env1
+
+TEMPBUILD=/home/$USER/$BUILD
+mkdir -p $TEMPBUILD
+mkdir -p $TEMPBUILD/tarball
+mkdir -p $TEMPBUILD/src
+
+cd $TEMPBUILD
+export PATH=$PREFIX/bin:$PATH
+export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
+
+wget --no-check-certificate -c --progress=dot:mega https://www.python.org/ftp/python/2.7.6/Python-2.7.6.tar.xz
+
+tar xpvf Python-2.7.6.tar.xz
+cd Python-2.7.6
+
+export CFLAGS="-fPIC"
+./configure --prefix=$PREFIX --enable-shared
+make -j $np
+make install
+make distclean > /dev/null 2>&1
+cd $TEMPBUILD
+
+
+export PATH=$PREFIX/bin:$PATH
+
+ln -s $PREFIX/bin/python2.7 $PREFIX/bin/python
+wget --no-check-certificate -c --progress=dot:mega https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+$PREFIX/bin/python2.7 ez_setup.py
+
+echo "installing pip"
+$PREFIX/bin/easy_install-2.7 pip

@@ -34,33 +34,12 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
-echo "install python sci*"
-./install_python.sh
-echo "install gis - basemap"
-./install_gis.sh
-echo "install SQL"
-./install_sql.sh
-echo "install gdal"
-./install_gdal.sh
-echo "install ghc"
-./install_ghc.sh
-echo "install postgis"
-./install_postgis.sh
-echo "install grass"
-./install_grass.sh
-echo "install "octave""
-./install_octave.sh
-echo "install R"
-./install_R.sh
-echo "install R libs"
-./install_R_lib.sh
 
-#PREFIX=/home/$USER/Envs/env1
+PREFIX=/home/$USER/Envs/env1
 
-#export PATH=$PREFIX/bin:$PATH
-#R --no-save < installRpackages.r
-#R --no-save < install_spatial_view.r
+export PATH=$PREFIX/bin:$PATH
+export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
-cp ipython.sh /home/$USER/Envs/env1/bin/
-
-
+$PREFIX/bin/createdb test
+$PREFIX/bin/psql -f $PREFIX/share/postgresql/contrib/postgis-2.1/postgis.sql -d test
+$PREFIX/bin/psql -f /home/$USER/Envs/env1/share/postgresql/contrib/postgis-2.1/spatial_ref_sys.sql -d test

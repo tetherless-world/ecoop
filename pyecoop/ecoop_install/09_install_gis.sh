@@ -34,12 +34,14 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
-np=${nproc}
+np=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
+
 
 BUILD=epilib
 PREFIX=/home/$USER/Envs/env1
 
 TEMPBUILD=/home/$USER/$BUILD
+
 mkdir -p $TEMPBUILD
 mkdir -p $TEMPBUILD/tarball
 mkdir -p $TEMPBUILD/src
@@ -48,36 +50,77 @@ cd $TEMPBUILD
 export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
+version="2"
+if [[ "$version" == "2" ]]
+then python=$PREFIX/bin/python2.7
+else python=$PREFIX/bin/python3.4
+fi
 
-wget http://download.osgeo.org/gdal/1.10.1/gdal-1.10.1.tar.gz
-tar -zxf gdal-1.10.1.tar.gz
-cd gdal-1.10.1
-#--with-pg=$PREFIX/bin/pg_config
-CPPFLAGS=-I$PREFIX/include ./configure --with-hdf5=$PREFIX/  --with-hdf4=$PREFIX/ --with-hdf4=/usr --with-geos=$PREFIX/bin/geos-config --with-spatialite=$PREFIX/ --with-freexl=$PREFIX/ --with-python=$PREFIX/bin/python --with-pg=$PREFIX/bin/pg_config --prefix=$PREFIX/ --with-netcdf=$PREFIX/
+if [[ "$version" == "2" ]]
+then pip=$PREFIX/bin/pip2.7
+else pip=$PREFIX/bin/pip3.4
+fi
+
+echo "installing proj"
+wget --no-check-certificate -c --progress=dot:mega http://download.osgeo.org/proj/proj-4.8.0.tar.gz
+tar -zxf proj-4.8.0.tar.gz 
+cd proj-4.8.0
+./configure --prefix=$PREFIX/
 make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv gdal-1.10.1.tar.gz $TEMPBUILD/tarball
-mv gdal-1.10.1 $TEMPBUILD/src
-$PREFIX/bin/pip install fiona
+#mv proj-4.8.0.tar.gz $TEMPBUILD/tarball
+#mv proj-4.8.0 $TEMPBUILD/src
 
-
-$PREFIX/bin/pip install Image
-
-wget http://hivelocity.dl.sourceforge.net/project/pyke/pyke/1.1.1/pyke-1.1.1.zip
-unzip pyke-1.1.1.zip
-cd pyke-1.1.1
-$PREFIX/bin/python setup.py install
+echo "installing geos & basemap"
+wget --no-check-certificate -c --progress=dot:mega http://softlayer-dal.dl.sourceforge.net/project/matplotlib/matplotlib-toolkits/basemap-1.0.7/basemap-1.0.7.tar.gz
+tar -zxf basemap-1.0.7.tar.gz
+cd basemap-1.0.7
+cd geos-3.3.3
+export GEOS_DIR=$PREFIX/
+./configure --prefix=$GEOS_DIR
+make -j $np
+make install
+make distclean > /dev/null 2>&1
+cd ..
+$python setup.py install
 rm -rf build
 cd $TEMPBUILD
-mv pyke-1.1.1 $TEMPBUILD/src
+#mv basemap-1.0.7.tar.gz $TEMPBUILD/tarball
+#mv basemap-1.0.7 $TEMPBUILD/src
 
-$PREFIX/bin/pip install biggus
 
-#git clone https://github.com/SciTools/iris.git
-#cd iris
-#$PREFIX/bin/python setup.py install
-#cd ..
-#mv iris $TEMPBUILD/src
+echo "installing shapelib"
+wget -c http://download.osgeo.org/shapelib/shapelib-1.3.0.tar.gz
+tar -zxf shapelib-1.3.0.tar.gz
+cd shapelib-1.3.0
+wget -c http://ftp.intevation.de/users/bh/pyshapelib/pyshapelib-0.3.tar.gz
+tar -zxf pyshapelib-0.3.tar.gz
+cd pyshapelib-0.3
+$python setup.py install
+rm -rf build
+cd $TEMPBUILD 
+#mv shapelib-1.3.0.tar.gz $TEMPBUILD/tarball
+#mv shapelib-1.3.0 $TEMPBUILD/src
+
+
+
+echo "installing pyproj"
+export PROJ_DIR=$PREFIX
+$pip install pyproj
+
+echo "installing shapely"
+$pip install -u shapely
+echo "installing descartes"
+$pip install -U descartes
+
+echo "installing cartopy"
+git clone https://github.com/SciTools/cartopy.git
+cd cartopy
+$python setup.py install
+rm -rf build
+cd $TEMPBUILD 
+
+
 

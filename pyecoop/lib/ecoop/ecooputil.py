@@ -150,7 +150,7 @@ class shareUtil():
 
         s = smtplib.SMTP(smtp)
         s.login(username, password)
-        s.sendmail('info@geohab.org', msgto, msg.as_string())
+        s.sendmail(msgfrom, msgto, msg.as_string())
         s.quit()
 
 

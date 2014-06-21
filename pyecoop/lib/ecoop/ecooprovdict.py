@@ -186,3 +186,25 @@ ecooProvDict['Library']['description'] = ''
 ecooProvDict['Library']['accessURL'] = ''
 ecooProvDict['Library']['wasAttributedTo'] = ''
 
+
+prov = {
+    "_comment": "Classes and properties that are not defined in the ecoop ontology are assigned the prefix ecoop_ext. We may do one of the following things: 1) Skip collecting these pieces of information; 2) Extend the ecoop ontology to include these properties and classes; 3) Find existing properties and classes, not necessarily in the ecoop ontology, to take their places.",
+    "@context":
+        {
+            "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+            "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+            "ecoop": "http://escience.rpi.edu/ontology/eco-op/ecoopProv.ttl#",
+            "owl": "http://www.w3.org/2002/07/owl#",
+            "foaf": "http://xmlns.com/foaf/0.1/",
+            "skos": "http://www.w3.org/2009/08/skos-reference/skos.rdf#",
+            "dctype": "http://purl.org/dc/dcmitype/",
+            "prov": "http://www.w3.org/ns/prov#",
+            "dct": "http://purl.org/dc/terms/",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "dcat": "http://www.w3.org/ns/dcat#",
+            "qudt": "http://qudt.org/1.1/schema/qudt#",
+            "ex" : "http://not.sure/yet#",
+            "ecoop_ext": "http://escience.rpi.edu/ontology/eco-op/ecoopProvExt.ttl#"
+        },
+    "@graph": [],
+    }

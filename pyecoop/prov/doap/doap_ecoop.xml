@@ -6,23 +6,22 @@ ecoop
 </name>
 
 <shortdesc>
-    ecoop: Utility to enable the reproducibility of a scientific workflow
+    ECO-OP software library to enable the reproducibility of a document produced in an ecosystem assessment.
 </shortdesc>
 
 <description>
-The latest development version is always available from ecoop's `GitHub
-site &lt;https://github.com/epifanio/ecoop/`_.
+The ECO-OP project was a collaboration between computer scientists,  fisheries scientists, and oceanographers to facilitate the deployment of  an Integrated Ecosystem Approach (IEA) to management of Large Marine  Ecosystems (LMEs). Here we provide the ECO-OP software library that we  developed from a Use Case for the Ecosystem Status Report for the U.S.  Northeast Shelf Large Marine Ecosystem (LME). We focus on the Climate  Forcing chapter of this report and build a PDF document that reports on  two climate indicators. The workflow is conducted within an IPython  Notebook. The general utility of this software package is to enable the  reproducibility of a scientific workflow that acquires data online,  processes and plots data, packages text and figures into a document, and  tracks provenance of derived data and the output document. The ECO-OP  project was a collaboration between Rensselaer Polytechnic  Institute, Woods Hole Oceanographic Institution, and NOAA's Northeast  Fisheries Science Center, funded in 2010-2014 by the U.S. National Science Foundation #0955649.
 </description>
 
 <download-page>
-    https://github.com/ipython/ipython/downloads
+    https://github.com/tetherless-world/ecoop/archive/master.zip
 </download-page>
 
-<homepage rdf:resource="https://github.com/epifanio/ecoop" />
+<homepage rdf:resource="https://github.com/tetherless-world/ecoop/" />
 
 <maintainer>
 <foaf:Person><foaf:name>Massimo Di Stefano</foaf:name>
-<foaf:mbox_sha1sum>xxxx</foaf:mbox_sha1sum></foaf:Person>
+<foaf:mbox_sha1sum>distem@rpi.edu</foaf:mbox_sha1sum></foaf:Person>
 </maintainer>
 
 <release><Version><revision>0.0.1</revision></Version></release>

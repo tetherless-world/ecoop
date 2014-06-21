@@ -34,34 +34,65 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
+np=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
 
-np=${nproc}
 
 BUILD=epilib
 PREFIX=/home/$USER/Envs/env1
 
 TEMPBUILD=/home/$USER/$BUILD
+mkdir -p $TEMPBUILD
+mkdir -p $TEMPBUILD/tarball
+mkdir -p $TEMPBUILD/src
 
-
-cd $TEMPBUILD
+cd $TEMPBUILD 
 export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
+version="2"
+if [[ "$version" == "2" ]]
+then python=$PREFIX/bin/python2.7
+else python=$PREFIX/bin/python3.4
+fi
 
-echo "installing mapserver"
-wget http://download.osgeo.org/mapserver/mapserver-6.4.1.tar.gz
-tar -zxf mapserver-6.4.1.tar.gz
-cd mapserver-6.4.1
-mkdir build
-cd build
-cmake ..
+
+if [[ "$version" == "2" ]]
+then pip=$PREFIX/bin/pip2.7
+else pip=$PREFIX/bin/pip3.4
+fi
+
+
+wget --no-check-certificate -c --progress=dot:mega http://download.osgeo.org/gdal/1.11.0/gdal-1.11.0.tar.gz
+tar -zxf gdal-1.11.0.tar.gz
+cd gdal-1.11.0
+#--with-pg=$PREFIX/bin/pg_config
+CPPFLAGS=-I$PREFIX/include ./configure --with-hdf5=$PREFIX/  --with-hdf4=$PREFIX/ --with-hdf4=/usr --with-geos=$PREFIX/bin/geos-config --with-spatialite=$PREFIX/ --with-freexl=$PREFIX/ --with-python=$python --with-pg=$PREFIX/bin/pg_config --prefix=$PREFIX/ --with-netcdf=$PREFIX/
 make -j $np
 make install
 make distclean > /dev/null 2>&1
 cd $TEMPBUILD
-mv mapserver-6.4.1.tar.gz $TEMPBUILD/tarball
-mv mapserver-6.4.1 $TEMPBUILD/src
+#mv gdal-1.11.0.tar.gz $TEMPBUILD/tarball
+#mv gdal-1.11.0 $TEMPBUILD/src
+$pip install -U fiona
+
+
+$pip install -U Image
+
+wget --no-check-certificate -c --progress=dot:mega http://downloads.sourceforge.net/project/pyke/pyke/1.1.1/pyke-1.1.1.zip
+unzip pyke-1.1.1.zip
+cd pyke-1.1.1
+$python setup.py install
+rm -rf build
+cd $TEMPBUILD
+#mv pyke-1.1.1 $TEMPBUILD/src
 
 
 
+$pip install -U biggus
+
+#git clone https://github.com/SciTools/iris.git
+#cd iris
+#$PREFIX/bin/python setup.py install
+#cd ..
+#mv iris $TEMPBUILD/src
 

@@ -34,12 +34,35 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
-yum -y install gcc gcc-c++ gcc-gfortran blas-devel lapack-devel zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel \
-freetype-devel libpng-devel svn git python-devel ruby texinfo texinfo-tex \
-libxml2-devel libcurl-devel libtiff-devel mesa-libGLU-devel mesa-libGLw-devel cairo-devel pcre-devel ImageMagick-devel \
-ImageMagick-c++-devel gnuplot-latex gsl-devel gtk2-devel java-1.7.0-openjdk-devel fftw-devel rubygems ruby-devel  >> yuminstall_devlibs.log
-yum -y groupinstall "Development tools" >> yuminstall_devtools.log
-gem install jist jist >> yuminstall_gems.log
+
+np=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
+
+
+BUILD=epilib
+PREFIX=/home/$USER/Envs/env1
+
+TEMPBUILD=/home/$USER/$BUILD
+
+
+cd $TEMPBUILD
+export PATH=$PREFIX/bin:$PATH
+export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
+
+
+echo "installing mapserver"
+wget --no-check-certificate -c --progress=dot:mega http://download.osgeo.org/mapserver/mapserver-6.4.1.tar.gz
+tar -zxf mapserver-6.4.1.tar.gz
+cd mapserver-6.4.1
+mkdir build
+cd build
+cmake .. -DWITH_FCGI=OFF -DCMAKE_INSTALL_PREFIX=$PREFIX -DWITH_FRIBIDI=0
+make -j $np
+make install
+make distclean > /dev/null 2>&1
+cd $TEMPBUILD
+#mv mapserver-6.4.1.tar.gz $TEMPBUILD/tarball
+#mv mapserver-6.4.1 $TEMPBUILD/src
+
 
 
 

@@ -34,7 +34,8 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
-np=${nproc}
+np=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
+
 
 # PYTHON
 
@@ -51,21 +52,18 @@ cd $TEMPBUILD
 export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
-### json-ld
+svn checkout http://netcdf4-python.googlecode.com/svn/trunk/ netcdf4-python
+cd netcdf4-python
+export HDF5_DIR=$PREFIX/
+export NETCDF4_DIR=$PREFIX/
 
-git clone https://github.com/digitalbazaar/pyld.git
-cd pyld
-$PREFIX/bin/python setup.py install
+version="2"
+if [[ "$version" == "2" ]]
+then python=$PREFIX/bin/python2.7
+else python=$PREFIX/bin/python3.4
+fi
+
+$python setup.py install
 rm -rf build
 cd $TEMPBUILD
-mv pyld $TEMPBUILD/src
-
-echo "installing rdflib"
-$PREFIX/bin/pip install rdflib
-
-git clone https://github.com/RDFLib/rdflib-jsonld.git
-cd rdflib-jsonld
-$PREFIX/bin/python setup.py install
-rm -rf build
-cd $TEMPBUILD
-mv rdflib-jsonld $TEMPBUILD/src
+#mv netcdf4-python $TEMPBUILD/src

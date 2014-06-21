@@ -34,7 +34,10 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
-np=${nproc}
+np=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
+
+
+CURRENTDIR=${PWD}
 
 BUILD=epilib
 PREFIX=/home/$USER/Envs/env1
@@ -45,74 +48,39 @@ mkdir -p $TEMPBUILD
 mkdir -p $TEMPBUILD/tarball
 mkdir -p $TEMPBUILD/src
 
-cd $TEMPBUILD
+cd $TEMPBUILD 
 export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
 
-wget http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz 
-tar xvfz yasm-1.2.0.tar.gz 
-cd yasm-1.2.0 
-./configure --prefix=$PREFIX 
+wget --no-check-certificate -c --progress=dot:mega http://cran.us.r-project.org/src/base/R-3/R-3.1.0.tar.gz
+tar -zxf R-3.1.0.tar.gz
+cd R-3.1.0
+CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib ./configure --prefix=$PREFIX/ --with-blas --with-lapack --enable-R-shlib
 make -j $np
 make install
+make distclean > /dev/null 2>&1
 cd $TEMPBUILD
+#mv R-3.1.0.tar.gz $TEMPBUILD/tarball
+#mv R-3.1.0 $TEMPBUILD/src
+ln -s /usr/lib64/gcj-4.4.4/*.so $PREFIX/lib
+mkdir -p $PREFIX/lib/R/site-library/
 
-git clone --depth 1 git://git.videolan.org/x264.git
-cd x264
-./configure --prefix=$PREFIX --enable-static
-make -j $np
-make install
-make distclean
+cd $CURRENTDIR
 
-
-cd $TEMPBUILD
-git clone --depth 1 git://git.code.sf.net/p/opencore-amr/fdk-aac
-cd fdk-aac
-autoreconf -fiv
-./configure --prefix=$PREFIX --disable-shared
-make -j $np
-make install
-make distclean
-
-cd $TEMPBUILD
-wget http://downloads.sourceforge.net/project/lame/lame/3.99/lame-3.99.5.tar.gz
-tar xzvf lame-3.99.5.tar.gz
-cd lame-3.99.5
-./configure --prefix=$PREFIX --enable-nasm --disable-shared
-make -j $np
-make install
-make distclean
+version="2"
+if [[ "$version" == "2" ]]
+then pip=$PREFIX/bin/pip2.7
+else pip=$PREFIX/bin/pip3.4
+fi
 
 
-cd $TEMPBUILD
-wget http://downloads.xiph.org/releases/opus/opus-1.0.3.tar.gz
-tar xzvf opus-1.0.3.tar.gz
-cd opus-1.0.3
-./configure --prefix=$PREFIX --disable-shared
-make -j $np
-make install
-make distclean
+echo "installing rpy2"
+$pip install rpy2
 
-cd $TEMPBUILD
-git clone --depth 1 http://git.chromium.org/webm/libvpx.git
-cd libvpx
-./configure --prefix=$PREFIX --disable-examples
-make -j $np
-make install
-make clean
 
-cd $TEMPBUILD
-git clone --depth 1 git://source.ffmpeg.org/ffmpeg
-cd ffmpeg
-PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
-export PKG_CONFIG_PATH
-./configure --prefix=$PREFIX \
-  --extra-cflags="-I$PREFIX/include" --extra-ldflags="-L$PREFIX/lib" \
-  --extra-libs="-ldl" --enable-gpl --enable-libass --enable-libfdk-aac \
-  --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx \
-  --enable-libx264 --enable-nonfree --enable-x11grab
-make -j $np
-make install
-make distclean
-hash -r
+$PREFIX/bin/R CMD javareconf -e
+export LD_LIBRARY_PATH=/usr/lib64/gcj-4.4.4/:$LD_LIBRARY_PATH
+$PREFIX/bin/R CMD javareconf -e
+
+

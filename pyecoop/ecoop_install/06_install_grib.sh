@@ -34,33 +34,59 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
-echo "install python sci*"
-./install_python.sh
-echo "install gis - basemap"
-./install_gis.sh
-echo "install SQL"
-./install_sql.sh
-echo "install gdal"
-./install_gdal.sh
-echo "install ghc"
-./install_ghc.sh
-echo "install postgis"
-./install_postgis.sh
-echo "install grass"
-./install_grass.sh
-echo "install "octave""
-./install_octave.sh
-echo "install R"
-./install_R.sh
-echo "install R libs"
-./install_R_lib.sh
-
-#PREFIX=/home/$USER/Envs/env1
-
-#export PATH=$PREFIX/bin:$PATH
-#R --no-save < installRpackages.r
-#R --no-save < install_spatial_view.r
-
-cp ipython.sh /home/$USER/Envs/env1/bin/
+np=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
 
 
+CURRENTDIR=${PWD}
+BUILD=epilib
+PREFIX=/home/$USER/Envs/env1
+
+TEMPBUILD=/home/$USER/$BUILD
+mkdir -p $TEMPBUILD
+mkdir -p $TEMPBUILD/tarball
+mkdir -p $TEMPBUILD/src
+
+cd $TEMPBUILD
+export PATH=$PREFIX/bin:$PATH
+export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
+
+
+wget --no-check-certificate -c --progress=dot:mega \
+  "https://software.ecmwf.int/wiki/download/attachments/3473437/grib_api-1.12.0.tar.gz"
+tar xzf grib_api-1.12.0.tar.gz
+
+cd grib_api-1.12.0
+export CFLAGS="-O2 -fPIC"
+./configure --enable-python --prefix=$PREFIX/ #--disable-numpy
+make -j $np
+make install
+make distclean
+cd $TEMPBUILD
+#mv grib_api-1.12.0.tar.gz $TEMPBUILD/tarball
+#mv grib_api-1.12.0 $TEMPBUILD/src
+
+version="2"
+if [[ "$version" == "2" ]]
+then python=$PREFIX/bin/python2.7
+else python=$PREFIX/bin/python3.4
+fi
+
+if [[ "$version" == "2" ]]
+then
+echo "$PREFIX/lib/python2.7/site-packages/grib_api" > gribapi.pth;
+cp gribapi.pth $PREFIX/lib/python2.7/site-packages/;
+else
+echo "$PREFIX/lib/python3.4/site-packages/grib_api" > gribapi.pth;
+cp gribapi.pth $PREFIX/lib/python3.4/site-packages/;
+fi
+
+git clone https://github.com/activepapers/activepapers-python.git
+cd activepapers-python
+
+
+
+$python setup.py install
+
+rm -rf build
+cd $TEMPBUILD
+#mv activepapers-python $TEMPBUILD/src

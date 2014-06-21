@@ -34,45 +34,49 @@
 # DEALINGS IN THE SOFTWARE.
 ###############################################################################
 
-np=${nproc}
+np=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
+
+
+# PYTHON
 
 CURRENTDIR=${PWD}
-
 BUILD=epilib
 PREFIX=/home/$USER/Envs/env1
 
 TEMPBUILD=/home/$USER/$BUILD
-
 mkdir -p $TEMPBUILD
 mkdir -p $TEMPBUILD/tarball
 mkdir -p $TEMPBUILD/src
 
-cd $TEMPBUILD 
+cd $TEMPBUILD
 export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib64:$LD_LIBRARY_PATH
 
+version="2"
+if [[ "$version" == "2" ]]
+then python=$PREFIX/bin/python2.7
+else python=$PREFIX/bin/python3.4
+fi
 
-wget http://cran.us.r-project.org/src/base/R-3/R-3.0.2.tar.gz
-tar -zxf R-3.0.2.tar.gz
-cd R-3.0.2
-CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib ./configure --prefix=$PREFIX/ --with-blas --with-lapack --enable-R-shlib
-make -j $np
-make install
-make distclean > /dev/null 2>&1
+if [[ "$version" == "2" ]]
+then pip=$PREFIX/bin/pip2.7
+else pip=$PREFIX/bin/pip3.4
+fi
+
+
+git clone https://github.com/digitalbazaar/pyld.git
+cd pyld
+$python setup.py install
+rm -rf build
 cd $TEMPBUILD
-mv R-3.0.2.tar.gz $TEMPBUILD/tarball
-mv R-3.0.2 $TEMPBUILD/src
-ln -s /usr/lib64/gcj-4.4.4/*.so $PREFIX/lib
-mkdir -p $PREFIX/lib/R/site-library/
+#mv pyld $TEMPBUILD/src
 
-cd $CURRENTDIR
+echo "installing rdflib"
+$pip install rdflib
 
-export PATH=$PREFIX/bin:$PATH
-echo "installing rpy2"
-$PREFIX/bin/pip install rpy2
-
-$PREFIX/bin/R CMD javareconf -e
-export LD_LIBRARY_PATH=/usr/lib64/gcj-4.4.4/:$LD_LIBRARY_PATH
-$PREFIX/bin/R CMD javareconf -e
-
-
+git clone https://github.com/RDFLib/rdflib-jsonld.git
+cd rdflib-jsonld
+$python setup.py install
+rm -rf build
+cd $TEMPBUILD
+#mv rdflib-jsonld $TEMPBUILD/src
