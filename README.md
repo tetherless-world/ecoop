@@ -2,7 +2,7 @@
 
 ![StickyLogo](http://tw.rpi.edu/img_projects/ECOOP-logo.png)
 
-ecoop
+ECO-OP
 =====
 
 ECO-OP software library to enable the reproducibility of a document produced in an ecosystem assessment.
