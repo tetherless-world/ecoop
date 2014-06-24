@@ -9,18 +9,37 @@ from ecoop.groupdict import ecoopgroup
 
 
 ecoopuser = {}
-"""
-ecoopuser['epinux'] = {}
-ecoopuser['epinux']['Organization'] = 'Rensselaer Polytechnic Institute'
-ecoopuser['epinux']['subOrganization'] = 'Tetherless World Constellation'
-ecoopuser['epinux']['Group'] = ecoopgroup['TWC']
-ecoopuser['epinux']['homepageURL'] = 'http://tw.rpi.edu/web/person/MassimoDiStefano'
-ecoopuser['epinux']['mbox'] = 'distem@rpi.edu'
-ecoopuser['epinux']['address'] = '22 Millfield St Woods Hole MA US'
-ecoopuser['epinux']['phone'] = '0015082924078'
-ecoopuser['epinux']['givenName'] = 'Massimo'
-ecoopuser['epinux']['familyName'] = 'Di Stefano'
-"""
+
+ecoopuser['anonymous'] = {
+                "@id": "ex:anonymous",
+                "@type": "foaf:Person",
+                "ecoop:address": "",
+                "ecoop:isMemberOf": [
+                    {
+                        "@id": "ex:ecoop_group",
+                        "@type": "foaf:Group",
+                        "foaf:name": ""
+                    },
+                    {
+                        "@id": "ex:TWC",
+                        "@type": "foaf:Organization",
+                        "foaf:name": "",
+                        "ecoop:subOrganizationOf":
+                            {
+                                "@id": "ex:",
+                                "@type": "foaf:Organization",
+                                "foaf:name": ""
+                            }
+                    }],
+                "foaf:familyName": "",
+                "foaf:givenName": "",
+                "foaf:homepage":
+                    {
+                        "@id": "",
+                        "@type": "foaf:Document"
+                    },
+                "foaf:mbox": {"@id": "mailto:"},
+                "foaf:phone": {"@id": "tel:"}}
 
 ecoopuser['epinux'] = {
                 "@id": "ex:epinux",

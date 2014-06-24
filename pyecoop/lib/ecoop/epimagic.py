@@ -51,6 +51,7 @@ class MyMagics(Magics):
             f.write(cell)
         username = os.path.expanduser(args.username)
         if username in ecoopuser.keys():
+            #ecoopuser[username]['attibution']=filename
             display('added references for user %s' % username, metadata={'references': ecoopuser[username]})
 
 ip = get_ipython()
