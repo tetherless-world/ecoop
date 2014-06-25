@@ -44,12 +44,12 @@ from datetime import datetime
 import numpy as np
 import scipy.stats as sts
 import statsmodels.api as sm
-
-lowess = sm.nonparametric.lowess
 from scipy.interpolate import interp1d
 import pandas as pd
 import matplotlib.pyplot as plt
 from ecoop.ecooputil import shareUtil as EU
+
+lowess = sm.nonparametric.lowess
 
 try:
     from IPython.core.display import display
@@ -88,12 +88,6 @@ class cfData():
                 naodata.to_csv(output, sep=',', header=True, index=True, index_label='Date')
                 print('nao data saved in : ' + output)
             if prov:
-                #function = {}
-                #function['name']= 'nao_get'
-                #function['parameters']={}
-                #function['parameters']['url'] = url
-                #function['parameters']['save'] = save
-                #function['parameters']['csvout'] = csvout
                 jsonld = {
                     "@id": "ex:NAO_dataset",
                     "@type": ["prov:Entity", "ecoop:Dataset"],
@@ -120,7 +114,7 @@ class cfData():
                         ]
                     }
                 }
-                display('cell-output metadata saved', metadata={'nao_get': jsonld})
+                display('cell-output metadata saved', metadata={'ecoop_prov': jsonld})
 
             return naodata
         except IOError:
@@ -170,6 +164,33 @@ class cfData():
                 function['parameters']['save'] = save
                 function['parameters']['csvout'] = csvout
                 display('cell-output metadata saved', metadata={'nin_get': function})
+                jsonld = {
+                    "@id": "ex:NIN_dataset",
+                    "@type": ["prov:Entity", "ecoop:Dataset"],
+                    "ecoop_ext:hasCode": {
+                        "@id": "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfData.nin_get",
+                        "@type": "ecoop_ext:Code",
+                        "ecoop_ext:hasFunction_src_code_link": url,
+                        "ecoop_ext:hasParameter": [
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "csvout",
+                                "ecoop_ext:parameter_value": csvout
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "save",
+                                "ecoop_ext:parameter_value": save
+                            },
+                            {
+                                "@type": "ecoop_ext:Parameter",
+                                "ecoop_ext:parameter_name": "url",
+                                "ecoop_ext:parameter_value": url
+                            }
+                        ]
+                    }
+                }
+                display('cell-output metadata saved', metadata={'ecoop_prov': jsonld})
             return nin_anomalies
         except IOError:
             print(
@@ -252,7 +273,7 @@ class cfData():
                         ]
                     }
                 }
-                display('cell-output metadata saved', metadata={'amo_get': jsonld})
+                display('cell-output metadata saved', metadata={'ecoop_prov': jsonld})
             return amodata
         except:
             print(
@@ -607,7 +628,7 @@ class cfPlot():
                     },
                     "ecoop_ext:usedSoftware": [{"@id": "ex:ecoop_software"}, {"@id": "ex:ipython_software"}]
                 }
-                display('cell-output metadata saved', metadata={'amo_get': jsonld})
+                display('cell-output metadata saved', metadata={'ecoop_prov': jsonld})
             pyplot.show_bokeh(plt.gcf(), filename="subplots.html")
         except AssertionError:
             if type(data) != pd.core.frame.DataFrame:
