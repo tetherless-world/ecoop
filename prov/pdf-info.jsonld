@@ -1,5 +1,5 @@
 {
-	"_comment": "Classes and properties that are not defined in the ecoop ontology are assigned the prefix ecoop_ext. We may do one of the following things: 1) Skip collecting these pieces of information; 2) Extend the ecoop ontology to include these properties and classes; 3) Find existing properties and classes, not necessarily in the ecoop ontology, to take their places.",
+	"_comment": "Classes and properties that are not defined in the ecoop ontology are assigned the prefix ecoop_ext. We may do one of the following things: 1) Find existing properties and classes, not necessarily in the ecoop ontology, to take their places; 2) Skip collecting these pieces of information; 3) Extend the ecoop ontology to include these properties and classes.",
 	"@context": {
 		"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
 		"rdfs": "http://www.w3.org/2000/01/rdf-schema#",
