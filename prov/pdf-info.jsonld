@@ -20,54 +20,36 @@
 		{
 			"@id": "ex:NAO_dataset",
 			"@type": ["prov:Entity", "ecoop:Dataset"],
-			"ecoop_ext:hasCode": {
-				"@id": "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfData.nao_get",
-				"@type": "ecoop_ext:Code",
-				"ecoop_ext:hasFunction_src_code_link": "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfData.nao_get",
-				"ecoop_ext:hasParameter": [
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "csvout",
-						"ecoop_ext:parameter_value": "nao.csv"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "save",
-						"ecoop_ext:parameter_value": "test/Climate-forcing_pdf_Monday_09_June_2014_03_31_33_PM"						
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "url",
-						"ecoop_ext:parameter_value": "https://climatedataguide.ucar.edu/sites/default/files/climate_index_files/nao_station_djfm.txt"											
+			"prov:wasDerivedFrom": {
+				"@id": "ex:NAO_txt",
+				"@type": "ecoop:Dataset",
+				"dcat:distribution": {
+					"@type": "dcat:Distribution",
+					"dcat:accessURL": {
+						"@id": "https://climatedataguide.ucar.edu/sites/default/files/climate_index_files/nao_station_djfm.txt"
 					}
-				]
+				}
+			}
+			"ecoop:sourceLibrary": {
+				"@id": "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfData.nao_get"
 			}
 		},
 		
 		{
 			"@id": "ex:AMO_dataset",
 			"@type": ["prov:Entity", "ecoop:Dataset"],
-			"ecoop_ext:hasCode": {
-				"@id": "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfData.amo_get",
-				"@type": "ecoop_ext:Code",
-				"ecoop_ext:hasFunction_src_code_link": "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfData.amo_get",
-				"ecoop_ext:hasParameter": [
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "csvout",
-						"ecoop_ext:parameter_value": "amo.csv"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "save",
-						"ecoop_ext:parameter_value": "test/Climate-forcing_pdf_Monday_09_June_2014_03_31_33_PM"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "url",
-						"ecoop_ext:parameter_value": "http://www.cdc.noaa.gov/Correlation/amon.us.long.data"
+			"prov:wasDerivedFrom": {
+				"@id": "ex:AMO_data",
+				"@type": "ecoop:Dataset",
+				"dcat:distribution": {
+					"@type": "dcat:Distribution",
+					"dcat:accessURL": {
+						"@id": "http://www.cdc.noaa.gov/Correlation/amon.us.long.data"
 					}
-				]
+				}
+			}
+			"ecoop:sourceLibrary": {
+				"@id": "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfData.amo_get"
 			}
 		},
 		
