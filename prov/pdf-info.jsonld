@@ -29,7 +29,7 @@
 						"@id": "https://climatedataguide.ucar.edu/sites/default/files/climate_index_files/nao_station_djfm.txt"
 					}
 				}
-			}
+			},
 			"ecoop:sourceLibrary": {
 				"@id": "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfData.nao_get"
 			}
@@ -47,7 +47,7 @@
 						"@id": "http://www.cdc.noaa.gov/Correlation/amon.us.long.data"
 					}
 				}
-			}
+			},
 			"ecoop:sourceLibrary": {
 				"@id": "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfData.amo_get"
 			}
