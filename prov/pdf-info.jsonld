@@ -1,5 +1,5 @@
 {
-	"_comment": "Classes and properties that are not defined in the ecoop ontology are assigned the prefix ecoop_ext. We may do one of the following things: 1) Find existing properties and classes, not necessarily in the ecoop ontology, to take their places; 2) Skip collecting these pieces of information; 3) Extend the ecoop ontology to include these properties and classes.",
+	"_comment": "The things I am still not clear: 1) what granularity of library (software, class, or function) we wanna capture (I am doing the function level for now to capture information about a code cell run using a specific function to generate a dataset or an image); 2) how we wanna deal with the library hierarchy; and 3) how we wanna relate an ecoop:Library with its DOAP URL",
 	"@context": {
 		"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
 		"rdfs": "http://www.w3.org/2000/01/rdf-schema#",
@@ -18,375 +18,128 @@
 	},
 	"@graph": [
 		{
-			"@id": "ex:NAO_dataset",
+			"@id": "ex:NAO_csv",
 			"@type": ["prov:Entity", "ecoop:Dataset"],
-			"prov:wasDerivedFrom": {
-				"@id": "ex:NAO_txt",
-				"@type": "ecoop:Dataset",
-				"dcat:distribution": {
-					"@type": "dcat:Distribution",
-					"dcat:accessURL": {
-						"@id": "https://climatedataguide.ucar.edu/sites/default/files/climate_index_files/nao_station_djfm.txt"
+			"prov:wasGeneratedBy": {
+				"@id": "ex:codeCellRun_nao_get_Monday_09_June_2014_03_31_33_PM",
+				"@type": "ecoop:CodeCellRun",
+				"prov:used": [
+					{
+						"@id": "ex:NAO_txt",
+						"@type": "ecoop:Dataset",
+						"dcat:distribution": {
+							"@type": "dcat:Distribution",
+							"dcat:accessURL": {
+								"@id": "https://climatedataguide.ucar.edu/sites/default/files/climate_index_files/nao_station_djfm.txt"
+							}
+						}
+					},
+					{
+						"@id": "ex:nao_get_cell",
+						"@type": "ecoop:CodeCell",
+						"dct:description": "naodata = cfd.nao_get(save=ID, csvout=\"nao.csv\", prov=True)"
+					},
+					{
+						"@id": "ex:nao_get",
+						"@type": "ecoop:Library",
+						"ecoop:accessURL": {
+							"@id": "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfData.nao_get"
+						},
+						"dct:description": "the nao_get() method of the ecoop.cf.cfData class"
 					}
-				}
-			},
-			"ecoop:sourceLibrary": {
-				"@id": "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfData.nao_get"
+				],
+				"_comment": "We may wanna add prov:startedAtTime, prov:endedAtTime and prov:wasAssociatedWith information later"
 			}
 		},
 		
 		{
-			"@id": "ex:AMO_dataset",
+			"@id": "ex:AMO_csv",
 			"@type": ["prov:Entity", "ecoop:Dataset"],
-			"prov:wasDerivedFrom": {
-				"@id": "ex:AMO_data",
-				"@type": "ecoop:Dataset",
-				"dcat:distribution": {
-					"@type": "dcat:Distribution",
-					"dcat:accessURL": {
-						"@id": "http://www.cdc.noaa.gov/Correlation/amon.us.long.data"
+			"prov:wasGeneratedBy": {
+				"@id": "ex:codeCellRun_amo_get_Monday_09_June_2014_03_31_33_PM",
+				"@type": "ecoop:CodeCellRun",
+				"prov:used": [
+					{
+						"@id": "ex:AMO_data",
+						"@type": "ecoop:Dataset",
+						"dcat:distribution": {
+							"@type": "dcat:Distribution",
+							"dcat:accessURL": {
+								"@id": "http://www.cdc.noaa.gov/Correlation/amon.us.long.data"
+							}
+						}						
+					},
+					{
+						"@id": "ex:amo_get_cell",
+						"@type": "ecoop:CodeCell",
+						"dct:description": "# AMO\namodata = cfd.amo_get(save=ID, csvout=\"amo.csv\")\ncfp.plot_index(name='AMO_lowess', xticks=10, xticks_fontsize=10, \ndata=amodata, nb='y', scategory='lowess', frac=1./6, it=6, \noutput=ID, dateformat=True, figsave=\"amo.png\", prov=True)"
+					},
+					{
+						"@id": "ex:amo_get",
+						"@type": "ecoop:Library",
+						"ecoop:accessURL": "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfData.amo_get",
+						"dct:description": "the amo_get() method of the ecoop.cf.cfData class"
 					}
-				}
-			},
-			"ecoop:sourceLibrary": {
-				"@id": "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfData.amo_get"
+				],
+				"_comment": "We may wanna add prov:startedAtTime, prov:endedAtTime and prov:wasAssociatedWith information later"
 			}
 		},
 		
 		{
 			"@id": "ex:NAO_figure",
 			"@type": ["prov:Entity", "ecoop:Figure"],
-			"ecoop_ext:hasData": "ecoop_data['NAO']",
-			"ecoop_ext:hasCode": {
-				"@type": "ecoop_ext:Code",
-				"ecoop_ext:hasFunction_src_code_link": "",
-				"ecoop_ext:hasParameter": [
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "beta",
-						"ecoop_ext:parameter_value": "0.1"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "center",
-						"ecoop_ext:parameter_value": "false"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "data",
-						"ecoop_ext:parameter_value": ""
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "datarange",
-						"ecoop_ext:parameter_value": "null"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "dateformat",
-						"ecoop_ext:parameter_value": "true"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "dpi",
-						"ecoop_ext:parameter_value": "300"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "figsave",
-						"ecoop_ext:parameter_value": "nao.png"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "figsize",
-						"ecoop_ext:parameter_value": "10,8"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "frac",
-						"ecoop_ext:parameter_value": "0.16666666666666666"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "freq",
-						"ecoop_ext:parameter_value": "null"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "grid",
-						"ecoop_ext:parameter_value": "true"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "it",
-						"ecoop_ext:parameter_value": "6"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "legend",
-						"ecoop_ext:parameter_value": "true"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "min_periods",
-						"ecoop_ext:parameter_value": "null"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "name",
-						"ecoop_ext:parameter_value": "NAO_lowess"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "nb",
-						"ecoop_ext:parameter_value": "y"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "output",
-						"ecoop_ext:parameter_value": "test/Climate-forcing_pdf_Monday_09_June_2014_03_31_33_PM"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "power",
-						"ecoop_ext:parameter_value": "1"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "scategory",
-						"ecoop_ext:parameter_value": "lowess"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "smoother",
-						"ecoop_ext:parameter_value": "null"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "std",
-						"ecoop_ext:parameter_value": "0.1"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "title",
-						"ecoop_ext:parameter_value": ""
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "width",
-						"ecoop_ext:parameter_value": "1"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "win_size",
-						"ecoop_ext:parameter_value": "10"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "win_type",
-						"ecoop_ext:parameter_value": "boxcar"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "xlabel",
-						"ecoop_ext:parameter_value": "Year"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "xmargin",
-						"ecoop_ext:parameter_value": "true"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "xticks",
-						"ecoop_ext:parameter_value": "10"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "xticks_fontsize",
-						"ecoop_ext:parameter_value": "10"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "ylabel",
-						"ecoop_ext:parameter_value": ""
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "ymargin",
-						"ecoop_ext:parameter_value": "true"
-					}
-				]
+			"ecoop:hasImage": {
+				"@id": "ex:nao.png",
+				"@type": "ecoop:Image",
+				"prov:wasGeneratedBy": {
+					"@id": "ex:codeCellRun_nao_plot_Monday_09_June_2014_03_31_33_PM",
+					"@type": "ecoop:CodeCellRun",
+					"prov:used": [
+						{
+							"@id": "ex:NAO_csv"
+						},
+						{
+							"@id": "ex:nao_plot_cell",
+							"@type": "ecoop:CodeCell",
+							"dct:description": "# NAO\nnaodata = cfd.nao_get(save=ID, csvout=\"nao.csv\")\ncfp.plot_index(name='NAO_lowess', xticks=10, xticks_fontsize=10, \n               data=naodata, nb='y', scategory='lowess', frac=1./6, it=6, \n               output=ID, dateformat=True, figsave=\"nao.png\", prov=True)"
+						},
+						{
+							"@id": "ex:plot_index",
+							"@type": "ecoop:Library",
+							"ecoop:accessURL": "http://epinux.com/shared/pyecoop_doc/ecoop.html#ecoop.cf.cfPlot.plot_index",
+							"dct:description": "the plot_index() method of the ecoop.cf.cfPlot class"
+						}
+					],
+					"_comment": "We may wanna add prov:startedAtTime, prov:endedAtTime and prov:wasAssociatedWith information later"
+				}
 			}
 		},
 		
 		{
 			"@id": "ex:AMO_figure",
 			"@type": ["prov:Entity", "ecoop:Figure"],
-			"ecoop_ext:hasData": "ecoop_data['AMO']",
-			"ecoop_ext:hasCode": {
-				"@type": "ecoop_ext:Code",
-				"ecoop_ext:hasFunction_src_code_link": "",
-				"ecoop_ext:hasParameter": [
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "beta",
-						"ecoop_ext:parameter_value": "0.1"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "center",
-						"ecoop_ext:parameter_value": "false"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "data",
-						"ecoop_ext:parameter_value": ""
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "datarange",
-						"ecoop_ext:parameter_value": "null"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "dateformat",
-						"ecoop_ext:parameter_value": "true"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "dpi",
-						"ecoop_ext:parameter_value": "300"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "figsave",
-						"ecoop_ext:parameter_value": "amo.png"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "figsize",
-						"ecoop_ext:parameter_value": "10,8"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "frac",
-						"ecoop_ext:parameter_value": "0.16666666666666666"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "freq",
-						"ecoop_ext:parameter_value": "null"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "grid",
-						"ecoop_ext:parameter_value": "true"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "it",
-						"ecoop_ext:parameter_value": "6"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "legend",
-						"ecoop_ext:parameter_value": "true"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "min_periods",
-						"ecoop_ext:parameter_value": "null"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "name",
-						"ecoop_ext:parameter_value": "AMO_lowess"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "nb",
-						"ecoop_ext:parameter_value": "y"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "output",
-						"ecoop_ext:parameter_value": "test/Climate-forcing_pdf_Monday_09_June_2014_03_31_33_PM"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "power",
-						"ecoop_ext:parameter_value": "1"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "scategory",
-						"ecoop_ext:parameter_value": "lowess"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "smoother",
-						"ecoop_ext:parameter_value": "null"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "std",
-						"ecoop_ext:parameter_value": "0.1"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "title",
-						"ecoop_ext:parameter_value": ""
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "width",
-						"ecoop_ext:parameter_value": "1"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "win_size",
-						"ecoop_ext:parameter_value": "10"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "win_type",
-						"ecoop_ext:parameter_value": "boxcar"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "xlabel",
-						"ecoop_ext:parameter_value": "Year"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "xmargin",
-						"ecoop_ext:parameter_value": "true"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "xticks",
-						"ecoop_ext:parameter_value": "10"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "xticks_fontsize",
-						"ecoop_ext:parameter_value": "10"
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "ylabel",
-						"ecoop_ext:parameter_value": ""
-					},
-					{
-						"@type": "ecoop_ext:Parameter",
-						"ecoop_ext:parameter_name": "ymargin",
-						"ecoop_ext:parameter_value": "true"
-					}
-				]
-			},
-			"ecoop_ext:usedSoftware": [{"@id": "ex:ecoop_software"}, {"@id": "ex:ipython_software"}]
-			
+			"ecoop:hasImage": {
+				"@id": "ex:amo.png",
+				"@type": "ecoop:Image",
+				"prov:wasGeneratedBy": {
+					"@id": "ex:codeCellRun_amo_plot__Monday_09_June_2014_03_31_33_PM",
+					"@type": "ecoop:CodeCellRun",
+					"prov:used": [
+						{
+							"@id": "ex:AMO_csv"
+						},
+						{
+							"@id": "ex:amo_plot_cell",
+							"@type": "ecoop:CodeCell",
+							"dct:description": "# AMO\namodata = cfd.amo_get(save=ID, csvout=\"amo.csv\")\ncfp.plot_index(name='AMO_lowess', xticks=10, xticks_fontsize=10, \n               data=amodata, nb='y', scategory='lowess', frac=1./6, it=6, \n               output=ID, dateformat=True, figsave=\"amo.png\", prov=True)"
+						},
+						{
+							"@id": "ex:plot_index"
+						}
+					],
+					"_comment": "We may wanna add prov:startedAtTime, prov:endedAtTime and prov:wasAssociatedWith information later"					
+				}
+			}
 		},
 		
 		{
