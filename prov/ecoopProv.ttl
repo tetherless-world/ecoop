@@ -85,9 +85,9 @@ ecoop:IPythonNotebookRun a owl:Class ;
     rdfs:comment "The running of an iPython Notebook" ;
     rdfs:subClassOf prov:Activity .
 
-ecoop:CodeCellRun a owl:Class ;
-    rdfs:label "Code Cell Run" ;
-    rdfs:comment "The running of a code cell in an iPython Notebook" ;
+ecoop:FunctionCall a owl:Class ;
+    rdfs:label "Function Call" ;
+    rdfs:comment "The execution of a function in a code cell in an iPython Notebook" ;
     rdfs:subClassOf prov:Activity .
 
 ecoop:Library a owl:Class ;

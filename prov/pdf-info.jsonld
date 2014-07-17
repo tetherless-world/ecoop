@@ -1,5 +1,5 @@
 {
-	"_comment": "The things I am still not clear: 1) what granularity of library (software, class, or function) we wanna capture (I am doing the function level for now to capture information about a code cell run using a specific function to generate a dataset or an image); 2) how we wanna deal with the library hierarchy; and 3) how we wanna relate an ecoop:Library with its DOAP URL",
+	"_comment": "The things I am still not clear: 1) how we wanna deal with the library hierarchy, for example, nao_get() is a function of the cfData class of the cf package of the ecoop library; 2) how we wanna relate an ecoop:Library with its DOAP URL, currently I am using ecoop_ext:hasDoap; and 3) if it is correct to say a function call used a code cell",
 	"@context": {
 		"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
 		"rdfs": "http://www.w3.org/2000/01/rdf-schema#",
@@ -21,8 +21,8 @@
 			"@id": "ex:NAO_csv",
 			"@type": ["prov:Entity", "ecoop:Dataset"],
 			"prov:wasGeneratedBy": {
-				"@id": "ex:codeCellRun_nao_get_Monday_09_June_2014_03_31_33_PM",
-				"@type": "ecoop:CodeCellRun",
+				"@id": "ex:functionCall_nao_get_Monday_09_June_2014_03_31_33_PM",
+				"@type": "ecoop:FunctionCall",
 				"prov:used": [
 					{
 						"@id": "ex:NAO_txt",
@@ -56,8 +56,8 @@
 			"@id": "ex:AMO_csv",
 			"@type": ["prov:Entity", "ecoop:Dataset"],
 			"prov:wasGeneratedBy": {
-				"@id": "ex:codeCellRun_amo_get_Monday_09_June_2014_03_31_33_PM",
-				"@type": "ecoop:CodeCellRun",
+				"@id": "ex:functionCall_amo_get_Monday_09_June_2014_03_31_33_PM",
+				"@type": "ecoop:FunctionCall",
 				"prov:used": [
 					{
 						"@id": "ex:AMO_data",
@@ -92,8 +92,8 @@
 				"@id": "ex:nao.png",
 				"@type": "ecoop:Image",
 				"prov:wasGeneratedBy": {
-					"@id": "ex:codeCellRun_nao_plot_Monday_09_June_2014_03_31_33_PM",
-					"@type": "ecoop:CodeCellRun",
+					"@id": "ex:functionCall_nao_plot_Monday_09_June_2014_03_31_33_PM",
+					"@type": "ecoop:FunctionCall",
 					"prov:used": [
 						{
 							"@id": "ex:NAO_csv"
@@ -122,8 +122,8 @@
 				"@id": "ex:amo.png",
 				"@type": "ecoop:Image",
 				"prov:wasGeneratedBy": {
-					"@id": "ex:codeCellRun_amo_plot__Monday_09_June_2014_03_31_33_PM",
-					"@type": "ecoop:CodeCellRun",
+					"@id": "ex:functionCall_amo_plot__Monday_09_June_2014_03_31_33_PM",
+					"@type": "ecoop:FunctionCall",
 					"prov:used": [
 						{
 							"@id": "ex:AMO_csv"
@@ -137,7 +137,7 @@
 							"@id": "ex:plot_index"
 						}
 					],
-					"_comment": "We may wanna add prov:startedAtTime, prov:endedAtTime and prov:wasAssociatedWith information later"					
+					"_comment": "We may wanna add prov:startedAtTime, prov:endedAtTime and prov:wasAssociatedWith information later"
 				}
 			}
 		},
