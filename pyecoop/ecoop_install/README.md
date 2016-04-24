@@ -37,7 +37,7 @@
 
 
 
-Local environment that includes a complete set of tool and libraries to work with R-GRASS-Scientiphic Python and more
+Local environment that includes a complete set of tool and libraries to work with R-GRASS-Scientific Python and more
 
 
 * download the following scripts on a linux machine (CentOS 6.x 64 - bit) :
