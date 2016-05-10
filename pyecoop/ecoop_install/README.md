@@ -7,9 +7,8 @@
 * Download and install the ecoop code and its dependencies
     
     ```
-    wget http://udoo.whoi.edu/shared/ecoop-0.0.1.tar.gz
-    tar -zxvf ecoop-0.0.1.tar.gz
-    cd ecoop-0.0.1
+    git clone https://github.com/tetherless-world/ecoop
+    cd ecoop/pyecoop
     pip install -r requirement.txt
     python setup.py install
     cd ..
